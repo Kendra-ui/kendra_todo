@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Text1 extends StatelessWidget {
-  const Text1({super.key});
+class Text2 extends StatelessWidget {
+  const Text2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +25,7 @@ class Text1 extends StatelessWidget {
           Padding(padding: const EdgeInsets.all(40),
         child: Image.asset('assets/images/Checkmark.png'),
         ),
+
          Padding(
            padding: const EdgeInsets.only(right:90),
            child: RichText(
@@ -39,11 +40,31 @@ class Text1 extends StatelessWidget {
          ),
         const  Padding(
            padding:  EdgeInsets.only(right:90.0),
-           child:  Text('Have an other productive day!', style: TextStyle(color: Colors.white, fontFamily: 'Poppins', fontSize: 18),),
+           child:  Text('Create an account and join us', style: TextStyle(color: Colors.white, fontFamily: 'Poppins', fontSize: 18),),
          ),
 
+         Padding(
+          padding: const EdgeInsets.only(top:40.0, right: 10),
+          child: SizedBox(
+                      width: 358,
+                      height: 38,
+                       child: TextFormField(
+                        decoration: const InputDecoration(
+                          labelText: "Full Name",
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 241, 240, 240),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none
+                          ),
+                          prefixIcon: Padding(padding: EdgeInsets.all(0),
+                          child: Icon(Icons.person, color: Colors.black,),) 
+                        ),
+                       ),
+                     ),
+        ),
+
         Padding(
-          padding: const EdgeInsets.only(top:30.0, right: 10),
+          padding: const EdgeInsets.only(top:40.0, right: 10),
           child: SizedBox(
                       width: 358,
                       height: 38,
@@ -83,9 +104,7 @@ class Text1 extends StatelessWidget {
                      ),
         ),
 
-        const Padding(padding: EdgeInsets.only(top: 10,left: 220),
-        child: Text('Forgot password?', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300, fontFamily: 'Poppins', decoration: TextDecoration.underline, decorationColor: Colors.white),)
-        ,),
+        
           Padding(
             padding: const EdgeInsets.only(top:30.0),
             child: SizedBox(
@@ -103,7 +122,7 @@ class Text1 extends StatelessWidget {
                 )
                 ),
                 onPressed: () {}
-                , child: const Text('Sign in', style: TextStyle( color: Colors.white),)
+                , child: const Text('Sign up', style: TextStyle( color: Colors.white),)
                 ),
             ),
           ),
@@ -113,16 +132,16 @@ class Text1 extends StatelessWidget {
             child:  Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Dont have an account?', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, color: Colors.white),),
-                Text(' sign up', style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF63D9F3)),)
+                Text('Already have an account?', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, color: Colors.white),),
+                Text(' sign in', style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF63D9F3)),)
               ],
             ),
           ),
 
-           Padding(padding: const EdgeInsets.only(top: 20, left: 20),
+           Padding(padding: const EdgeInsets.only(top: 5, left: 20),
           child: Row(
             children: [
-              const Text('Sign in with:', style: TextStyle(fontFamily: 'Poppins', color: Colors.white, fontWeight: FontWeight.w500),),
+              const Text('Sign up with:', style: TextStyle(fontFamily: 'Poppins', color: Colors.white, fontWeight: FontWeight.w500),),
               Padding(
                 padding: const EdgeInsets.only(left:20.0),
                 child: Image.asset('assets/images/Frame 18.png'),
