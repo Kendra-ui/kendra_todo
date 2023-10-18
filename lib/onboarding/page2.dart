@@ -21,7 +21,7 @@ class Page2 extends StatelessWidget {
       ),
     child: Column(
       children: [
-        Padding(padding: const EdgeInsets.all(50),
+        Padding(padding: const EdgeInsets.only(top: 50),
         child: Image.asset('assets/images/calendar.png'),
         ),
 

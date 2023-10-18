@@ -21,19 +21,19 @@ class Page3 extends StatelessWidget {
       ),
     child: Column(
       children: [
-        Padding(padding: const EdgeInsets.all(80),
+        Padding(padding: const EdgeInsets.only(top:50),
         child: Image.asset('assets/images/team.png'),
         ),
 
       Container(
         width: 254,
         height: 200,
-        margin: const EdgeInsets.only(top:5),
+        margin: const EdgeInsets.only(top:40),
         child: 
         const Text('Create a team task, invite people and manage your work together', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),),
       ),
 
-      Padding(padding: const EdgeInsets.only(left:150),
+      Padding(padding: const EdgeInsets.only(top: 50, left:150),
       child:
       Row(
         children: [
