@@ -71,7 +71,7 @@ class Text4 extends StatelessWidget {
             ],
           ),
           const Padding(
-            padding:  EdgeInsets.only(top:50.0, right: 240),
+            padding:  EdgeInsets.only(top:50.0, right: 299),
             child: Text('Tasks List', style: TextStyle(letterSpacing: 1, color: Colors.white, fontFamily: 'Poppins', fontSize: 14),),
           ),
 
@@ -93,7 +93,7 @@ class Text4 extends StatelessWidget {
                           children: [
                             Column(
                               children: [
-                            Text('Client Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
+                            Text('Client meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
                             Text('Tomorrow | 10:30pm', style: TextStyle(fontFamily: 'Poppins', fontSize: 10,letterSpacing: 1, fontWeight: FontWeight.bold ),),
                               ],
                             ),
@@ -126,7 +126,7 @@ class Text4 extends StatelessWidget {
                           children: [
                             Column(
                               children: [
-                            Text('Client Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
+                            Text('Client meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
                             Text('Tomorrow | 10:30pm', style: TextStyle(fontFamily: 'Poppins', fontSize: 10,letterSpacing: 1, fontWeight: FontWeight.bold ),),
                               ],
                             ),
@@ -158,7 +158,7 @@ class Text4 extends StatelessWidget {
                           children: [
                             Column(
                               children: [
-                            Text('Client Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
+                            Text('Client meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
                             Text('Tomorrow | 10:30pm', style: TextStyle(fontFamily: 'Poppins', fontSize: 10,letterSpacing: 1, fontWeight: FontWeight.bold ),),
                               ],
                             ),
@@ -190,7 +190,7 @@ class Text4 extends StatelessWidget {
                           children: [
                             Column(
                               children: [
-                            Text('Client Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
+                            Text('Client meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
                             Text('Tomorrow | 10:30pm', style: TextStyle(fontFamily: 'Poppins', fontSize: 10,letterSpacing: 1, fontWeight: FontWeight.bold ),),
                               ],
                             ),
