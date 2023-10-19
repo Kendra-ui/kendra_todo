@@ -91,8 +91,8 @@ class Info3 extends StatelessWidget {
                 child:  Column(
                   children: [
                      Padding(
-                      padding:  const EdgeInsets.only(right:260.0, top: 10),
-                      child:   Text('Set task for ${DateTime.now().toString().split('')[0]}', style: const TextStyle(color: Colors.black, fontFamily: 'Poppins', fontWeight: FontWeight.bold),),
+                      padding:  const EdgeInsets.only(right:190.0, top: 10),
+                      child:   Text('Set task for ${DateTime.now().toString().split(' ')[0]}', style: const TextStyle(color: Colors.black, fontFamily: 'Poppins', fontWeight: FontWeight.bold),),
                     ),
                     Row(
                       children: [
