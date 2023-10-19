@@ -75,7 +75,7 @@ class Info extends StatelessWidget {
                         height: 71,
                         child: ElevatedButton(
                           style: ButtonStyle(
-                             backgroundColor:MaterialStateProperty.all(Color(0xFF05243E)),
+                             backgroundColor:MaterialStateProperty.all(const Color(0xFF05243E)),
 
                             shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
@@ -102,7 +102,7 @@ class Info extends StatelessWidget {
                         height: 71,
                         child: ElevatedButton(
                           style: ButtonStyle(
-                             backgroundColor:MaterialStateProperty.all(Color(0xFF05243E)),
+                             backgroundColor:MaterialStateProperty.all(const Color(0xFF05243E)),
 
                             shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
@@ -129,7 +129,7 @@ class Info extends StatelessWidget {
                         height: 71,
                         child: ElevatedButton(
                           style: ButtonStyle(
-                             backgroundColor:MaterialStateProperty.all(Color(0xFF05243E)),
+                             backgroundColor:MaterialStateProperty.all(const Color(0xFF05243E)),
 
                             shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(

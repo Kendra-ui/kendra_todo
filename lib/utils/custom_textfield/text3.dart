@@ -25,9 +25,9 @@ class Text3 extends StatelessWidget {
             padding: const EdgeInsets.only(top: 40.0, left: 15 ),
             child: Row(
               children: [
-              Image.asset('assets/images/Checkmark.png', height: 70,),
+              Image.asset('assets/images/logo.png', height: 70,),
                  const Padding(
-                   padding:  EdgeInsets.all(8.0),
+                   padding:  EdgeInsets.all(3.0),
                    child:  Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,13 +63,17 @@ class Text3 extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10)
                     ),
                     child: 
-                    const Padding(
-                      padding:  EdgeInsets.only(top:8.0, left: 20),
+                     Padding(
+                      padding:  const EdgeInsets.only(top:15.0, left: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Design Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1),),
-                          Text('Tomorrow | 10:30pm', style: TextStyle(fontFamily: 'Poppins', fontSize: 10,letterSpacing: 1 ),)
+                          const Text('Design Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1),),
+                          const Text('Tomorrow | 10:30pm', style: TextStyle(fontFamily: 'Poppins', fontSize: 10,letterSpacing: 1 ),),
+                          Padding(
+                            padding: const EdgeInsets.only(top:15.0),
+                            child: Image.asset('assets/images/Group 3.png'),
+                          )
           
                         ],
                       ),
@@ -86,14 +90,17 @@ class Text3 extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)
                       ),
                       child: 
-                      const Padding(
-                        padding:  EdgeInsets.only(top:8.0, left: 20),
+                       Padding(
+                        padding:  const EdgeInsets.only(top:15.0, left: 20),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Projects Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
-                            Text('Thursday | 10:30pm', style: TextStyle(fontFamily: 'Poppins', fontSize: 10,letterSpacing: 1 ),)
-                            
+                            const Text('Projects Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
+                            const Text('Thursday | 10:30pm', style: TextStyle(fontFamily: 'Poppins', fontSize: 10,letterSpacing: 1 ),)
+                                 ,Padding(
+                            padding: const EdgeInsets.only(top:15.0),
+                            child: Image.asset('assets/images/Group 3.png'),
+                          )  
                           ],
                         ),
                       ),
