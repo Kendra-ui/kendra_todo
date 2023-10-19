@@ -30,15 +30,13 @@ class Info3 extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top:50.0, left: 30),
-                  child: Container(
-                    width: 40,
-                    height: 50,
-                    alignment: Alignment.center,
-                    child: ElevatedButton.icon(
-                      onPressed: (){}, 
-                    icon:const Icon(Icons.arrow_back_ios, color: Color.fromARGB(255, 250, 7, 19), size: 20,),
-                    label: const Text(''),),
-                  ),
+                  child: IconButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.white),
+                    iconSize: MaterialStateProperty.all(15),
+                    fixedSize: MaterialStateProperty.all(const Size(30, 30))                ),
+                  icon:const Icon(Icons.arrow_back_ios, color: Colors.lightBlue,) , 
+                  onPressed: () {  },)
                 ),
 
                 const Padding(
@@ -67,15 +65,15 @@ class Info3 extends StatelessWidget {
                               rowHeight: 43,
                               availableGestures: AvailableGestures.all,
                               onHeaderTapped:(val){
-                              
                               } ,
                               headerStyle: const HeaderStyle(
                               formatButtonVisible: false, 
-                              
                               titleCentered: true,),
                               focusedDay: DateTime.now(),
                               firstDay:  DateTime.utc(2023,01,01), 
-                              lastDay:  DateTime.utc(2030,01,01)),
+                              lastDay:  DateTime.utc(2030,01,01)
+                              // calendarStyle: ,
+                              ),
                           ),
              ),
 

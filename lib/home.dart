@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/widgets/info2.dart';
 // import 'package:kendra_todo/utils/buttons/button1.dart';
 // import 'package:kendra_todo/utils/custom_textfield/text3.dart';
 // import 'package:kendra_todo/widgets/info.dart';
@@ -18,6 +19,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   const Info3();
+    return   const Info2();
   }
 }
