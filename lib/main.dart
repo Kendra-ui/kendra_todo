@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/home.dart';
-import 'package:kendra_todo/utils/custom_textfield/text3.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,7 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return  Scaffold();
+    return  const Scaffold();
       
   }
   }

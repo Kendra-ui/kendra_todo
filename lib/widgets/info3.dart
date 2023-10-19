@@ -66,7 +66,13 @@ class Info3 extends StatelessWidget {
                             child: TableCalendar(
                               rowHeight: 43,
                               availableGestures: AvailableGestures.all,
-                              headerStyle: const HeaderStyle(formatButtonVisible: false, titleCentered: true),
+                              onHeaderTapped:(val){
+                              
+                              } ,
+                              headerStyle: const HeaderStyle(
+                              formatButtonVisible: false, 
+                              
+                              titleCentered: true,),
                               focusedDay: DateTime.now(),
                               firstDay:  DateTime.utc(2023,01,01), 
                               lastDay:  DateTime.utc(2030,01,01)),
@@ -86,7 +92,7 @@ class Info3 extends StatelessWidget {
                   children: [
                      Padding(
                       padding:  const EdgeInsets.only(right:260.0, top: 10),
-                      child:   Text('Set task for ${DateTime.now().toString().split('')[0]}', style: TextStyle(color: Colors.black, fontFamily: 'Poppins', fontWeight: FontWeight.bold),),
+                      child:   Text('Set task for ${DateTime.now().toString().split('')[0]}', style: const TextStyle(color: Colors.black, fontFamily: 'Poppins', fontWeight: FontWeight.bold),),
                     ),
                     Row(
                       children: [
@@ -114,7 +120,7 @@ class Info3 extends StatelessWidget {
                                 width: 110,
                                 child: ElevatedButton(
                                 style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(Colors.blue),
+                                  backgroundColor: MaterialStateProperty.all(const Color(0xFF0EA5E9)),
                                   shape: MaterialStateProperty.all(
                                     RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(4)

@@ -18,6 +18,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   Info3();
+    return   const Info3();
   }
 }
