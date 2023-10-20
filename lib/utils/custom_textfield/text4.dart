@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/utils/buttons/button1.dart';
 
 class Text4 extends StatelessWidget {
   const Text4({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -216,7 +218,10 @@ class Text4 extends StatelessWidget {
                 color:  Colors.lightBlue,
               ),
               child: ElevatedButton(
-                 onPressed: () {  }, 
+                 onPressed: () { 
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Button1()));
+
+                  }, 
                  style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF63D9F3)
                  ),

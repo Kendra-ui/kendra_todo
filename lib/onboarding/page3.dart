@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/onboarding/page4.dart';
 
 class Page3 extends StatelessWidget {
   const Page3({super.key});
@@ -50,7 +51,10 @@ class Page3 extends StatelessWidget {
                 color: Colors.white,
               ),
               child: ElevatedButton(
-                 onPressed: () {  }, 
+                 onPressed: () { 
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page4()));
+
+                  }, 
                  child: const Icon(Icons.arrow_forward, color: Colors.black,),
                 ),
             ),

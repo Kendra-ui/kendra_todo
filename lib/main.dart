@@ -35,7 +35,6 @@ class MyApp extends StatelessWidget {
   
   class _HomepageState extends State<Homepage>{
 
-  DateTime today = DateTime.now();
 
 
   @override

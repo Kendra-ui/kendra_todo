@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/widgets/info2.dart';
 
 class Info extends StatelessWidget {
   const Info({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +85,11 @@ class Info extends StatelessWidget {
                               )
                             )
                           ),
-                          onPressed: (){}, 
+                          onPressed: (){
+                  
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Info2()));
+
+                          }, 
                           child: const Padding(
                             padding:  EdgeInsets.only(top:8.0),
                             child:  Column(

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/utils/custom_textfield/text2.dart';
 
 class Text1 extends StatelessWidget {
   const Text1({super.key});
-
-  @override
+ 
+ @override
   Widget build(BuildContext context) {
     return  Scaffold(
       body: Container(
@@ -102,7 +103,10 @@ class Text1 extends StatelessWidget {
                   
                 )
                 ),
-                onPressed: () {}
+                onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Text2()));
+
+                }
                 , child: const Text('Sign in', style: TextStyle( color: Colors.white),)
                 ),
             ),

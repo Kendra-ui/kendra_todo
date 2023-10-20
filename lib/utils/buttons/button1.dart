@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/widgets/info.dart';
 
 class Button1 extends StatelessWidget {
   const Button1({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +141,10 @@ class Button1 extends StatelessWidget {
                               )
                             )
                           ),
-                          onPressed: (){}, 
+                          onPressed: (){
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Info()));
+
+                          }, 
                           child: const Text('create', style: TextStyle(fontFamily: 'Poppins', letterSpacing: 1, fontSize: 15, color: Colors.white),)),
                         ),
                      ],

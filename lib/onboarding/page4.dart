@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/utils/custom_textfield/text1.dart';
 
 class Page4 extends StatelessWidget {
   const Page4({super.key});
@@ -50,7 +51,10 @@ class Page4 extends StatelessWidget {
                 color: Colors.white,
               ),
               child: ElevatedButton(
-                 onPressed: () {  }, 
+                 onPressed: () { 
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Text1()));
+
+                  }, 
                  child: const Icon(Icons.arrow_forward, color: Colors.black,),
                 ),
             ),

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/onboarding/page2.dart';
 
 class Page1 extends StatelessWidget {
   const Page1({super.key});
 
-  @override
+
+
+@override
   Widget build(BuildContext context) {
     return  Scaffold(
       body: Container(
@@ -49,10 +52,16 @@ class Page1 extends StatelessWidget {
               
                 color: Colors.white,
               ),
-              child: ElevatedButton(
-                 onPressed: () {  }, 
-                 child: const Icon(Icons.arrow_forward, color: Colors.black,),
-                ),
+              child: GestureDetector(
+                child: ElevatedButton(
+                   onPressed: () { 
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page2()));
+                    }, 
+                   child: const Icon(Icons.arrow_forward, color: Colors.black,),
+                  ),
+                  onTap: () {
+                  },
+              ),
             ),
           )
         ],
@@ -62,4 +71,8 @@ class Page1 extends StatelessWidget {
     ),
     );
   }
+
 }
+
+  
+  

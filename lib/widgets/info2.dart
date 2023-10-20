@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/widgets/info3.dart';
 
-class Info2 extends StatelessWidget {
+class Info2 extends StatefulWidget {
   const Info2({super.key});
+
+      @override
+  State<Info2> createState()  => _Info2();
+}
+
+class _Info2 extends State<Info2> {
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +36,12 @@ class Info2 extends StatelessWidget {
                   child: IconButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.white),
-                    iconSize: MaterialStateProperty.all(15),
+                    iconSize: MaterialStateProperty.all(20),
                     fixedSize: MaterialStateProperty.all(const Size(30, 30))                ),
                   icon:const Icon(Icons.arrow_back_ios, color: Colors.lightBlue,) , 
-                  onPressed: () {  },)
+                  onPressed: () { 
+
+                   },)
                 ),
 
                 const Padding(
@@ -65,7 +74,7 @@ class Info2 extends StatelessWidget {
               padding:  EdgeInsets.only(top:20.0, left: 30),
               child:  Row(
                 children: [
-                  Icon(Icons.message_sharp, color: Colors.white,),
+                  Icon(Icons.chat_bubble_rounded, color: Colors.white,),
                   Padding(
                     padding: EdgeInsets.only(left:8.0),
                     child: Text("Conversations", style: TextStyle(color: Colors.white,fontSize: 18, fontFamily: 'Poppins', letterSpacing: 1),),
@@ -86,7 +95,7 @@ class Info2 extends StatelessWidget {
               padding:  EdgeInsets.only(top:20.0, left: 30),
               child:  Row(
                 children: [
-                  Icon(Icons.production_quantity_limits, color: Colors.white,),
+                  Icon(Icons.lightbulb, color: Colors.white,),
                   Padding(
                     padding: EdgeInsets.only(left:8.0),
                     child: Text("Projects", style: TextStyle(color: Colors.white,fontSize: 18, fontFamily: 'Poppins', letterSpacing: 1),),
@@ -106,7 +115,7 @@ class Info2 extends StatelessWidget {
               padding:  EdgeInsets.only(top:20.0, left: 30),
               child:  Row(
                 children: [
-                  Icon(Icons.settings_applications, color: Colors.white,),
+                  Icon(Icons.policy, color: Colors.white,),
                   Padding(
                     padding: EdgeInsets.only(left:8.0),
                     child: Text("Terms and Policies", style: TextStyle(color: Colors.white,fontSize: 18, fontFamily: 'Poppins', letterSpacing: 1),),
@@ -130,7 +139,10 @@ class Info2 extends StatelessWidget {
                     height: 30,
                     alignment: Alignment.center,
                     child: ElevatedButton.icon(
-                      onPressed: (){}, 
+                      onPressed: (){
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Info3()));
+
+                      }, 
                     icon:const Icon(Icons.logout_rounded, color: Color.fromARGB(255, 250, 7, 19), size: 20,),
                     label: const Text('Logout', style: TextStyle(color: Colors.red, fontFamily: 'Poppins'),),
                     ),

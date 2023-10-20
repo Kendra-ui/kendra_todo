@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/utils/custom_textfield/text4.dart';
 
-class Text3 extends StatelessWidget {
+class Text3 extends StatefulWidget {
   const Text3({super.key});
+
+      @override
+  State<Text3> createState()  => _Text3();
+}
+
+class _Text3 extends State<Text3> {
 
   @override
   Widget build(BuildContext context) {
@@ -117,9 +124,9 @@ class Text3 extends StatelessWidget {
           ),
 
           Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.only(top:15, right: 15, left: 15),
                     child: Container(
-                      width: double.infinity,
+                      width: 400,
                       height: 50,
                       decoration:  BoxDecoration(
                         color: Colors.white,
@@ -150,7 +157,7 @@ class Text3 extends StatelessWidget {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.only(top:15, right: 15, left: 15),
                     child: Container(
                       width: 400,
                       height: 50,
@@ -186,7 +193,7 @@ class Text3 extends StatelessWidget {
             child: Text('Complete Tasks', style: TextStyle(letterSpacing: 1, color: Colors.white, fontFamily: 'Poppins', fontSize: 14),),
           ),
 Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.only(top:15, left: 15, right: 15),
                     child: Container(
                       width: 400,
                       height: 50,
@@ -214,7 +221,7 @@ Padding(
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(left:200.0, top: 10),
+                              padding: EdgeInsets.only(left:189, top:10),
                               child: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,),
                             )
                             
@@ -225,7 +232,7 @@ Padding(
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.only(top:15, right: 15, left: 15),
                     child: Container(
                       width: 400,
                       height: 50,
@@ -234,16 +241,16 @@ Padding(
                         borderRadius: BorderRadius.circular(5)
                       ),
                       child: 
-                      const Padding(
-                        padding:  EdgeInsets.only(top:8.0, left: 20),
+                       Padding(
+                        padding:  const EdgeInsets.only(top:8.0, left: 20),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.only(top:5.0),
                               child: Icon(Icons.verified_rounded,color: Color.fromARGB(255, 130, 236, 133)),
                             ),
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.only(left:8.0),
                               child: Column(
                                 children: [
@@ -252,9 +259,16 @@ Padding(
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(left:200.0, top: 10),
-                              child: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,),
+                    Padding(
+                      padding: const EdgeInsets.only(left:189, top:10),
+                      child: GestureDetector(
+                        child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,)
+                        ,onTap: (){
+
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Text4()));
+
+                                },
+                                ),
                             )
                             
                           ],

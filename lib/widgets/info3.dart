@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/main.dart';
+import 'package:kendra_todo/widgets/info2.dart';
 import 'package:table_calendar/table_calendar.dart';
 //import 'package:table_calendar/table_calendar.dart';
 
 
-class Info3 extends StatelessWidget {
+class Info3 extends StatefulWidget {  
 
    const Info3({super.key,});
+
+       @override
+  State<Info3> createState()  => _Info3();
+}
+
+class _Info3 extends State<Info3> {
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +44,10 @@ class Info3 extends StatelessWidget {
                     iconSize: MaterialStateProperty.all(15),
                     fixedSize: MaterialStateProperty.all(const Size(30, 30))                ),
                   icon:const Icon(Icons.arrow_back_ios, color: Colors.lightBlue,) , 
-                  onPressed: () {  },)
+                  onPressed: () { 
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Info2()));
+
+                   },)
                 ),
 
                 const Padding(
@@ -59,9 +70,10 @@ class Info3 extends StatelessWidget {
                                     Colors.white,
                                     Color(0xFF1253AA),
                                   ],
-          ) 
-                            ),
+                    ) 
+                  ),
                             child: TableCalendar(
+                           
                               rowHeight: 43,
                               availableGestures: AvailableGestures.all,
                               onHeaderTapped:(val){

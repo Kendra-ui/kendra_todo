@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/onboarding/page1.dart';
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +27,16 @@ class SplashScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top:110.0),
               child: Image.asset('assets/images/Checkmark.png'),
             ),
-             const Padding(
-               padding: EdgeInsets.all(12),
-               child: Text('DO IT', textAlign:TextAlign.center,style: TextStyle( fontSize: 36, color: Colors.white, fontFamily: 'Darumadrop One'),),
+              Padding(
+               padding: const EdgeInsets.all(12),
+               child: GestureDetector(
+                child: 
+                const Text('DO IT', textAlign:TextAlign.center,style: TextStyle( fontSize: 36, color: Colors.white, fontFamily: 'Darumadrop One'),),
+                onTap: (){
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page1()));
+                },
+
+                ),
              ),
              const Padding(
                padding: EdgeInsets.only(top:250.0),
