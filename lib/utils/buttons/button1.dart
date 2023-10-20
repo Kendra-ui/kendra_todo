@@ -9,12 +9,12 @@ class Button1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
       backgroundColor: const Color.fromARGB(255, 106, 137, 238),
-      body:  ScrollConfiguration(
-        behavior: const ScrollBehavior(),
+      body:  SingleChildScrollView(
+        
         child: Padding(
           padding: const EdgeInsets.only(top:250.0, right: 2, left:2),
           child: Container(
-            width: double.infinity,
+            width: MediaQuery.of(context).size.width,
             height: 500,
             decoration: BoxDecoration(
               color:  Colors.white,
