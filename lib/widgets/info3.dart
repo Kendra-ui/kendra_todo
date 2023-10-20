@@ -13,6 +13,14 @@ class Info3 extends StatefulWidget {
 }
 
 class _Info3 extends State<Info3> {
+    DateTime today = DateTime.now();
+
+    void _onDaySelected(DateTime day, DateTime focusedDay){
+      setState(() {
+        today = day;
+      });
+    }
+
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +80,9 @@ class _Info3 extends State<Info3> {
                     ) 
                   ),
                             child: TableCalendar(
-                           
+                              //permits to select another day from the date onf today
+                              selectedDayPredicate: (day)=>isSameDay(day, today),
+                              onDaySelected: _onDaySelected,
                               rowHeight: 43,
                               availableGestures: AvailableGestures.all,
                               onHeaderTapped:(val){
@@ -80,7 +90,7 @@ class _Info3 extends State<Info3> {
                               headerStyle: const HeaderStyle(
                               formatButtonVisible: false, 
                               titleCentered: true,),
-                              focusedDay: DateTime.now(),
+                              focusedDay: today,
                               firstDay:  DateTime.utc(2023,01,01), 
                               lastDay:  DateTime.utc(2030,01,01)
                               // calendarStyle: ,
@@ -101,7 +111,8 @@ class _Info3 extends State<Info3> {
                   children: [
                      Padding(
                       padding:  const EdgeInsets.only(right:190.0, top: 10),
-                      child:   Text('Set task for ${DateTime.now().toString().split(' ')[0]}', style: const TextStyle(color: Colors.black, fontFamily: 'Poppins', fontWeight: FontWeight.bold),),
+                      //this line enables to set task for the chosen date
+                      child:   Text('Set task for ${today.toString().split(' ')[0]}', style: const TextStyle(color: Colors.black, fontFamily: 'Poppins', fontWeight: FontWeight.bold),),
                     ),
                     Row(
                       children: [
