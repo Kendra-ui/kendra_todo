@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/widgets/info.dart';
 import 'package:kendra_todo/widgets/info3.dart';
 
 class Info2 extends StatefulWidget {
@@ -40,6 +41,7 @@ class _Info2 extends State<Info2> {
                     fixedSize: MaterialStateProperty.all(const Size(30, 30))                ),
                   icon:const Icon(Icons.arrow_back_ios, color: Colors.lightBlue,) , 
                   onPressed: () { 
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Info()));
 
                    },)
                 ),
