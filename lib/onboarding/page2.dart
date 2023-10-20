@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/onboarding/page1.dart';
 import 'package:kendra_todo/onboarding/page3.dart';
 
 class Page2 extends StatelessWidget {
@@ -38,7 +39,11 @@ class Page2 extends StatelessWidget {
       child:
       Row(
         children: [
-          Image.asset("assets/images/slider2.png"),
+          GestureDetector(
+            child: Image.asset("assets/images/slider2.png"),
+            onDoubleTap: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=> const Page1()));
+            },),
 
           Padding(
             padding: const EdgeInsets.only(left:50),

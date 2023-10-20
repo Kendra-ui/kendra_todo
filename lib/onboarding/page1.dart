@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/onboarding/page2.dart';
+import 'package:kendra_todo/widgets/splash_screen.dart';
 
 class Page1 extends StatelessWidget {
   const Page1({super.key});
@@ -40,7 +41,11 @@ class Page1 extends StatelessWidget {
       child:
       Row(
         children: [
-          Image.asset("assets/images/slider.png"),
+          GestureDetector(
+            child: Image.asset("assets/images/slider.png"),
+            onDoubleTap: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=> const SplashScreen()));
+            },),
 
           Padding(
             padding: const EdgeInsets.only(left:50),
