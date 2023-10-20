@@ -85,6 +85,7 @@ class _Info3 extends State<Info3> {
                               onDaySelected: _onDaySelected,
                               rowHeight: 43,
                               availableGestures: AvailableGestures.all,
+                              //swipe to different months
                               onHeaderTapped:(val){
                               } ,
                               headerStyle: const HeaderStyle(
