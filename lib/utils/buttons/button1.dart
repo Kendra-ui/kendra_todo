@@ -59,7 +59,7 @@ class Button1 extends StatelessWidget {
                         prefixIcon:  Padding(padding: EdgeInsets.only(bottom:110),
                         child: Icon(Icons.line_weight, color: Colors.white,),) 
                       ),
-                     style: TextStyle(fontSize: 15, color: Colors.white),
+                     style: TextStyle(fontSize: 15, color: Colors.white, fontFamily: "Poppins"),
                     ),
                   ),
                   const Padding(

@@ -132,6 +132,7 @@ class _Info3 extends State<Info3> {
                                       fillColor: Color.fromRGBO(5, 36, 62, 1),
                
                                   ),
+                                  style: TextStyle(color: Colors.white, fontSize: 15, fontFamily: "Poppins"),
                                 ),
                                            ),
                           ),

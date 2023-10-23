@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/utils/custom_textfield/text2.dart';
 import 'package:kendra_todo/utils/custom_textfield/text4.dart';
 
 class Text3 extends StatefulWidget {
@@ -52,9 +53,14 @@ class _Text3 extends State<Text3> {
                 ],
               ),
             ),
-            const Padding(
-              padding:  EdgeInsets.only(right:270.0, top: 10),
-              child:  Text('Group tasks', style: TextStyle(fontFamily: 'Poppins', color: Colors.white , fontSize: 16, letterSpacing: 1),),
+             Padding(
+              padding:  const EdgeInsets.only(right:270.0, top: 10),
+              child:  GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => const Text2()));
+                },
+                child:
+                 const Text('Group tasks', style: TextStyle(fontFamily: 'Poppins', color: Colors.white , fontSize: 16, letterSpacing: 1),)),
             ),
       
             SingleChildScrollView(

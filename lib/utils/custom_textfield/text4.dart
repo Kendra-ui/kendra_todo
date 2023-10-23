@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/utils/buttons/button1.dart';
+import 'package:kendra_todo/utils/custom_textfield/text3.dart';
 
 class Text4 extends StatelessWidget {
   const Text4({super.key});
@@ -73,9 +74,15 @@ class Text4 extends StatelessWidget {
           ),
               ],
             ),
-            const Padding(
-              padding:  EdgeInsets.only(top:50.0, right: 299),
-              child: Text('Tasks List', style: TextStyle(letterSpacing: 1, color: Colors.white, fontFamily: 'Poppins', fontSize: 14),),
+             Padding(
+              padding:  const EdgeInsets.only(top:50.0, right: 299),
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Text3()));
+                },
+                child: 
+                 const Text('Tasks List', style: TextStyle(letterSpacing: 1, color: Colors.white, fontFamily: 'Poppins', fontSize: 14),),
+                ),
             ),
       
             Padding(
