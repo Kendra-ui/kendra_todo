@@ -53,7 +53,7 @@ class _Info3 extends State<Info3> {
                       fixedSize: MaterialStateProperty.all(const Size(30, 30))                ),
                     icon:const Icon(Icons.arrow_back_ios, color: Colors.lightBlue,) , 
                     onPressed: () { 
-                    Navigator.of(context).push(_createRoute());
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Info2()));
       
                      },)
                   ),
@@ -165,19 +165,4 @@ class _Info3 extends State<Info3> {
       )
       );
   }
-  }
-  
-  Route _createRoute() {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation)=>const Info2(),
-      transitionsBuilder: (context, animation, secondaryAnimation, child)  {
-        const begin = Offset(0.0, 1.0);
-        const end = Offset.zero;
-        const curve = Curves.ease;
-
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-        return SlideTransition(position: animation.drive(tween),
-        child: child,);
-      },);
   }
