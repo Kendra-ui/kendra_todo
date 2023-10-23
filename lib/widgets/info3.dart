@@ -150,7 +150,20 @@ class _Info3 extends State<Info3> {
                                       )
                                     )
                                   ),
-                                  onPressed: (){}, 
+                                  onPressed: (){
+                                    showDialog(context: context,
+                                     builder: (context)=>  AlertDialog(
+                                      title: const Text('SUCCESS', style: TextStyle(fontFamily: "Poppins"),),
+                                      content: const Text('You have sucessfully added a task', style: TextStyle(fontFamily: "Poppins")),
+                                      actions: <Widget>[
+                                        TextButton(onPressed: (){
+                                        Navigator.of(context).pop();
+                                        }, 
+                                        child: const Text('Okay',style: TextStyle(fontFamily: "Poppins")),
+                                      )
+                                      ],
+                                     ));
+                                  }, 
                                   child: const Text('submit', style: TextStyle(fontFamily: 'Poppins', letterSpacing: 1, fontSize: 15, color: Colors.white),)),
                                 ),
                           ),
