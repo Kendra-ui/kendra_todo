@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/widgets/info.dart';
+//import 'package:kendra_todo/widgets/info.dart';
 
 class Button1 extends StatelessWidget {
   const Button1({super.key});
@@ -126,7 +127,25 @@ class Button1 extends StatelessWidget {
                               )
                             )
                           ),
-                          onPressed: (){}, 
+                          onPressed: (){
+                            showDialog(context: context,
+                                     builder: (context)=>  AlertDialog(
+                                      title: const Text('DELETE', style: TextStyle(fontFamily: "Poppins"),),
+                                      content: const Text('Do you want to delete this task?', style: TextStyle(fontFamily: "Poppins")),
+                                      actions: <Widget>[
+                                        TextButton(onPressed: (){
+                                        Navigator.of(context).pop();
+                                        }, 
+                                        child: const Text('No',style: TextStyle(fontFamily: "Poppins")),
+                                      ),
+                                      TextButton(onPressed: (){
+                                        Navigator.of(context).pop();
+                                        }, 
+                                        child: const Text('Continue',style: TextStyle(fontFamily: "Poppins")),
+                                      )
+                                      ],
+                                     ));
+                          }, 
                           child: const Text('cancel', style: TextStyle(fontFamily: 'Poppins', letterSpacing: 1, fontSize: 15, color: Colors.black),)),
                       ),
                   
@@ -142,6 +161,7 @@ class Button1 extends StatelessWidget {
                             )
                           ),
                           onPressed: (){
+                            
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Info()));
 
                           }, 
