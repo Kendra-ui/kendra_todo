@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/onboarding/page1.dart';
 import 'package:kendra_todo/onboarding/page3.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class Page2 extends StatelessWidget {
   const Page2({super.key});
 
 
   @override
   Widget build(BuildContext context) {
+
+    //double screenwidth = MediaQuery.of(context).size.width;
+
     return  Scaffold(
       body: Container(
-       width: double.infinity,
-        height: double.infinity,
+       width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         decoration:  const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -22,53 +25,61 @@ class Page2 extends StatelessWidget {
             ],
           )
       ),
-    child: Column(
+
+      child: Column(
       children: [
-        Padding(padding: const EdgeInsets.only(top: 50),
-        child: Image.asset('assets/images/calendar.png'),
-        ),
 
-      const SizedBox(
-        width: 250,
-        height: 200,
-        child: 
-         Text('Make a full schedule for the whole week and stay organized and productive all days', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),),
-      ),
+        const SizedBox(height: 10,),
+            Image.asset('assets/images/calendar.png'),
+            
+       const SizedBox(
+             width: 250,
+             height: 200,
+             child: 
+              Text('Make a full schedule for the whole week and stay organized and productive all days', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),),
+       ),
 
-      Padding(padding: const EdgeInsets.only(left:150),
-      child:
+       const SizedBox(height: 60,),
+            
       Row(
-        children: [
-          GestureDetector(
-            child: Image.asset("assets/images/slider2.png"),
-            onDoubleTap: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=> const Page1()));
-            },),
+            children: [
 
-          Padding(
-            padding: const EdgeInsets.only(left:50),
-            child: Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-              
-                color: Colors.white,
+              const SizedBox(width: 150,),
+              Flexible(
+                child: GestureDetector(
+                  child: Image.asset("assets/images/slider2.png"),
+                  onDoubleTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=> const Page1()));
+                  },
+                  ),
               ),
-              child: ElevatedButton(
-                 onPressed: () {
-                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page3()));
-
-                   }, 
-                 child: const Icon(Icons.arrow_forward, color: Colors.black,),
+            
+              Padding(
+                padding: const EdgeInsets.only(left:50,),
+                child: Container(
+                  width: 70,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                  
+                    color: Colors.white,
+                  ),
+                  child: GestureDetector(
+                    child: ElevatedButton(
+                       onPressed: () {
+                       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page3()));
+                         }, 
+                       child: const Icon(Icons.arrow_forward, color: Colors.black,),
+                      ),
+                  ),
                 ),
-            ),
-          )
-        ],
-      ))
+              )
+            ],
+      )
       ],
-    ),
-    ),
+            ),
+ 
+        ),
     );
   }
 }

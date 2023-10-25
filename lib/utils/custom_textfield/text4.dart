@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kendra_todo/utils/buttons/button1.dart';
+//import 'package:kendra_todo/utils/buttons/button1.dart';
 import 'package:kendra_todo/utils/custom_textfield/text3.dart';
 import 'package:kendra_todo/widgets/info.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class Text4 extends StatelessWidget {
   const Text4({super.key});
@@ -23,6 +25,15 @@ class Text4 extends StatelessWidget {
               ],
             )
         ),
+         child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight
+                ),
+                child: IntrinsicHeight(
+                  
         child:   Padding(
           padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
           child: Column(
@@ -414,5 +425,11 @@ class Text4 extends StatelessWidget {
         ),
         ),
       ),
-  );}
+  );
+  }
+  )
+  )
+  )
+  );
+  }
 }

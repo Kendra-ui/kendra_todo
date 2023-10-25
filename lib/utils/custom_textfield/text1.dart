@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/utils/custom_textfield/text2.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class Text1 extends StatelessWidget {
   const Text1({super.key});
@@ -21,6 +23,14 @@ class Text1 extends StatelessWidget {
               ],
             )
         ),
+         child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight
+                ),
+                child: IntrinsicHeight(
             child:    
             Column(
           children: [
@@ -140,5 +150,5 @@ class Text1 extends StatelessWidget {
       )
     );
     
-  }
-}
+  }))));
+}}

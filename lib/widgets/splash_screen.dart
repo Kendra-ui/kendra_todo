@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/onboarding/page1.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
