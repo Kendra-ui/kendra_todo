@@ -28,15 +28,19 @@ class Page1 extends StatelessWidget {
       
 child:
      Column(
-      children: [
+      children: <Widget>[
 
-        Image.asset('assets/images/pencil.png'),
+        Flexible(
+          fit: FlexFit.tight,
+          child: Image.asset('assets/images/pencil.png')),
 
-     const SizedBox(
-       width: 254,
-       height: 200,
-       child: 
-        Text('Plan your tasks to do, that way youll stay organized and you wont skip any', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),),
+     const Flexible(
+       child: SizedBox(
+         width: 254,
+         height: 200,
+         child: 
+          Text('Plan your tasks to do, that way youll stay organized and you wont skip any', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),),
+       ),
      ),
 
       const SizedBox(height: 50,),
@@ -78,7 +82,9 @@ child:
         ],
       ),
       ],
-    ),));
+    ),
+    )
+    );
 
 }
 

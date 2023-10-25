@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/onboarding/page1.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+//import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -22,12 +22,15 @@ class SplashScreen extends StatelessWidget {
             ],
           )
         ),
-                child:   Column(
+        child:   Column(
         
-          children: [
+          children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(top:110.0),
-              child: Image.asset('assets/images/Checkmark.png'),
+              child: Flexible(
+                fit: FlexFit.loose,
+                flex: 1,
+                child: Image.asset('assets/images/Checkmark.png')),
             ),
               Padding(
                padding: const EdgeInsets.all(12),
@@ -40,9 +43,12 @@ class SplashScreen extends StatelessWidget {
 
                 ),
              ),
-             const Padding(
-               padding: EdgeInsets.only(top:250.0),
-               child: Text('v 1.0.0',textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20),),
+             const Flexible(
+              fit: FlexFit.tight,
+               child: Padding(
+                 padding: EdgeInsets.only(top:250.0),
+                 child: Text('v 1.0.0',textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20),),
+               ),
              )
           ],
         ),

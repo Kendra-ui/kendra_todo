@@ -29,8 +29,11 @@ class Page2 extends StatelessWidget {
       child: Column(
       children: [
 
-        const SizedBox(height: 10,),
-            Image.asset('assets/images/calendar.png'),
+        const SizedBox(height: 5,),
+
+            Flexible(
+              fit: FlexFit.loose,
+              child: Image.asset('assets/images/calendar.png')),
             
        const SizedBox(
              width: 250,
@@ -39,7 +42,7 @@ class Page2 extends StatelessWidget {
               Text('Make a full schedule for the whole week and stay organized and productive all days', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),),
        ),
 
-       const SizedBox(height: 20,),
+       const SizedBox(height: 10,),
             
       Row(
             children: [
@@ -55,22 +58,25 @@ class Page2 extends StatelessWidget {
               ),
             
               Padding(
-                padding: const EdgeInsets.only(left:50,),
-                child: Container(
-                  width: 70,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                  
-                    color: Colors.white,
-                  ),
-                  child: GestureDetector(
-                    child: ElevatedButton(
-                       onPressed: () {
-                       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page3()));
-                         }, 
-                       child: const Icon(Icons.arrow_forward, color: Colors.black,),
-                      ),
+                padding: const EdgeInsets.only(left:70,),
+                child: Flexible(
+                  fit: FlexFit.loose,
+                  child: Container(
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                    
+                      color: Colors.white,
+                    ),
+                    child: GestureDetector(
+                      child: ElevatedButton(
+                         onPressed: () {
+                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page3()));
+                           }, 
+                         child: const Icon(Icons.arrow_forward, color: Colors.black,),
+                        ),
+                    ),
                   ),
                 ),
               )

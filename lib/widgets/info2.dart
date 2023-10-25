@@ -61,10 +61,8 @@ class _Info2 extends State<Info2> {
                     padding: EdgeInsets.only(left:8.0),
                     child: Text("Profile", style: TextStyle(color: Colors.white,fontSize: 18, fontFamily: 'Poppins', letterSpacing: 1),),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(left:250.0),
-                    child: Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,),
-                  )
+                  SizedBox(width: 200,),
+                  Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,)
                                   ],
               ),
             ),
@@ -81,10 +79,8 @@ class _Info2 extends State<Info2> {
                     padding: EdgeInsets.only(left:8.0),
                     child: Text("Conversations", style: TextStyle(color: Colors.white,fontSize: 18, fontFamily: 'Poppins', letterSpacing: 1),),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(left:170.0),
-                    child: Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,),
-                  )
+                  SizedBox(width: 120,),
+                  Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,)
                    ],
               ),
             ),
@@ -102,10 +98,8 @@ class _Info2 extends State<Info2> {
                     padding: EdgeInsets.only(left:8.0),
                     child: Text("Projects", style: TextStyle(color: Colors.white,fontSize: 18, fontFamily: 'Poppins', letterSpacing: 1),),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(left:232.0),
-                    child: Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,),
-                  )
+                  SizedBox(width: 182,),
+                  Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,)
             ],
               ),
             ),
@@ -122,10 +116,9 @@ class _Info2 extends State<Info2> {
                     padding: EdgeInsets.only(left:8.0),
                     child: Text("Terms and Policies", style: TextStyle(color: Colors.white,fontSize: 18, fontFamily: 'Poppins', letterSpacing: 1),),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(left:125.0),
-                    child: Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,),
-                  )
+
+                  SizedBox(width: 76,),
+                  Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,)
                           ],
               ),
             ),

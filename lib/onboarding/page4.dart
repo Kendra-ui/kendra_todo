@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/onboarding/page2.dart';
+import 'package:kendra_todo/onboarding/page3.dart';
 import 'package:kendra_todo/utils/custom_textfield/text1.dart';
 
 class Page4 extends StatelessWidget {
@@ -25,8 +26,11 @@ class Page4 extends StatelessWidget {
       child: Column(
       children: [
 
-        const SizedBox(height: 50,),
-        Image.asset('assets/images/protected.png'),
+        const SizedBox(height: 30,),
+
+        Flexible(
+          fit: FlexFit.loose,
+          child: Image.asset('assets/images/protected.png')),
 
       Container(
         width: 254,
@@ -43,7 +47,7 @@ class Page4 extends StatelessWidget {
           GestureDetector(
             child: Image.asset("assets/images/slider3.png"),
             onDoubleTap: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=> const Page2()));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=> const Page3()));
             },),
 
           Padding(

@@ -59,7 +59,7 @@ class _Info3 extends State<Info3> {
                   ),
       
                   const Padding(
-                    padding:  EdgeInsets.only(top:50.0, right: 70),
+                    padding:  EdgeInsets.only(top:50.0, right: 50),
                     child: Text('Manage Your Time', style: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 2, fontWeight: FontWeight.bold, fontSize: 20),),
                   )
                 ],
@@ -112,61 +112,57 @@ class _Info3 extends State<Info3> {
                   child:  Column(
                     children: [
                        Padding(
-                        padding:  const EdgeInsets.only(right:190.0, top: 10),
+                        padding:  const EdgeInsets.only(right:150.0, top: 10),
                         //this line enables to set task for the chosen date
                         child:   Text('Set task for ${today.toString().split(' ')[0]}', style: const TextStyle(color: Colors.black, fontFamily: 'Poppins', fontWeight: FontWeight.bold),),
                       ),
                       Row(
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child: SizedBox(
-                                  width: 250,
-                                  height: 40,
-                                child: 
-                                  TextField(
-                                    decoration:  InputDecoration(
-                                      filled: true,
-                                      labelText: 'Task',
-                                      labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 1, fontSize: 15),
-                                      fillColor: Color.fromRGBO(5, 36, 62, 1),
-               
-                                  ),
-                                  style: TextStyle(color: Colors.white, fontSize: 15, fontFamily: "Poppins"),
+                          const SizedBox(width: 10,),
+                          const SizedBox(
+                                width: 200,
+                                height: 40,
+                              child: 
+                                TextField(
+                                  decoration:  InputDecoration(
+                                    filled: true,
+                                    labelText: 'Task',
+                                    labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 1, fontSize: 15),
+                                    fillColor: Color.fromRGBO(5, 36, 62, 1),
+                                       
                                 ),
-                                           ),
-                          ),
-                         
-                          Padding(
-                            padding: const EdgeInsets.only(top:1.0),
-                            child: SizedBox(
-                                  width: 110,
-                                  child: ElevatedButton(
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(const Color(0xFF0EA5E9)),
-                                    shape: MaterialStateProperty.all(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(4)
-                                      )
+                                style: TextStyle(color: Colors.white, fontSize: 15, fontFamily: "Poppins"),
+                              ),
+                                         ),
+                          
+                         const SizedBox(width: 10,),
+                          SizedBox(
+                                width: 110,
+                                child: ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(const Color(0xFF0EA5E9)),
+                                  shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(4)
                                     )
-                                  ),
-                                  onPressed: (){
-                                    showDialog(context: context,
-                                     builder: (context)=>  AlertDialog(
-                                      title: const Text('SUCCESS', style: TextStyle(fontFamily: "Poppins"),),
-                                      content: const Text('You have sucessfully added a task', style: TextStyle(fontFamily: "Poppins")),
-                                      actions: <Widget>[
-                                        TextButton(onPressed: (){
-                                        Navigator.of(context).pop();
-                                        }, 
-                                        child: const Text('Okay',style: TextStyle(fontFamily: "Poppins")),
-                                      )
-                                      ],
-                                     ));
-                                  }, 
-                                  child: const Text('submit', style: TextStyle(fontFamily: 'Poppins', letterSpacing: 1, fontSize: 15, color: Colors.white),)),
+                                  )
                                 ),
-                          ),
+                                onPressed: (){
+                                  showDialog(context: context,
+                                   builder: (context)=>  AlertDialog(
+                                    title: const Text('SUCCESS', style: TextStyle(fontFamily: "Poppins"),),
+                                    content: const Text('You have sucessfully added a task', style: TextStyle(fontFamily: "Poppins")),
+                                    actions: <Widget>[
+                                      TextButton(onPressed: (){
+                                      Navigator.of(context).pop();
+                                      }, 
+                                      child: const Text('Okay',style: TextStyle(fontFamily: "Poppins")),
+                                    )
+                                    ],
+                                   ));
+                                }, 
+                                child: const Text('submit', style: TextStyle(fontFamily: 'Poppins', letterSpacing: 1, fontSize: 15, color: Colors.white),)),
+                              ),
                         ],
                       ),
                     ],
