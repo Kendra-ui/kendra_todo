@@ -23,20 +23,13 @@ class Text1 extends StatelessWidget {
               ],
             )
         ),
-         child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: constraints.maxHeight
-                ),
-                child: IntrinsicHeight(
+     
             child:    
             Column(
           children: [
-            Padding(padding: const EdgeInsets.all(40),
-          child: Image.asset('assets/images/Checkmark.png'),
-          ),
+            const SizedBox(height: 50,),
+            Image.asset('assets/images/Checkmark.png'),
+            
            Padding(
              padding: const EdgeInsets.only(right:90),
              child: RichText(
@@ -143,12 +136,12 @@ class Text1 extends StatelessWidget {
                   child: Image.asset('assets/images/Frame 18.png'),
                 )
               ],
-            ),)
+            ),
+            )
           ] 
            ),
-          ),
-      )
-    );
-    
-  }))));
-}}
+         )
+         )
+         );
+}
+}

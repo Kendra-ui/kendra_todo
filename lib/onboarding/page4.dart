@@ -22,15 +22,7 @@ class Page4 extends StatelessWidget {
           )
       ),
 
-       child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: constraints.maxHeight
-                ),
-                child: IntrinsicHeight(
-    child: Column(
+      child: Column(
       children: [
 
         const SizedBox(height: 50,),
@@ -44,10 +36,10 @@ class Page4 extends StatelessWidget {
         const Text('Your information are secured with us', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20,fontFamily: 'Poppins'),),
       ),
 
-      const SizedBox(height: 50,),
+      const SizedBox(height: 20,),
       Row(
         children: [
-          const SizedBox(width: 150,),
+          const SizedBox(width: 140,),
           GestureDetector(
             child: Image.asset("assets/images/slider3.png"),
             onDoubleTap: () {
@@ -77,8 +69,7 @@ class Page4 extends StatelessWidget {
       )
       ],
     ),
-    ),
-    ));
-  })));
+    )
+    );
 }
 }

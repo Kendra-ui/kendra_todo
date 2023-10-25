@@ -68,7 +68,7 @@ class Info extends StatelessWidget {
                 padding: EdgeInsets.only(top:25.0, right: 30),
                 child: SizedBox(
                   width: 350,
-                  height: 130,
+                  height: 150,
                   child: Text('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
                   , style: TextStyle(fontFamily: "Poppins", fontSize: 14, color: Colors.white),),
                 ),

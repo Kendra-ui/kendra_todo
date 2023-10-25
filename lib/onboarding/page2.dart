@@ -39,12 +39,12 @@ class Page2 extends StatelessWidget {
               Text('Make a full schedule for the whole week and stay organized and productive all days', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),),
        ),
 
-       const SizedBox(height: 60,),
+       const SizedBox(height: 20,),
             
       Row(
             children: [
 
-              const SizedBox(width: 150,),
+              const SizedBox(width: 130,),
               Flexible(
                 child: GestureDetector(
                   child: Image.asset("assets/images/slider2.png"),

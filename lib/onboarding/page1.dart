@@ -25,10 +25,10 @@ class Page1 extends StatelessWidget {
             ],
           )
       ),
+      
 child:
      Column(
       children: [
-        const SizedBox(height: 10),
 
         Image.asset('assets/images/pencil.png'),
 
@@ -39,7 +39,7 @@ child:
         Text('Plan your tasks to do, that way youll stay organized and you wont skip any', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),),
      ),
 
-      const SizedBox(height: 60,),
+      const SizedBox(height: 50,),
       Row(
         children: [
 

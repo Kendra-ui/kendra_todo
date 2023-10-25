@@ -40,38 +40,33 @@ class _Text3 extends State<Text3> {
                 child: IntrinsicHeight(
         child:   Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 40.0, left: 15 ),
-              child: Row(
-                children: [
-                Image.asset('assets/images/logo.png', height: 70,),
-                   const Padding(
-                     padding:  EdgeInsets.all(3.0),
-                     child:  Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('oussama chahidi', style: TextStyle(fontFamily: 'Poppins', color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18, letterSpacing: 1)),
-                        Text('oussamachahidi@gmail.com', style: TextStyle(fontFamily: 'Poppins', color: Color.fromARGB(255, 206, 204, 204),fontSize: 14, letterSpacing: 1 ),)
-                      ],
-                                   ),
-                   ),
-                 const Padding(
-                    padding:  EdgeInsets.only(left: 40.0),
-                    child:  Icon(Icons.notifications, color: Colors.white,),
-                  )
-                ],
-              ),
+            const SizedBox(height: 30,),
+            Row(
+              children: [
+              Image.asset('assets/images/logo.png',),
+                 const Column(
+                  
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('oussama chahidi', style: TextStyle(fontFamily: 'Poppins', color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18, letterSpacing: 1)),
+                    Text('oussamachahidi@gmail.com', style: TextStyle(fontFamily: 'Poppins', color: Color.fromARGB(255, 206, 204, 204),fontSize: 14, letterSpacing: 1 ),)
+                  ],
+                  ),
+                  const SizedBox(width: 40,),
+               const Icon(Icons.notifications, color: Colors.white,)
+              ],
             ),
-             Padding(
-              padding:  const EdgeInsets.only(right:270.0, top: 10),
-              child:  GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => const Text2()));
-                },
-                child:
-                 const Text('Group tasks', style: TextStyle(fontFamily: 'Poppins', color: Colors.white , fontSize: 16, letterSpacing: 1),)),
-            ),
+            const SizedBox(height: 15,),
+             GestureDetector(
+               onTap: () {
+                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => const Text2()));
+               },
+               child:
+                const Padding(
+                  padding:  EdgeInsets.only(right:210.0),
+                  child:  Text('Group tasks', style: TextStyle(fontFamily: 'Poppins', color: Colors.white , fontSize: 16, letterSpacing: 1),),
+                )),
       
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -134,9 +129,10 @@ class _Text3 extends State<Text3> {
                 ),
               ),
             ),
+            const SizedBox(height: 10,),
       
             const Padding(
-              padding:  EdgeInsets.only(top:15.0, right: 240),
+              padding: EdgeInsets.only(right:180.0),
               child: Text('Incomplete Tasks', style: TextStyle(letterSpacing: 1, color: Colors.white, fontFamily: 'Poppins', fontSize: 14),),
             ),
       
@@ -205,8 +201,11 @@ class _Text3 extends State<Text3> {
                         ),
                       ),
                     ),
+
+            const SizedBox(height: 10,),
+                    
             const Padding(
-              padding:  EdgeInsets.only(top:10.0, right: 240),
+              padding: EdgeInsets.only(right:190.0),
               child: Text('Complete Tasks', style: TextStyle(letterSpacing: 1, color: Colors.white, fontFamily: 'Poppins', fontSize: 14),),
             ),
       Padding(
@@ -237,8 +236,9 @@ class _Text3 extends State<Text3> {
                                   ],
                                 ),
                               ),
+                              SizedBox(width: 135,),
                               Padding(
-                                padding: EdgeInsets.only(left:189, top:10),
+                                padding: EdgeInsets.only(top:10.0),
                                 child: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,),
                               )
                               
@@ -276,17 +276,18 @@ class _Text3 extends State<Text3> {
                                   ],
                                 ),
                               ),
-                      Padding(
-                        padding: const EdgeInsets.only(left:189, top:10),
-                        child: GestureDetector(
-                          child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,)
-                          ,onTap: (){
+                              const SizedBox(width: 135,),
+                      GestureDetector(
+                        child: const Padding(
+                          padding: EdgeInsets.only(top:10.0),
+                          child: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,),
+                        )
+                        ,onTap: (){
       
-                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Text4()));
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Text4()));
       
-                                  },
-                                  ),
-                              )
+                                },
+                                )
                               
                             ],
                           ),

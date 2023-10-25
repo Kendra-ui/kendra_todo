@@ -26,7 +26,7 @@ class Page3 extends StatelessWidget {
     child: Column(
       children: [
 
-        const SizedBox(height: 70,),
+        const SizedBox(height: 50,),
 
         Image.asset('assets/images/team.png'),
 
@@ -39,10 +39,10 @@ class Page3 extends StatelessWidget {
          Text('Create a team task, invite people and manage your work together', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),),
       ),
 
-      const SizedBox(height: 50,),
+      const SizedBox(height: 20,),
       Row(
         children: [
-          const SizedBox(width: 160,),
+          const SizedBox(width: 130,),
           Flexible(
             child: GestureDetector(
               child: Image.asset("assets/images/slider2.png"),
