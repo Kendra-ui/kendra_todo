@@ -27,90 +27,78 @@ class Text1 extends StatelessWidget {
             child:    
             Column(
           children: [
-            const SizedBox(height: 50,),
-            Image.asset('assets/images/Checkmark.png'),
+             SizedBox(height: MediaQuery.of(context).size.height/10,),
+            Image.asset('assets/images/Checkmark.png', height: 90,),
+
+            SizedBox(height: MediaQuery.of(context).size.height/30,),
+
             
-           Padding(
-             padding: const EdgeInsets.only(right:90),
-             child: Flexible(
-              fit: FlexFit.loose,
-               child: RichText(
-                text: const TextSpan(
-                  style: TextStyle(color: Colors.white),
-                children: [
-                  TextSpan(text: 'Welcome Back to', style: TextStyle(fontFamily: 'Poppins', fontSize: 20)),
-                  TextSpan(text: ' DO IT', style: TextStyle(fontFamily: 'Darumadrop One', fontSize: 20))
-                  
-                ])
-               ),
+           SizedBox(
+            width: MediaQuery.of(context).size.width/1.1,
+            height: MediaQuery.of(context).size.height/18,
+             child: RichText(
+              text: const TextSpan(
+                style: TextStyle(color: Colors.white),
+              children: [
+                TextSpan(text: 'Welcome Back to', style: TextStyle(fontFamily: 'Poppins', fontSize: 18)),
+                TextSpan(text: ' DO IT', style: TextStyle(fontFamily: 'Darumadrop One', fontSize: 18))
+                
+              ])
              ),
            ),
-          const Flexible(
-            fit: FlexFit.loose,
-            child:   Padding(
-               padding:  EdgeInsets.only(right:70.0),
-               child:  Text('Have an other productive day!', style: TextStyle(color: Colors.white, fontFamily: 'Poppins', fontSize: 16),),
-             ),
-          ),
-      
-          Flexible(
-            fit: FlexFit.loose,
-            child: Padding(
-              padding: const EdgeInsets.only(top:20.0, right: 10, left: 10),
-              child: SizedBox(
-                          width: 358,
-                          height: 38,
-                           child: TextFormField(
-                            decoration: const InputDecoration(
-                              labelText: "E-mail",
-                              filled: true,
-                              fillColor: Color.fromARGB(255, 241, 240, 240),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none
-                              ),
-                              prefixIcon: Padding(padding: EdgeInsets.all(0),
-                              child: Icon(Icons.mail,  color: Colors.black),) 
-                            ),
-                            
-                           ),
-                         ),
-            ),
-          ),
-      
-          Flexible(
-            child: Padding(
-              padding: const EdgeInsets.only(top:20.0, right: 10, left: 10),
-              child: SizedBox(
-                          width: 358,
-                          height: 38,
-                           child: TextFormField(
-                            decoration: const InputDecoration(
-                              labelText: "Password",
-                              filled: true,
-                              fillColor: Color.fromARGB(255, 241, 240, 240),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none
-                              ),
-                              prefixIcon: Padding(padding: EdgeInsets.all(0),
-                              child: Icon(Icons.lock_sharp, color: Colors.black,),) 
-                            ),
-                           ),
-                         ),
-            ),
-          ),
-      
-          const Flexible(
-            child:  Padding(padding: EdgeInsets.only(top: 20,left: 220),
-            child: Text('Forgot password?', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300, fontFamily: 'Poppins', decoration: TextDecoration.underline, decorationColor: Colors.white),)
-            ,),
-          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width/1.1,
+            height: MediaQuery.of(context).size.height/18,
 
-            Flexible(
-              child: Padding(
+            child: const Text('Have an other productive day!', style: TextStyle(color: Colors.white, fontFamily: 'Poppins', fontSize: 16),)),
+      
+          Padding(
+            padding: const EdgeInsets.only(top:20.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width/1.1,
+              height: MediaQuery.of(context).size.height/15,
+                         child: TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: "E-mail",
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 241, 240, 240),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none
+                            ),
+                            prefixIcon: Padding(padding: EdgeInsets.all(0),
+                            child: Icon(Icons.mail,  color: Colors.black),) 
+                          ),
+                          
+                         ),
+                       ),
+          ),
+      
+          Padding(
+            padding: const EdgeInsets.only(top:20.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width/1.1,
+              height: MediaQuery.of(context).size.height/15,
+                         child: TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: "Password",
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 241, 240, 240),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none
+                            ),
+                            prefixIcon: Padding(padding: EdgeInsets.all(0),
+                            child: Icon(Icons.lock_sharp,  color: Colors.black),) 
+                          ),
+                          
+                         ),
+                       ),
+
+          ),
+           Padding(
                 padding: const EdgeInsets.only(top:20.0),
                 child: SizedBox(
-                  width: 348,
-                  height: 42,
+                  width: MediaQuery.of(context).size.width/1.2,
+              height: MediaQuery.of(context).size.height/15,
                   child: ElevatedButton(
                     style:  ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.lightBlue) ,
@@ -130,34 +118,38 @@ class Text1 extends StatelessWidget {
                     ),
                 ),
               ),
-            ),
-      
-            const Flexible(
-              child:  Padding(
-                padding:  EdgeInsets.only(top:30.0),
-                child:  Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Dont have an account?', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, color: Colors.white),),
-                    Text(' sign up', style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF63D9F3)),)
-                  ],
-                ),
-              ),
-            ),
-      
-             Flexible(
-               child: Padding(padding: const EdgeInsets.only(top: 20, left: 20),
-                         child: Row(
+             Padding(
+               padding:  EdgeInsets.all(MediaQuery.of(context).size.height/40),
+               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Sign in with:', style: TextStyle(fontFamily: 'Poppins', color: Colors.white, fontWeight: FontWeight.w500),),
-                  Padding(
-                    padding: const EdgeInsets.only(left:20.0),
-                    child: Image.asset('assets/images/Frame 18.png'),
-                  )
+             
+                  SizedBox(
+                         width: MediaQuery.of(context).size.width/2,
+                         height: MediaQuery.of(context).size.height/18,
+             
+                    child: const Text('Dont have an account?', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, color: Colors.white),)
+                    ),
+             
+                  SizedBox(
+                         width: MediaQuery.of(context).size.width/5,
+                         height: MediaQuery.of(context).size.height/18,
+                    child: const Text(' sign up', style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF63D9F3)),))
                 ],
                          ),
-                         ),
-             )
+             ),
+      
+             Padding(padding:  EdgeInsets.all(MediaQuery.of(context).size.width/15),
+                       child: Row(
+              children: [
+                const Text('Sign in with:', style: TextStyle(fontFamily: 'Poppins', color: Colors.white, fontWeight: FontWeight.w500),),
+                Padding(
+                  padding: const EdgeInsets.only(left:20.0),
+                  child: Image.asset('assets/images/Frame 18.png'),
+                )
+              ],
+                       ),
+                       )
           ] 
            ),
          )

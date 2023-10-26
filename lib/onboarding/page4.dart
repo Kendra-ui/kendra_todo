@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kendra_todo/onboarding/page2.dart';
+
 import 'package:kendra_todo/onboarding/page3.dart';
 import 'package:kendra_todo/utils/custom_textfield/text1.dart';
 
@@ -26,51 +26,49 @@ class Page4 extends StatelessWidget {
       child: Column(
       children: [
 
-        const SizedBox(height: 30,),
+        SizedBox(height: MediaQuery.of(context).size.height/20,),
 
-        Flexible(
-          fit: FlexFit.loose,
-          child: Image.asset('assets/images/protected.png')),
+        Image.asset('assets/images/protected.png', height: 200,),
 
-      Container(
-        width: 254,
-        height: 200,
-        margin: const EdgeInsets.only(top:15),
+      SizedBox(
+         width: MediaQuery.of(context).size.width/1.5,
+       height: MediaQuery.of(context).size.height/5,
         child: 
         const Text('Your information are secured with us', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20,fontFamily: 'Poppins'),),
       ),
 
-      const SizedBox(height: 20,),
+      SizedBox(height:MediaQuery.of(context).size.height/3.4,),
       Row(
         children: [
-          const SizedBox(width: 140,),
-          GestureDetector(
-            child: Image.asset("assets/images/slider3.png"),
-            onDoubleTap: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=> const Page3()));
-            },),
 
-          Padding(
-            padding: const EdgeInsets.only(left:50),
-            child: Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-              
-                color: Colors.white,
-              ),
+          SizedBox(
+            width:MediaQuery.of(context).size.width*0.81,
+            child: GestureDetector(
+              child: Image.asset("assets/images/slider3.png",),
+              onDoubleTap: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=> const Page3()));
+              },),
+          ),
+      
+          SizedBox(
+            width: MediaQuery.of(context).size.width/6,
+            height: MediaQuery.of(context).size.height/10,
+            child: GestureDetector(
               child: ElevatedButton(
                  onPressed: () { 
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Text1()));
-
                   }, 
                  child: const Icon(Icons.arrow_forward, color: Colors.black,),
+                 style: ButtonStyle(
+                  padding: MaterialStateProperty.all(EdgeInsets.zero),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(100))
+                 ),
                 ),
+               
             ),
           )
-        ],
-      )
+)],
+      ),
       ],
     ),
     )

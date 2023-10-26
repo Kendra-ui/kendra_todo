@@ -25,31 +25,22 @@ class SplashScreen extends StatelessWidget {
         child:   Column(
         
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top:110.0),
-              child: Flexible(
-                fit: FlexFit.loose,
-                flex: 1,
-                child: Image.asset('assets/images/Checkmark.png')),
-            ),
-              Padding(
-               padding: const EdgeInsets.all(12),
-               child: GestureDetector(
-                child: 
-                const Text('DO IT', textAlign:TextAlign.center,style: TextStyle( fontSize: 36, color: Colors.white, fontFamily: 'Darumadrop One'),),
-                onTap: (){
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page1()));
-                },
+          SizedBox(height: MediaQuery.of(context).size.height/10,),
 
-                ),
-             ),
-             const Flexible(
-              fit: FlexFit.tight,
-               child: Padding(
-                 padding: EdgeInsets.only(top:250.0),
-                 child: Text('v 1.0.0',textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20),),
+            Image.asset('assets/images/Checkmark.png'),
+
+            SizedBox(height: MediaQuery.of(context).size.height/1000,),
+
+              GestureDetector(
+               child: 
+               const Text('DO IT', textAlign:TextAlign.center,style: TextStyle( fontSize: 36, color: Colors.white, fontFamily: 'Darumadrop One'),),
+               onTap: (){
+                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page1()));
+               },
+
                ),
-             )
+             SizedBox(height: MediaQuery.of(context).size.height/1.9,),
+             const Text('v 1.0.0',textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20),)
           ],
         ),
       )

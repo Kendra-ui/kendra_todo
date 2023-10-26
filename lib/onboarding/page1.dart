@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/onboarding/page2.dart';
 import 'package:kendra_todo/widgets/splash_screen.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class Page1 extends StatelessWidget {
@@ -30,56 +29,49 @@ child:
      Column(
       children: <Widget>[
 
-        Flexible(
-          fit: FlexFit.tight,
-          child: Image.asset('assets/images/pencil.png')),
+        SizedBox(height: MediaQuery.of(context).size.height/100,),
 
-     const Flexible(
-       child: SizedBox(
-         width: 254,
-         height: 200,
-         child: 
-          Text('Plan your tasks to do, that way youll stay organized and you wont skip any', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),),
-       ),
+        Image.asset('assets/images/pencil.png', height: 200,),
+
+      SizedBox(
+       width: MediaQuery.of(context).size.width/1.8,
+       height: MediaQuery.of(context).size.height/5,
+
+       child: 
+        const Text('Plan your tasks to do, that way youll stay organized and you wont skip any', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),),
      ),
 
-      const SizedBox(height: 50,),
+       SizedBox(height:MediaQuery.of(context).size.height/3,),
       Row(
         children: [
 
-          const SizedBox(width: 150,),
-          Flexible(
+          SizedBox(
+            width:MediaQuery.of(context).size.width*0.8,
             child: GestureDetector(
-              child: Image.asset("assets/images/slider.png"),
+              child: Image.asset("assets/images/slider.png",),
               onDoubleTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=> const SplashScreen()));
               },),
           ),
       
-          Padding(
-            padding: const EdgeInsets.only(left:80),
-            child: Flexible(
-              child: Container(
-                width: 70,
-                height: 70,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                
-                  color: Colors.white,
+          SizedBox(
+            width: MediaQuery.of(context).size.width/6,
+            height: MediaQuery.of(context).size.height/10,
+            child: GestureDetector(
+              child: ElevatedButton(
+                 onPressed: () { 
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page2()));
+                  }, 
+                 child: const Icon(Icons.arrow_forward, color: Colors.black,),
+                 style: ButtonStyle(
+                  padding: MaterialStateProperty.all(EdgeInsets.zero),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(100))
+                 ),
                 ),
-                child: GestureDetector(
-                  child: ElevatedButton(
-                     onPressed: () { 
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page2()));
-                      }, 
-                     child: const Icon(Icons.arrow_forward, color: Colors.black,),
-                    ),
-                   
-                ),
-              ),
+               
             ),
           )
-        ],
+)],
       ),
       ],
     ),
