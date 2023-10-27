@@ -255,10 +255,10 @@ class Text4 extends StatelessWidget {
                            Column(
                 children: [
                 Padding(
-                      padding: const EdgeInsets.only(top:25),
+                      padding: const EdgeInsets.only(top:10),
                       child: Container(
                         width: MediaQuery.of(context).size.width/1.2,
-                        height: 40,
+                        height: MediaQuery.of(context).size.height/15,
                         decoration:  BoxDecoration(
                           color: const Color(0xFF05243E),
                           borderRadius: BorderRadius.circular(5)
@@ -280,68 +280,78 @@ class Text4 extends StatelessWidget {
                            ),
                           
                    Padding(
-                    padding:  EdgeInsets.all(MediaQuery.of(context).size.width/13),
-                    child: const TextField(
-                      decoration:  InputDecoration(
-                        labelText: "Description",
-                        labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 1),
-                        filled: true,
-                        fillColor: Color.fromRGBO(5, 36, 62, 1),
-                        prefixIcon:  Padding(padding: EdgeInsets.only(bottom:110),
-                        child: Icon(Icons.line_weight, color: Colors.white,),) 
+                    padding:  const EdgeInsets.only(top: 15),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height/5,
+                      width: MediaQuery.of(context).size.width/1.2,
+                      child: const TextField(
+                        decoration:  InputDecoration(
+                          labelText: "Description",
+                          labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 1),
+                          filled: true,
+                          fillColor: Color.fromRGBO(5, 36, 62, 1),
+                          prefixIcon:  Padding(padding: EdgeInsets.only(bottom:90),
+                          child: Icon(Icons.line_weight, color: Colors.white,),) 
+                        ),
+                       style: TextStyle(fontSize: 15, color: Colors.white, fontFamily: "Poppins"),
                       ),
-                     style: TextStyle(fontSize: 15, color: Colors.white, fontFamily: "Poppins"),
                     ),
                   ),
                   
-                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(width:MediaQuery.of(context).size.width/100,),
-                       SizedBox(
-                        width: MediaQuery.of(context).size.width/3,
-                        height: MediaQuery.of(context).size.height/15,
-                      child: 
-                        const TextField(
-                          decoration:  InputDecoration(
-                            labelText: "Date",
-                            labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 1),
-                            filled: true,
-                            fillColor: Color.fromRGBO(5, 36, 62, 1),
-                            prefixIcon:  Padding(padding: EdgeInsets.only(top:5),
-                            child: Icon(Icons.calendar_month, color: Colors.white,size: 20,),),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(5))
-                            )
-                            
+                   Padding(
+                     padding: const EdgeInsets.only(top:10),
+                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(width:MediaQuery.of(context).size.width/30),
+                         SizedBox(
+                          width: MediaQuery.of(context).size.width/3,
+                          height: MediaQuery.of(context).size.height/15,
+                        child: 
+                          const TextField(
+                            decoration:  InputDecoration(
+                              labelText: "Date",
+                              labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 1),
+                              filled: true,
+                              fillColor: Color.fromRGBO(5, 36, 62, 1),
+                              prefixIcon:  Padding(padding: EdgeInsets.only(top:5),
+                              child: Icon(Icons.calendar_month, color: Colors.white,size: 20,),),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(5))
+                              )
+                              
+                            ),
+                           style: TextStyle(fontSize: 15, color: Colors.white),
                           ),
-                         style: TextStyle(fontSize: 15, color: Colors.white),
                         ),
-                      ),
-                  
-                       SizedBox(
-                        width: MediaQuery.of(context).size.width/3,
-                        height: MediaQuery.of(context).size.height/15,
-                      child: 
-                        const TextField(
-                          decoration:  InputDecoration(
-                            labelText: "Time",
-                            labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 1),
-                            filled: true,
-                            fillColor: Color.fromRGBO(5, 36, 62, 1),
-                            prefixIcon:  Padding(padding: EdgeInsets.only(top:5),
-                            child: Icon(Icons.timelapse, color: Colors.white,size: 20,),),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(5))
-                            ) 
+
+       
+                         SizedBox(
+                          width: MediaQuery.of(context).size.width/3,
+                          height: MediaQuery.of(context).size.height/15,
+                        child: 
+                          const TextField(
+                            decoration:  InputDecoration(
+                              labelText: "Time",
+                              labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 1),
+                              filled: true,
+                              fillColor: Color.fromRGBO(5, 36, 62, 1),
+                              prefixIcon:  Padding(padding: EdgeInsets.only(top:5),
+                              child: Icon(Icons.timelapse, color: Colors.white,size: 20,),),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(5))
+                              ) 
+                            ),
+                           style: TextStyle(fontSize: 15, color: Colors.white),
                           ),
-                         style: TextStyle(fontSize: 15, color: Colors.white),
                         ),
-                      ),
-                       SizedBox(width: MediaQuery.of(context).size.width/500,)
-                    ],
-                  ),
-                    
+                         SizedBox(width: MediaQuery.of(context).size.width/100,)
+                      ],
+                    ),
+                   ),              
+                      
+                  SizedBox(height:MediaQuery.of(context).size.height/50),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                    children: [
