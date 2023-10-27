@@ -35,7 +35,7 @@ class Page3 extends StatelessWidget {
        width: MediaQuery.of(context).size.width/1.5,
        height: MediaQuery.of(context).size.height/5,
         child: 
-         Text('Create a team task, invite people and manage your work together', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),),
+         const Text('Create a team task, invite people and manage your work together', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),),
       ),
 
      SizedBox(height:MediaQuery.of(context).size.height/3,),
@@ -58,13 +58,13 @@ class Page3 extends StatelessWidget {
               child: ElevatedButton(
                  onPressed: () { 
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page4()));
-                  }, 
-                 child: const Icon(Icons.arrow_forward, color: Colors.black,),
+                  },
                  style: ButtonStyle(
                   padding: MaterialStateProperty.all(EdgeInsets.zero),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(100))
                  ),
-                ),
+                ), 
+                 child: const Icon(Icons.arrow_forward, color: Colors.black,),
                
             ),
           )

@@ -117,7 +117,7 @@ class _Info3 extends State<Info3> {
                     children: [
                       SizedBox(height: MediaQuery.of(context).size.height/50,),
                        Padding(
-                         padding:  EdgeInsets.only(right: 200),
+                         padding:  const EdgeInsets.only(right: 200),
                          child: Text('Set task for ${today.toString().split(' ')[0]}', style: const TextStyle(color: Colors.black, fontFamily: 'Poppins', fontWeight: FontWeight.bold),),
                        ),
                       Row(

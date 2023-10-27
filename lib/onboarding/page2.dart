@@ -59,13 +59,13 @@ class Page2 extends StatelessWidget {
               child: ElevatedButton(
                  onPressed: () { 
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page3()));
-                  }, 
-                 child: const Icon(Icons.arrow_forward, color: Colors.black,),
+                  },
                  style: ButtonStyle(
                   padding: MaterialStateProperty.all(EdgeInsets.zero),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(100))
                  ),
-                ),
+                ), 
+                 child: const Icon(Icons.arrow_forward, color: Colors.black,),
                
             ),
           )
