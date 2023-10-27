@@ -256,7 +256,7 @@ class Text4 extends StatelessWidget {
                              Column(
                   children: [
                   Padding(
-                        padding: const EdgeInsets.only(top:10),
+                        padding: const EdgeInsets.only(top:29),
                         child: Container(
                           width: MediaQuery.of(context).size.width/1.2,
                           height: MediaQuery.of(context).size.height/15,
