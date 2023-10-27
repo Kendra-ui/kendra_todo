@@ -41,32 +41,34 @@ class _Info3 extends State<Info3> {
           ),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top:50.0, left: 30),
-                    child: IconButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.white),
-                      iconSize: MaterialStateProperty.all(15),
-                      fixedSize: MaterialStateProperty.all(const Size(30, 30))                ),
-                    icon:const Icon(Icons.arrow_back_ios, color: Colors.lightBlue,) , 
-                    onPressed: () { 
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Info2()));
-      
-                     },)
-                  ),
-      
-                  const Padding(
-                    padding:  EdgeInsets.only(top:50.0, right: 50),
-                    child: Text('Manage Your Time', style: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 2, fontWeight: FontWeight.bold, fontSize: 20),),
-                  )
-                ],
-              ),
+              
+         SizedBox(height: MediaQuery.of(context).size.height/30),
+
+            Row(
+              children: [
+                SizedBox(width: MediaQuery.of(context).size.width/20),
+                SizedBox(
+                      height: MediaQuery.of(context).size.height/20,
+                      width: MediaQuery.of(context).size.width/13,
+                      child: FloatingActionButton(
+                  backgroundColor: Colors.white,
+                  onPressed: () { 
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Info2()));
+                  
+                   },
+                   child: const Icon(Icons.arrow_back_ios, color: Colors.blue, size: 20,),)
+                ),
+
+              SizedBox(
+                width: MediaQuery.of(context).size.width/20,
+                height: MediaQuery.of(context).size.height/8,),
+                const Text('Manage your time', style: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 2, fontWeight: FontWeight.bold, fontSize: 25),)
+              ],
+            ),
+
       
                Padding(
-                 padding: const EdgeInsets.all(15.0),
+                 padding:  EdgeInsets.all(MediaQuery.of(context).size.height/40),
                  child: Container(
                   
                               decoration:  BoxDecoration(
@@ -101,29 +103,33 @@ class _Info3 extends State<Info3> {
                ),
       
               Padding(
-                padding:  const EdgeInsets.only(right:13.0, left:13, top:20),
+                padding:   EdgeInsets.all(MediaQuery.of(context).size.height/50),
                 child: Container(
-                  width: 400,
-                  height: 100,
+                  width: MediaQuery.of(context).size.width/1,
+                  height: MediaQuery.of(context).size.height/7,
                   decoration:  BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10)
                   ),
+
                   child:  Column(
+
                     children: [
+                      SizedBox(height: MediaQuery.of(context).size.height/50,),
                        Padding(
-                        padding:  const EdgeInsets.only(right:150.0, top: 10),
-                        //this line enables to set task for the chosen date
-                        child:   Text('Set task for ${today.toString().split(' ')[0]}', style: const TextStyle(color: Colors.black, fontFamily: 'Poppins', fontWeight: FontWeight.bold),),
-                      ),
+                         padding:  EdgeInsets.only(right: 200),
+                         child: Text('Set task for ${today.toString().split(' ')[0]}', style: const TextStyle(color: Colors.black, fontFamily: 'Poppins', fontWeight: FontWeight.bold),),
+                       ),
                       Row(
                         children: [
-                          const SizedBox(width: 10,),
-                          const SizedBox(
-                                width: 200,
-                                height: 40,
+
+                          SizedBox(width: MediaQuery.of(context).size.width/50),
+
+                           SizedBox(
+                                width: MediaQuery.of(context).size.width/1.8,
+                                height: MediaQuery.of(context).size.height/18,
                               child: 
-                                TextField(
+                                const TextField(
                                   decoration:  InputDecoration(
                                     filled: true,
                                     labelText: 'Task',
@@ -135,10 +141,13 @@ class _Info3 extends State<Info3> {
                               ),
                                          ),
                           
-                         const SizedBox(width: 10,),
                           SizedBox(
-                                width: 110,
-                                child: ElevatedButton(
+                            width: MediaQuery.of(context).size.width/100,
+                            height: MediaQuery.of(context).size.height/15,),
+
+                          SizedBox(
+                                  width: MediaQuery.of(context).size.width/3.3,
+                                  height: MediaQuery.of(context).size.height/18,                                child: ElevatedButton(
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(const Color(0xFF0EA5E9)),
                                   shape: MaterialStateProperty.all(

@@ -29,109 +29,110 @@ class _Info2 extends State<Info2> {
         ),
         child: Column(
           children: [
+
+         SizedBox(height: MediaQuery.of(context).size.height/30),
+
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top:50.0, left: 30),
-                  child: IconButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.white),
-                    iconSize: MaterialStateProperty.all(20),
-                    fixedSize: MaterialStateProperty.all(const Size(30, 30))                ),
-                  icon:const Icon(Icons.arrow_back_ios, color: Colors.lightBlue,) , 
+                SizedBox(width: MediaQuery.of(context).size.width/10),
+                SizedBox(
+                      height: MediaQuery.of(context).size.height/20,
+                      width: MediaQuery.of(context).size.width/13,
+                      child: FloatingActionButton(
+                  backgroundColor: Colors.white,
                   onPressed: () { 
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Info()));
-
-                   },)
+                  
+                   },
+                   child: const Icon(Icons.arrow_back_ios, color: Colors.blue, size: 20,),)
                 ),
 
-                const Padding(
-                  padding:  EdgeInsets.only(top:50.0, right: 150),
-                  child: Text('Settings', style: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 2, fontWeight: FontWeight.bold, fontSize: 25),),
-                )
+              SizedBox(
+                width: MediaQuery.of(context).size.width/7,
+                height: MediaQuery.of(context).size.height/8,),
+                const Text('Settings', style: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 2, fontWeight: FontWeight.bold, fontSize: 25),)
               ],
             ),
-            const Padding(
-              padding:  EdgeInsets.only(top:70.0, left: 30),
-              child:  Row(
+
+             Padding(
+              padding:  EdgeInsets.all(MediaQuery.of(context).size.height/25),
+              child:   Row(
                 children: [
-                  Icon(Icons.person_rounded, color: Colors.white,),
-                  Padding(
+                  const Icon(Icons.person_rounded, color: Colors.white,),
+                  const Padding(
                     padding: EdgeInsets.only(left:8.0),
                     child: Text("Profile", style: TextStyle(color: Colors.white,fontSize: 18, fontFamily: 'Poppins', letterSpacing: 1),),
                   ),
-                  SizedBox(width: 200,),
-                  Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,)
+                  SizedBox(width: MediaQuery.of(context).size.width/1.7,),
+                  const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,)
                                   ],
               ),
             ),
-            const Padding(
-              padding:  EdgeInsets.only(top:10.0),
-              child: Divider(color: Colors.white,),
-            ),               
-            const Padding(
-              padding:  EdgeInsets.only(top:20.0, left: 30),
-              child:  Row(
+
+              SizedBox(height: MediaQuery.of(context).size.height/100),
+
+            const Divider(color: Colors.white,),
+
+             Padding(
+            padding:  EdgeInsets.all(MediaQuery.of(context).size.height/25),
+              child:   Row(
                 children: [
-                  Icon(Icons.chat_bubble_rounded, color: Colors.white,),
-                  Padding(
+                  const Icon(Icons.chat_bubble_rounded, color: Colors.white,),
+                  const Padding(
                     padding: EdgeInsets.only(left:8.0),
                     child: Text("Conversations", style: TextStyle(color: Colors.white,fontSize: 18, fontFamily: 'Poppins', letterSpacing: 1),),
                   ),
-                  SizedBox(width: 120,),
-                  Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,)
+                  SizedBox(width: MediaQuery.of(context).size.width/2.6,),
+                  const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,)
                    ],
               ),
             ),
+              SizedBox(height: MediaQuery.of(context).size.height/100),
 
-            const Padding(
-              padding:  EdgeInsets.only(top:10.0),
-              child: Divider(color: Colors.white,),
-            ),               
-            const Padding(
-              padding:  EdgeInsets.only(top:20.0, left: 30),
-              child:  Row(
+            const Divider(color: Colors.white,),
+
+             Padding(
+              padding:  EdgeInsets.all(MediaQuery.of(context).size.height/25),
+              child:   Row(
                 children: [
-                  Icon(Icons.lightbulb, color: Colors.white,),
-                  Padding(
+                  const Icon(Icons.lightbulb, color: Colors.white,),
+                  const Padding(
                     padding: EdgeInsets.only(left:8.0),
                     child: Text("Projects", style: TextStyle(color: Colors.white,fontSize: 18, fontFamily: 'Poppins', letterSpacing: 1),),
                   ),
-                  SizedBox(width: 182,),
-                  Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,)
+                  SizedBox(width: MediaQuery.of(context).size.width/1.84,),
+                  const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,)
             ],
               ),
             ),
-            const Padding(
-              padding:  EdgeInsets.only(top:10.0),
-              child: Divider(color: Colors.white, thickness: 1,),
-            ),               
-            const Padding(
-              padding:  EdgeInsets.only(top:20.0, left: 30),
-              child:  Row(
+              SizedBox(height: MediaQuery.of(context).size.height/100),
+
+            const Divider(color: Colors.white,),
+
+             Padding(
+              padding:  EdgeInsets.all(MediaQuery.of(context).size.height/25),
+              child:   Row(
                 children: [
-                  Icon(Icons.policy, color: Colors.white,),
-                  Padding(
+                  const Icon(Icons.policy, color: Colors.white,),
+                  const Padding(
                     padding: EdgeInsets.only(left:8.0),
                     child: Text("Terms and Policies", style: TextStyle(color: Colors.white,fontSize: 18, fontFamily: 'Poppins', letterSpacing: 1),),
                   ),
 
-                  SizedBox(width: 76,),
-                  Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,)
+                  SizedBox(width:MediaQuery.of(context).size.width/3.5,),
+                  const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15.43,)
                           ],
               ),
             ),
-            const Padding(
-                padding: EdgeInsets.only(top:10.0,),
-                child: Divider(color: Colors.white, thickness: 1,),
-              ), 
+
+              SizedBox(height: MediaQuery.of(context).size.height/100),
+               const Divider(color: Colors.white,),
 
               Padding(
-                  padding: const EdgeInsets.only(top:50.0, left: 30),
+                  padding:  EdgeInsets.all(MediaQuery.of(context).size.width/8),
                   child: Container(
-                    width: 400,
-                    height: 30,
+                    width: MediaQuery.of(context).size.width/2,
+                    height: MediaQuery.of(context).size.height/20,
                     alignment: Alignment.center,
                     child: ElevatedButton.icon(
                       onPressed: (){
