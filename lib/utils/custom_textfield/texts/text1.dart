@@ -29,7 +29,7 @@ class Text1 extends StatelessWidget {
               child:    
               Column(
             children: [
-               SizedBox(height: MediaQuery.of(context).size.height/10,),
+               SizedBox(height: MediaQuery.of(context).size.height/30,),
               Image.asset('assets/images/Checkmark.png', height: 90,),
       
               SizedBox(height: MediaQuery.of(context).size.height/30,),
@@ -74,6 +74,10 @@ class Text1 extends StatelessWidget {
                            ),
                          ),
             ),
+            
+            SizedBox(
+              height: MediaQuery.of(context).size.height/30,
+            ),
         
             Padding(
               padding: const EdgeInsets.only(top:20.0),
@@ -95,6 +99,15 @@ class Text1 extends StatelessWidget {
                            ),
                          ),
       
+            ),
+
+            SizedBox(
+              height: MediaQuery.of(context).size.height/30,
+            ),
+
+            SizedBox(
+              width: MediaQuery.of(context).size.width/1.1,
+              child: const Text('forgot Password?', textAlign: TextAlign.right, style: TextStyle(color: Colors.white, letterSpacing: 1, fontFamily: "Poppins", decoration: TextDecoration.underline, decorationColor: Colors.white),),
             ),
              Padding(
                   padding: const EdgeInsets.only(top:20.0),

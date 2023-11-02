@@ -177,7 +177,7 @@ class _Text2 extends State<Text2> {
                ),
         
                SizedBox(
-                width: MediaQuery.of(context).size.width/1.1,
+                width: MediaQuery.of(context).size.width/1.2,
                  child: Row(
                   children: [
                     const Text('Sign in with:', style: TextStyle(fontFamily: 'Poppins', color: Colors.white, fontWeight: FontWeight.w500),),

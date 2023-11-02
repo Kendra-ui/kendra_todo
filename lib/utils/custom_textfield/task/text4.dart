@@ -127,7 +127,7 @@ class Text4 extends StatelessWidget {
                 ),
               ),
       
-              SizedBox(height: MediaQuery.of(context).size.height/30,),
+              SizedBox(height: MediaQuery.of(context).size.height/20,),
            
                      Container(
                        width: MediaQuery.of(context).size.width/1.1,
@@ -160,7 +160,7 @@ class Text4 extends StatelessWidget {
                        ),
                      ),
       
-              SizedBox(height: MediaQuery.of(context).size.height/30,),
+              SizedBox(height: MediaQuery.of(context).size.height/20,),
       
         
                      Container(
@@ -194,7 +194,7 @@ class Text4 extends StatelessWidget {
                        ),
                      ),
       
-              SizedBox(height: MediaQuery.of(context).size.height/45,),
+              SizedBox(height: MediaQuery.of(context).size.height/20,),
       
         
                        Container(
@@ -229,7 +229,7 @@ class Text4 extends StatelessWidget {
                        ),
         
               SizedBox(
-                height: MediaQuery.of(context).size.height/5,),
+                height: MediaQuery.of(context).size.height/6,),
               Padding(
                 padding: const EdgeInsets.only(left:250),
                 child: SizedBox(
