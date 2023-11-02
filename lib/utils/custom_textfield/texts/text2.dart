@@ -165,7 +165,7 @@ class _Text2 extends State<Text2> {
                
                     SizedBox(
                            width: MediaQuery.of(context).size.width/6,
-                           height: MediaQuery.of(context).size.height/25,
+                           height: MediaQuery.of(context).size.height/18,
                       child: GestureDetector(
                         onTap: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Text1()));
