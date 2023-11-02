@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:kendra_todo/utils/buttons/button1.dart';
-import 'package:kendra_todo/utils/custom_textfield/home1.dart/text3.dart';
+import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/task/info.dart';
 
 
@@ -87,7 +86,7 @@ class Text4 extends StatelessWidget {
               SizedBox(height: MediaQuery.of(context).size.height/30,),
                GestureDetector(
                  onTap: (){
-                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Text3()));
+                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Dashboard()));
                  },
                  child: 
                   SizedBox(
@@ -229,7 +228,7 @@ class Text4 extends StatelessWidget {
                        ),
         
               SizedBox(
-                height: MediaQuery.of(context).size.height/6,),
+                height: MediaQuery.of(context).size.height/10,),
               Padding(
                 padding: const EdgeInsets.only(left:250),
                 child: SizedBox(

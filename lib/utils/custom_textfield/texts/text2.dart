@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kendra_todo/utils/custom_textfield/home1.dart/text3.dart';
+import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/text1.dart';
 //import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -143,7 +143,7 @@ class _Text2 extends State<Text2> {
                       )
                       ),
                       onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Text3()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Dashboard()));
                     
                       }
                       , child: const Text('Sign up', style: TextStyle( color: Colors.white),)

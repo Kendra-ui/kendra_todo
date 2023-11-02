@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:kendra_todo/widgets/setting/info2.dart';
+import 'package:kendra_todo/widgets/setting/logout.dart';
 import 'package:table_calendar/table_calendar.dart';
 //import 'package:table_calendar/table_calendar.dart';
 
 
-class Info3 extends StatefulWidget {  
+class Calendar extends StatefulWidget {  
 
-   const Info3({super.key,});
+   const Calendar({super.key,});
 
        @override
-  State<Info3> createState()  => _Info3();
+  State<Calendar> createState()  => _CalendarState();
 }
 
-class _Info3 extends State<Info3> {
+class _CalendarState extends State<Calendar> {
     DateTime today = DateTime.now();
 
     void _onDaySelected(DateTime day, DateTime focusedDay){
@@ -54,7 +54,7 @@ class _Info3 extends State<Info3> {
                         child: FloatingActionButton(
                     backgroundColor: Colors.white,
                     onPressed: () { 
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Info2()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Logout()));
                     
                      },
                      child: const Icon(Icons.arrow_back_ios, color: Colors.blue, size: 20,),)

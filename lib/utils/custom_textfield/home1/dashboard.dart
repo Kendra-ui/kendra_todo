@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:kendra_todo/utils/custom_textfield/texts/text2.dart';
 import 'package:kendra_todo/utils/custom_textfield/task/text4.dart';
+import 'package:kendra_todo/utils/custom_textfield/texts/text2.dart';
 
-
-class Text3 extends StatefulWidget {
-  const Text3({super.key});
-
-      @override
-  State<Text3> createState()  => _Text3();
-}
-
-class _Text3 extends State<Text3> {
+class Dashboard extends StatelessWidget {
+  const Dashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       body: SafeArea(
+      
         child: SingleChildScrollView(
           child: Container(
            width: MediaQuery.of(context).size.width,
@@ -298,6 +292,6 @@ class _Text3 extends State<Text3> {
               ),
             ),
       ),
-        )
-;
-  }}
+    );
+  }
+}

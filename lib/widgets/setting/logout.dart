@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:kendra_todo/utils/custom_textfield/task/info.dart';
 import 'package:kendra_todo/widgets/setting/calendar.dart';
 
-class Info2 extends StatefulWidget {
-  const Info2({super.key});
+class Logout extends StatefulWidget {
+  const Logout({super.key});
 
       @override
-  State<Info2> createState()  => _Info2();
+  State<Logout> createState()  => _LogoutState();
 }
 
-class _Info2 extends State<Info2> {
+class _LogoutState extends State<Logout> {
 
   @override
   Widget build(BuildContext context) {

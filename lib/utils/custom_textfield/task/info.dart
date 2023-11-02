@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/utils/custom_textfield/task/text4.dart';
-import 'package:kendra_todo/widgets/setting/info2.dart';
+import 'package:kendra_todo/widgets/setting/logout.dart';
 
 class Info extends StatelessWidget {
   const Info({super.key});
@@ -50,7 +50,7 @@ class Info extends StatelessWidget {
                     Text('team meeting', style: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 2, fontSize: 18),),
                     Padding(
                       padding: EdgeInsets.only(left:8.0),
-                      child: Icon(Icons.abc, color: Colors.white,),
+                      child: Icon(Icons.note_alt_outlined, color: Colors.white,),
                     ),
                   ],
                 ),
@@ -77,7 +77,7 @@ class Info extends StatelessWidget {
                    , style: TextStyle(fontFamily: "Poppins", fontSize: 14, color: Colors.white),),
                  ),
       
-              SizedBox(height: MediaQuery.of(context).size.height/5),
+              SizedBox(height: MediaQuery.of(context).size.height/15),
       
       
                 Row(
@@ -89,8 +89,7 @@ class Info extends StatelessWidget {
                     child: ElevatedButton(
                       style: ButtonStyle(
                          backgroundColor:MaterialStateProperty.all(const Color(0xFF05243E)),
-      
-                        shape: MaterialStateProperty.all(
+                         shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)
                           )
@@ -98,7 +97,7 @@ class Info extends StatelessWidget {
                       ),
                       onPressed: (){
                     
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Info2()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Logout()));
       
                       }, 
                       child: const Padding(
