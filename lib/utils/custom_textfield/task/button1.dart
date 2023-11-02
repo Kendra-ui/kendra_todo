@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kendra_todo/widgets/info.dart';
+import 'package:kendra_todo/utils/custom_textfield/task/info.dart';
 //import 'package:kendra_todo/widgets/info.dart';
 
 class Button1 extends StatelessWidget {

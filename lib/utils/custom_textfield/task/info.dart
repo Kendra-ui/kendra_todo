@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kendra_todo/utils/custom_textfield/text4.dart';
-import 'package:kendra_todo/widgets/info2.dart';
+import 'package:kendra_todo/utils/custom_textfield/task/text4.dart';
+import 'package:kendra_todo/widgets/setting/info2.dart';
 
 class Info extends StatelessWidget {
   const Info({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kendra_todo/utils/custom_textfield/text2.dart';
-import 'package:kendra_todo/utils/custom_textfield/text4.dart';
+import 'package:kendra_todo/utils/custom_textfield/texts/text2.dart';
+import 'package:kendra_todo/utils/custom_textfield/task/text4.dart';
 
 
 class Text3 extends StatefulWidget {
@@ -124,12 +124,11 @@ class _Text3 extends State<Text3> {
                   ),
                 ),
               ),
-               SizedBox(height: MediaQuery.of(context).size.height/150,),
+               SizedBox(height: MediaQuery.of(context).size.height/80,),
         
-              const Padding(
-                padding: EdgeInsets.only(right:180.0),
-                child: Text('Incomplete Tasks', style: TextStyle(letterSpacing: 1, color: Colors.white, fontFamily: 'Poppins', fontSize: 14),),
-              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width/1.1,
+                child: const Text('Incomplete Tasks', style: TextStyle(letterSpacing: 1, color: Colors.white, fontFamily: 'Poppins', fontSize: 14),)),
         
               Padding(
                         padding:  EdgeInsets.all(MediaQuery.of(context).size.height/100),
@@ -200,12 +199,11 @@ class _Text3 extends State<Text3> {
                       ),
         
       
-               SizedBox(height: MediaQuery.of(context).size.height/150,),
+               SizedBox(height: MediaQuery.of(context).size.height/30,),
                       
-              const Padding(
-                padding: EdgeInsets.only(right:190.0),
-                child: Text('Complete Tasks', style: TextStyle(letterSpacing: 1, color: Colors.white, fontFamily: 'Poppins', fontSize: 14),),
-              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width/1.1,
+                child: const Text('Complete Tasks', style: TextStyle(letterSpacing: 1, color: Colors.white, fontFamily: 'Poppins', fontSize: 14),)),
       
       
                   Padding(

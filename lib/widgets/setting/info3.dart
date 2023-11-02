@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kendra_todo/widgets/info2.dart';
+import 'package:kendra_todo/widgets/setting/info2.dart';
 import 'package:table_calendar/table_calendar.dart';
 //import 'package:table_calendar/table_calendar.dart';
 

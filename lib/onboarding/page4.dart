@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:kendra_todo/onboarding/page3.dart';
-import 'package:kendra_todo/utils/custom_textfield/text1.dart';
+import 'package:kendra_todo/utils/custom_textfield/texts/text1.dart';
 
 class Page4 extends StatelessWidget {
   const Page4({super.key});
@@ -37,7 +36,7 @@ class Page4 extends StatelessWidget {
         const Text('Your information are secured with us', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20,fontFamily: 'Poppins'),),
       ),
 
-      SizedBox(height:MediaQuery.of(context).size.height/3.4,),
+      SizedBox(height:MediaQuery.of(context).size.height/3.7,),
       Row(
         children: [
 

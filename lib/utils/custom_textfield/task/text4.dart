@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 //import 'package:kendra_todo/utils/buttons/button1.dart';
-import 'package:kendra_todo/utils/custom_textfield/text3.dart';
-import 'package:kendra_todo/widgets/info.dart';
+import 'package:kendra_todo/utils/custom_textfield/home1.dart/text3.dart';
+import 'package:kendra_todo/utils/custom_textfield/task/info.dart';
 
 
 class Text4 extends StatelessWidget {
@@ -84,17 +84,16 @@ class Text4 extends StatelessWidget {
             ),
                 ],
               ),
-              SizedBox(height: MediaQuery.of(context).size.height/50,),
-               Padding(
-                padding:  const EdgeInsets.only(right: 210),
-                child: GestureDetector(
-                  onTap: (){
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Text3()));
-                  },
-                  child: 
-                   const Text('Tasks List', style: TextStyle(letterSpacing: 1, color: Colors.white, fontFamily: 'Poppins', fontSize: 14),),
-                  ),
-              ),
+              SizedBox(height: MediaQuery.of(context).size.height/30,),
+               GestureDetector(
+                 onTap: (){
+                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Text3()));
+                 },
+                 child: 
+                  SizedBox(
+                width: MediaQuery.of(context).size.width/1.1,
+                child: const Text('Tasks List', style: TextStyle(letterSpacing: 1, color: Colors.white, fontFamily: 'Poppins', fontSize: 14),)),
+                 ),
               SizedBox(height: MediaQuery.of(context).size.height/30,),
               
               Container(
@@ -195,7 +194,7 @@ class Text4 extends StatelessWidget {
                        ),
                      ),
       
-              SizedBox(height: MediaQuery.of(context).size.height/30,),
+              SizedBox(height: MediaQuery.of(context).size.height/45,),
       
         
                        Container(
@@ -230,7 +229,7 @@ class Text4 extends StatelessWidget {
                        ),
         
               SizedBox(
-                height: MediaQuery.of(context).size.height/4,),
+                height: MediaQuery.of(context).size.height/5,),
               Padding(
                 padding: const EdgeInsets.only(left:250),
                 child: SizedBox(

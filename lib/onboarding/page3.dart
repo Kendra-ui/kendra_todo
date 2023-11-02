@@ -39,7 +39,7 @@ class Page3 extends StatelessWidget {
            const Text('Create a team task, invite people and manage your work together', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),),
         ),
       
-           SizedBox(height:MediaQuery.of(context).size.height/3,),
+           SizedBox(height:MediaQuery.of(context).size.height/3.7,),
         Row(
           children: [
       
