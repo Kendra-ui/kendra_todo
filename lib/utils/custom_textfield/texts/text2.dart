@@ -1,6 +1,7 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/utility/data_helper.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/text1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -56,11 +57,33 @@ class _Text2 extends State<Text2> {
   //      }
   //   );
   // }
+  String fullname = '';
+  String email = '';
+  String password= '';
+
+  Future<void> performLogin(String fullname, String password, String email) async {
+  final db = DatabaseHelper.instance;
+
+  // Insert login information
+  await db.insertSignupInfo(fullname, password, email);
+
+  // Retrieve login information
+  final storedInfo = await db.getLoginInfo(fullname);
+
+  if (storedInfo != null && storedInfo['password'] == password) {
+    print('Login successful. Welcome, ${storedInfo[fullname]}!');
+  } else {
+    print('Login failed. Invalid fullname or password.');
+  }
+}
+
+
+
 
   @override
 
   void initState() {
-    
+
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async{
         final Future<SharedPreferences> preference = SharedPreferences.getInstance();
     final SharedPreferences prefs = await preference;
@@ -202,26 +225,28 @@ class _Text2 extends State<Text2> {
                         
                       )
                       ),
-                      onPressed: () {
-                        showDialog(context: context,
-                                     builder: (context)=>  AlertDialog(
-                                      icon: const Icon(Icons.verified, size: 50, color: Colors.green,),
-                                      title: const Text('Congratulations', style: TextStyle(fontFamily: "Poppins",),),
-                                      content: const Text('You have successfully created your account! ', style: TextStyle(fontFamily: "Poppins")),
-                                      actions: <Widget>[
-                                        TextButton(onPressed: (){
-                                        Navigator.of(context).pop();
-                                        }, 
-                                        child: GestureDetector(
-                                          onTap: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Dashboard()));
-
-                                          },
-                                          child: const Text('ok',style: TextStyle(fontFamily: "Poppins"))),
-                                      ),
+                      onPressed: ()  {
+                        // calling the function in order t retrieve the info of the user
+                        performLogin(fullname, password, email);
+                      //   showDialog(context: context,
+                      //                builder: (context)=>  AlertDialog(
+                      //                 icon: const Icon(Icons.verified, size: 50, color: Colors.green,),
+                      //                 title: const Text('Congratulations', style: TextStyle(fontFamily: "Poppins",),),
+                      //                 content: const Text('You have successfully created your account! ', style: TextStyle(fontFamily: "Poppins")),
+                      //                 actions: <Widget>[
+                      //                   TextButton(onPressed: (){
+                      //                   Navigator.of(context).pop();
+                      //                   }, 
+                      //                   child: GestureDetector(
+                      //                     onTap: () {
+                      // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Dashboard()));
+              
+                      //                     },
+                      //                     child: const Text('ok',style: TextStyle(fontFamily: "Poppins"))),
+                      //                 ),
                                       
-                                      ],
-                                     ));
+                      //                 ],
+                      //                ));
                     
                       }
                       , child: const Text('Sign up', style: TextStyle( color: Colors.white),)
