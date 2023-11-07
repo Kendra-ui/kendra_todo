@@ -67,6 +67,7 @@ class Text1 extends StatelessWidget {
                 width: MediaQuery.of(context).size.width/1.1,
                 height: MediaQuery.of(context).size.height/15,
                            child: TextFormField(
+                            controller: _emailController,
                             decoration: const InputDecoration(
                               labelText: "E-mail",
                               filled: true,
