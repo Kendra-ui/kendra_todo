@@ -58,9 +58,9 @@ class MyApp extends StatelessWidget {
     }
 
     //check whether the app is paused
-    final isBackground = state = AppLifecycleState.paused;
+    //final isBackground = state = AppLifecycleState.paused;
 
-    print('app state: $AppLifecycleState');
+    //print('app state: $AppLifecycleState');
   }
 
   @override

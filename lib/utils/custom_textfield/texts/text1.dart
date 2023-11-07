@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/text3.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/text2.dart';
 //import 'package:flutter_screenutil/flutter_screenutil.dart';
+//import 'package:firebase_core/firebase_core.dart';
 
 
 class Text1 extends StatelessWidget {
-  const Text1({super.key});
+   Text1({super.key});
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+      
+  
  
  @override
   Widget build(BuildContext context) {
@@ -86,6 +92,7 @@ class Text1 extends StatelessWidget {
                 width: MediaQuery.of(context).size.width/1.1,
                 height: MediaQuery.of(context).size.height/15,
                            child: TextFormField(
+                            controller:_passwordController ,
                             decoration: const InputDecoration(
                               labelText: "Password",
                               filled: true,

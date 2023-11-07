@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/onboarding/page1.dart';
 //import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:async';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
 
+class _SplashScreenState extends State<SplashScreen> {
+
+    @override
+  void initState() {
+    super.initState();
+    Timer(
+      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Page1())));
+  }
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Container(
          width: double.infinity,
@@ -45,8 +57,6 @@ class SplashScreen extends StatelessWidget {
             ],
           ),
         ),
-      )
-      )
-    ;
+      ));
   }
 }

@@ -1,12 +1,14 @@
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/text1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-//import 'package:flutter_screenutil/flutter_screenutil.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Text2 extends StatefulWidget {
-  const Text2({super.key});
+   const Text2({super.key});
 
       @override
   State<Text2> createState()  => _Text2();
@@ -16,9 +18,49 @@ class Text2 extends StatefulWidget {
 
 class _Text2 extends State<Text2> {
 
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _fullnameController = TextEditingController();
+
   @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _fullnameController.dispose();
+    super.dispose();
+  }
+
+  // Future signUp() async{
+
+  //     //create user
+  //     await FirebaseAuth.instance.createUser(
+  //       email: _emailController.text.trim(),
+  //       password: _passwordController.text.trim(),
+  //     );
+
+  //     //add user details when signing up
+  //     addUserDetails(
+  //       _fullnameController.text.trim(),
+  //       _emailController.text.trim(),
+  //       _passwordController.text.trim()
+  //       );
+  
+  // }
+//adding user information in the data base
+//passing the details as parameters
+  // Future addUserDetails(String fullname, String email, String password) async{
+  //   await FirebaseFirestore.instance.collection('Users').add(
+  //     {'full name': fullname,
+  //      'email' : email,
+  //      'password': password
+  //      }
+  //   );
+  // }
+
+  @override
+
   void initState() {
-    // TODO: implement initState
+    
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async{
         final Future<SharedPreferences> preference = SharedPreferences.getInstance();
     final SharedPreferences prefs = await preference;
@@ -82,6 +124,7 @@ class _Text2 extends State<Text2> {
                 width: MediaQuery.of(context).size.width/1.1,
                 height: MediaQuery.of(context).size.height/15,
                            child: TextFormField(
+                            controller: _fullnameController,
                             decoration: const InputDecoration(
                               labelText: "Full Name",
                               filled: true,
@@ -103,6 +146,7 @@ class _Text2 extends State<Text2> {
                 width: MediaQuery.of(context).size.width/1.1,
                 height: MediaQuery.of(context).size.height/15,
                            child: TextFormField(
+                            controller: _emailController,
                             decoration: const InputDecoration(
                               labelText: "E-mail",
                               filled: true,
@@ -124,6 +168,7 @@ class _Text2 extends State<Text2> {
                 width: MediaQuery.of(context).size.width/1.1,
                 height: MediaQuery.of(context).size.height/15,
                            child: TextFormField(
+                            controller: _passwordController,
                             decoration: const InputDecoration(
                               labelText: "Password",
                               filled: true,
@@ -158,7 +203,25 @@ class _Text2 extends State<Text2> {
                       )
                       ),
                       onPressed: () {
+                        showDialog(context: context,
+                                     builder: (context)=>  AlertDialog(
+                                      icon: const Icon(Icons.verified, size: 50, color: Colors.green,),
+                                      title: const Text('Congratulations', style: TextStyle(fontFamily: "Poppins",),),
+                                      content: const Text('You have successfully created your account! ', style: TextStyle(fontFamily: "Poppins")),
+                                      actions: <Widget>[
+                                        TextButton(onPressed: (){
+                                        Navigator.of(context).pop();
+                                        }, 
+                                        child: GestureDetector(
+                                          onTap: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Dashboard()));
+
+                                          },
+                                          child: const Text('ok',style: TextStyle(fontFamily: "Poppins"))),
+                                      ),
+                                      
+                                      ],
+                                     ));
                     
                       }
                       , child: const Text('Sign up', style: TextStyle( color: Colors.white),)
@@ -183,7 +246,7 @@ class _Text2 extends State<Text2> {
                            height: MediaQuery.of(context).size.height/18,
                       child: GestureDetector(
                         onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Text1()));
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Text1()));
 
                         },
                         child: const Text(' sign in', style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF63D9F3)),)))
