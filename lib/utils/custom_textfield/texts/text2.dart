@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/text1.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
@@ -9,9 +10,23 @@ class Text2 extends StatefulWidget {
 
       @override
   State<Text2> createState()  => _Text2();
+
+  
 }
 
 class _Text2 extends State<Text2> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async{
+        final Future<SharedPreferences> preference = SharedPreferences.getInstance();
+    final SharedPreferences prefs = await preference;
+    prefs.setString("screenToShow", "signUp");
+      
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/onboarding/page1.dart';
 import 'package:kendra_todo/onboarding/page3.dart';
-class Page2 extends StatelessWidget {
+import 'dart:async';
+
+class Page2 extends StatefulWidget {
   const Page2({super.key});
 
+  @override
+  State<Page2> createState() => _Page2State();
+}
+
+class _Page2State extends State<Page2> {
+
+    @override
+  void initState() {
+    super.initState();
+    Timer(
+      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Page3())));
+  }
 
   @override
   Widget build(BuildContext context) {
-
-    //double screenwidth = MediaQuery.of(context).size.width;
-
-    return  Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Container(
          width: MediaQuery.of(context).size.width,
@@ -80,6 +91,7 @@ class Page2 extends StatelessWidget {
     );
   }
 }
+
 
   
   

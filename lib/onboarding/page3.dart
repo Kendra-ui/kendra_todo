@@ -1,14 +1,28 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/onboarding/page2.dart';
 import 'package:kendra_todo/onboarding/page4.dart';
 
-
-class Page3 extends StatelessWidget {
+class Page3 extends StatefulWidget {
   const Page3({super.key});
 
-   @override
+  @override
+  State<Page3> createState() => _Page3State();
+}
+
+class _Page3State extends State<Page3> {
+
+    @override
+  void initState() {
+    super.initState();
+    Timer(
+      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Page4())));
+  }
+  
+  @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Container(
          width: MediaQuery.of(context).size.width ,

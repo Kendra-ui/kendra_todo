@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/onboarding/page3.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/text1.dart';
+import 'dart:async';
 
-class Page4 extends StatelessWidget {
+class Page4 extends StatefulWidget {
   const Page4({super.key});
 
-   @override
+  @override
+  State<Page4> createState() => _Page4State();
+}
+
+class _Page4State extends State<Page4> {
+
+    @override
+  void initState() {
+    super.initState();
+    Timer(
+      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Text1())));
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: Container(
        width: double.infinity,
         height: double.infinity,
@@ -72,5 +86,5 @@ class Page4 extends StatelessWidget {
     ),
     )
     );
-}
+  }
 }

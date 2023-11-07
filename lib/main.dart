@@ -33,9 +33,35 @@ class MyApp extends StatelessWidget {
   State<Homepage> createState() => _HomepageState();
   }
   
-  class _HomepageState extends State<Homepage>{
+  class _HomepageState extends State<Homepage> with WidgetsBindingObserver{
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
 
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    //check if the app is inactive or detached
+    if (state == AppLifecycleState.inactive || state == AppLifecycleState.detached) {
+      return;
+    }
+
+    //check whether the app is paused
+    final isBackground = state = AppLifecycleState.paused;
+
+    print('app state: $AppLifecycleState');
+  }
 
   @override
   Widget build(BuildContext context) {

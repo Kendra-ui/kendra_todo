@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/onboarding/page2.dart';
 import 'package:kendra_todo/widgets/splashscreen/splash_screen.dart';
+import 'dart:async';
 
-
-class Page1 extends StatelessWidget {
+class Page1 extends StatefulWidget {
   const Page1({super.key});
 
+  @override
+  State<Page1> createState() => _Page1State();
+}
 
+class _Page1State extends State<Page1> {
 
-@override
+  @override
+  void initState() {
+    super.initState();
+    Timer(
+      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Page2())));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return  Scaffold(
       body: SafeArea(
@@ -82,6 +93,5 @@ class Page1 extends StatelessWidget {
 
 }
 
-  
-  
-}
+  }
+
