@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/home.dart';
 import 'package:kendra_todo/utility/data_helper.dart';
-import 'package:sqflite/sqflite.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

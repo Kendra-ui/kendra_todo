@@ -64,14 +64,15 @@ class _Text2 extends State<Text2> {
   Future<void> performLogin(String fullname, String password, String email) async {
   final db = DatabaseHelper.instance;
 
+
   // Insert login information
   await db.insertSignupInfo(fullname, password, email);
 
   // Retrieve login information
   final storedInfo = await db.getLoginInfo(fullname);
 
-  if (storedInfo != null && storedInfo['password'] == password) {
-    print('Login successful. Welcome, ${storedInfo[fullname]}!');
+  if (storedInfo != null) {
+    print('Login successful. Welcome, ${storedInfo['fullname']}!');
   } else {
     print('Login failed. Invalid fullname or password.');
   }
@@ -148,6 +149,11 @@ class _Text2 extends State<Text2> {
                 height: MediaQuery.of(context).size.height/15,
                            child: TextFormField(
                             controller: _fullnameController,
+                            onChanged: (value) {
+                              setState(() {
+                                fullname = value;
+                              });
+                            },
                             decoration: const InputDecoration(
                               labelText: "Full Name",
                               filled: true,
@@ -170,6 +176,11 @@ class _Text2 extends State<Text2> {
                 height: MediaQuery.of(context).size.height/15,
                            child: TextFormField(
                             controller: _emailController,
+                             onChanged: (value) {
+                              setState(() {
+                                email = value;
+                              });
+                            },
                             decoration: const InputDecoration(
                               labelText: "E-mail",
                               filled: true,
@@ -192,6 +203,11 @@ class _Text2 extends State<Text2> {
                 height: MediaQuery.of(context).size.height/15,
                            child: TextFormField(
                             controller: _passwordController,
+                             onChanged: (value) {
+                              setState(() {
+                                password = value;
+                              });
+                            },
                             decoration: const InputDecoration(
                               labelText: "Password",
                               filled: true,
@@ -228,28 +244,14 @@ class _Text2 extends State<Text2> {
                       onPressed: ()  {
                         // calling the function in order t retrieve the info of the user
                         performLogin(fullname, password, email);
-                      //   showDialog(context: context,
-                      //                builder: (context)=>  AlertDialog(
-                      //                 icon: const Icon(Icons.verified, size: 50, color: Colors.green,),
-                      //                 title: const Text('Congratulations', style: TextStyle(fontFamily: "Poppins",),),
-                      //                 content: const Text('You have successfully created your account! ', style: TextStyle(fontFamily: "Poppins")),
-                      //                 actions: <Widget>[
-                      //                   TextButton(onPressed: (){
-                      //                   Navigator.of(context).pop();
-                      //                   }, 
-                      //                   child: GestureDetector(
-                      //                     onTap: () {
-                      // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Dashboard()));
-              
-                      //                     },
-                      //                     child: const Text('ok',style: TextStyle(fontFamily: "Poppins"))),
-                      //                 ),
-                                      
-                      //                 ],
-                      //                ));
                     
                       }
-                      , child: const Text('Sign up', style: TextStyle( color: Colors.white),)
+                      , child: GestureDetector(
+                        onTap: () {
+                       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Dashboard()));
+ 
+                        },
+                        child: const Text('Sign up', style: TextStyle( color: Colors.white),))
                       ),
                   ),
                 ),
