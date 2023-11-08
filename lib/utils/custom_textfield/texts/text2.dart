@@ -22,64 +22,7 @@ class _Text2 extends State<Text2> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _fullnameController = TextEditingController();
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _fullnameController.dispose();
-    super.dispose();
-  }
-
-  // Future signUp() async{
-
-  //     //create user
-  //     await FirebaseAuth.instance.createUser(
-  //       email: _emailController.text.trim(),
-  //       password: _passwordController.text.trim(),
-  //     );
-
-  //     //add user details when signing up
-  //     addUserDetails(
-  //       _fullnameController.text.trim(),
-  //       _emailController.text.trim(),
-  //       _passwordController.text.trim()
-  //       );
-  
-  // }
-//adding user information in the data base
-//passing the details as parameters
-  // Future addUserDetails(String fullname, String email, String password) async{
-  //   await FirebaseFirestore.instance.collection('Users').add(
-  //     {'full name': fullname,
-  //      'email' : email,
-  //      'password': password
-  //      }
-  //   );
-  // }
-  String fullname = '';
-  String email = '';
-  String password= '';
-
-  Future<void> performLogin(String fullname, String password, String email) async {
-  final db = DatabaseHelper.instance;
-
-
-  // Insert login information
-  await db.insertSignupInfo(fullname, password, email);
-
-  // Retrieve login information
-  final storedInfo = await db.getLoginInfo(fullname);
-
-  if (storedInfo != null) {
-    print('Login successful. Welcome, ${storedInfo['fullname']}!');
-  } else {
-    print('Login failed. Invalid fullname or password.');
-  }
-}
-
-
-
+  late DatabaseHelper databaseHelper;
 
   @override
 
@@ -92,6 +35,8 @@ class _Text2 extends State<Text2> {
       
     });
     super.initState();
+    databaseHelper.initDatabase();
+    DatabaseHelper().fetchData();
   }
 
   @override
@@ -149,11 +94,7 @@ class _Text2 extends State<Text2> {
                 height: MediaQuery.of(context).size.height/15,
                            child: TextFormField(
                             controller: _fullnameController,
-                            onChanged: (value) {
-                              setState(() {
-                                fullname = value;
-                              });
-                            },
+                          
                             decoration: const InputDecoration(
                               labelText: "Full Name",
                               filled: true,
@@ -176,11 +117,7 @@ class _Text2 extends State<Text2> {
                 height: MediaQuery.of(context).size.height/15,
                            child: TextFormField(
                             controller: _emailController,
-                             onChanged: (value) {
-                              setState(() {
-                                email = value;
-                              });
-                            },
+                            
                             decoration: const InputDecoration(
                               labelText: "E-mail",
                               filled: true,
@@ -203,11 +140,7 @@ class _Text2 extends State<Text2> {
                 height: MediaQuery.of(context).size.height/15,
                            child: TextFormField(
                             controller: _passwordController,
-                             onChanged: (value) {
-                              setState(() {
-                                password = value;
-                              });
-                            },
+                           
                             decoration: const InputDecoration(
                               labelText: "Password",
                               filled: true,
@@ -241,9 +174,9 @@ class _Text2 extends State<Text2> {
                         
                       )
                       ),
-                      onPressed: ()  {
+                      onPressed: () async {
                         // calling the function in order t retrieve the info of the user
-                        performLogin(fullname, password, email);
+                       await DatabaseHelper().insertSignupInfo(_fullnameController.text.trim(), _passwordController.text.trim(), _emailController.text.trim());
                     
                       }
                       , child: GestureDetector(

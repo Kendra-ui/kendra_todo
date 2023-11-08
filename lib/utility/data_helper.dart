@@ -1,24 +1,26 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper{
-  static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
+  // static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
   static Database? _database;
+  final tableName = 'SignUp';
 
-  DatabaseHelper._privateConstructor();
+  // DatabaseHelper._privateConstructor();
 
   Future<Database> get database async {
     if (_database != null) return _database!;
 
-    _database = await _initDatabase();
+    _database = await initDatabase();
     return _database!;
   }
 
-  Future<Database> _initDatabase() async {
+  Future initDatabase() async {
     //gets the default db location
     final databasePath = await getDatabasesPath();
-
+  
     //accepts a string which is the path of db
     //path of the db; where join is used to combine the given path into a single path
     final path = join(databasePath, 'Signup.db');
@@ -38,23 +40,33 @@ class DatabaseHelper{
     ''');
   }
 
-//ADDING THE INFORMATION and passing the fields as parameters
-  Future<int> insertSignupInfo(String fullname, String password, String email,) async {
+//ADDING THE INFORMATION and passing the fields as parameters FOR SIGN UP
+  Future insertSignupInfo(fullname, password,  email,) async {
     final db = await database;
 
     //adding tje insert queries for adding the info of the user
-    return await db.insert('Signup', {'fullname': fullname, 'email': email,'password': password});
+     await db.insert(
+      'Signup', {'fullname': fullname, 'email': email,'password': password});
+      print('$fullname added in database successfully');
+      return 'added';
+      
   }
 
-  Future<Map<String, dynamic>?> getLoginInfo(String fullname) async {
-    final db = await database;
-    final result = await db.query('Signup', where: 'fullname = ?', whereArgs: [fullname]);
+  // Future<Map<String, dynamic>?> getLoginInfo(String fullname) async {
+  //   final db = await database;
+  //   final result = await db.query('Signup', where: 'fullname = ?', whereArgs: [fullname]);
 
-    if (result.isEmpty) {
-      return null;
-    }
+  //   if (result.isEmpty) {
+  //     return null;
+  //   }
 
-    return result.first;
-  }
+  //   return result.first;
+  // }
+
+   Future<void> fetchData() async{
+   final db = await database;
+   final queryResult = await db.query(tableName);
+   inspect(queryResult);
+}
 }
 

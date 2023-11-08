@@ -1,17 +1,34 @@
 import 'package:flutter/material.dart';
-//import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
+import 'package:kendra_todo/utility/signinDB.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/text3.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/text2.dart';
-//import 'package:flutter_screenutil/flutter_screenutil.dart';
-//import 'package:firebase_core/firebase_core.dart';
 
-
+// ignore: must_be_immutable
 class Text1 extends StatelessWidget {
    Text1({super.key});
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-      
+  
+   String email = '';
+  String password= '';
+
+  Future<void> performSignin( String password, String email) async {
+  final db = SignIn.instance;
+
+
+  // Insert login information
+  await db.insertSigninInfo( password, email);
+
+  // Retrieve login information
+  final storedInfo = await db.getLoginInfo(email);
+
+  if (storedInfo != null) {
+    print('Login successful. Welcome, ${storedInfo['email']}!');
+  } else {
+    print('Login failed. Invalid fullname or password.');
+  }
+}
   
  
  @override
@@ -134,11 +151,17 @@ class Text1 extends StatelessWidget {
                         
                       )
                       ),
-                      onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const dashboard()));
+                      onPressed: () async{
+                       await performSignin( _passwordController.text.trim(), _emailController.text.trim());
+
                     
                       }
-                      , child: const Text('Sign in', style: TextStyle( color: Colors.white),)
+                      , child: GestureDetector(
+                        onTap: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const dashboard()));
+
+                        },
+                        child: const Text('Sign in', style: TextStyle( color: Colors.white),))
                       ),
                   ),
                 ),

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/home.dart';
-import 'package:kendra_todo/utility/data_helper.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await DatabaseHelper.instance.database; // Initialize the database
+void main()  {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await DatabaseHelper.instance.database; // Initialize the database
   runApp(const MyApp());
 }
 
@@ -38,33 +37,6 @@ class MyApp extends StatelessWidget {
   
   class _HomepageState extends State<Homepage> with WidgetsBindingObserver{
 
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    WidgetsBinding.instance.removeObserver(this);
-
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-
-    //check if the app is inactive or detached
-    if (state == AppLifecycleState.inactive || state == AppLifecycleState.detached) {
-      return;
-    }
-
-    //check whether the app is paused
-    //final isBackground = state = AppLifecycleState.paused;
-
-    //print('app state: $AppLifecycleState');
-  }
 
   @override
   Widget build(BuildContext context) {
