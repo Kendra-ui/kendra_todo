@@ -27,15 +27,10 @@ class _Text2 extends State<Text2> {
   @override
 
   void initState() {
-
-    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async{
-        final Future<SharedPreferences> preference = SharedPreferences.getInstance();
-    final SharedPreferences prefs = await preference;
-    prefs.setString("screenToShow", "signUp");
-      
-    });
     super.initState();
-    databaseHelper.initDatabase();
+    databaseHelper = DatabaseHelper();
+    //initialize database
+    databaseHelper.initialize();
     DatabaseHelper().fetchData();
   }
 

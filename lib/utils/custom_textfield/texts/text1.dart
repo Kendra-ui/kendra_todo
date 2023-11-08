@@ -4,31 +4,29 @@ import 'package:kendra_todo/utils/custom_textfield/home1/text3.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/text2.dart';
 
 // ignore: must_be_immutable
-class Text1 extends StatelessWidget {
+class Text1 extends StatefulWidget {
    Text1({super.key});
+
+   @override
+  State<Text1> createState() => _Text1State();
+}
+
+class _Text1State extends State<Text1> {
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   
-   String email = '';
-  String password= '';
+   late Signin Helper;
 
-  Future<void> performSignin( String password, String email) async {
-  final db = SignIn.instance;
+  @override
 
-
-  // Insert login information
-  await db.insertSigninInfo( password, email);
-
-  // Retrieve login information
-  final storedInfo = await db.getLoginInfo(email);
-
-  if (storedInfo != null) {
-    print('Login successful. Welcome, ${storedInfo['email']}!');
-  } else {
-    print('Login failed. Invalid fullname or password.');
+  void initState() {
+    super.initState();
+    Helper = Signin();
+    //initialize database
+    Helper.initDatabase();
+    Signin().fetchData();
   }
-}
   
  
  @override
@@ -152,7 +150,7 @@ class Text1 extends StatelessWidget {
                       )
                       ),
                       onPressed: () async{
-                       await performSignin( _passwordController.text.trim(), _emailController.text.trim());
+                       await Signin().insertSignupInfo( _passwordController.text.trim(), _emailController.text.trim());
 
                     
                       }

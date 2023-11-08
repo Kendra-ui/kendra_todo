@@ -4,6 +4,10 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper{
+  static const id = 'id';
+  static const fullname = 'fullname';
+  static const password = 'password';
+  static const email = 'email';
   // static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
   static Database? _database;
   final tableName = 'SignUp';
@@ -13,11 +17,11 @@ class DatabaseHelper{
   Future<Database> get database async {
     if (_database != null) return _database!;
 
-    _database = await initDatabase();
+    _database = await initialize();
     return _database!;
   }
 
-  Future initDatabase() async {
+  Future initialize() async {
     //gets the default db location
     final databasePath = await getDatabasesPath();
   
@@ -25,10 +29,10 @@ class DatabaseHelper{
     //path of the db; where join is used to combine the given path into a single path
     final path = join(databasePath, 'Signup.db');
 
-    return await openDatabase(path, version: 1, onCreate: _createDatabase);
+    return await openDatabase(path, version: 1, onCreate: createDatabase);
   }
 //create the db and getting the version
-  Future<void> _createDatabase(Database db, int version) async {
+  Future<void> createDatabase(Database db, int version) async {
     //here, we run the queries
     await db.execute('''
       CREATE TABLE Signup (
@@ -51,17 +55,6 @@ class DatabaseHelper{
       return 'added';
       
   }
-
-  // Future<Map<String, dynamic>?> getLoginInfo(String fullname) async {
-  //   final db = await database;
-  //   final result = await db.query('Signup', where: 'fullname = ?', whereArgs: [fullname]);
-
-  //   if (result.isEmpty) {
-  //     return null;
-  //   }
-
-  //   return result.first;
-  // }
 
    Future<void> fetchData() async{
    final db = await database;
