@@ -20,10 +20,10 @@ class dashboard extends StatefulWidget {
   const dashboard({super.key});
 
       @override
-  State<dashboard> createState()  => _dashboardState();
+  State<dashboard> createState()  => _DashboardState();
 }
 
-class _dashboardState extends State<dashboard> {
+class _DashboardState extends State<dashboard> {
 
   int _currentIndex = 0;
   final List<Widget> screen = [

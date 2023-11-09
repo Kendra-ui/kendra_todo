@@ -7,6 +7,7 @@ class Signin{
   static const id = 'id';
   static const password = 'password';
   static const email = 'email';
+
   // static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
   static Database? _database;
   final tableName = 'Signin';
@@ -16,17 +17,17 @@ class Signin{
   Future<Database> get database async {
     if (_database != null) return _database!;
 
-    _database = await initDatabase();
+    _database = await initialize();
     return _database!;
   }
 
-  Future initDatabase() async {
+  Future initialize() async {
     //gets the default db location
     final databasePath = await getDatabasesPath();
   
     //accepts a string which is the path of db
     //path of the db; where join is used to combine the given path into a single path
-    final path = join(databasePath, 'Signin.db');
+    final path = join(databasePath, 'Signup.db');
 
     return await openDatabase(path, version: 1, onCreate: createDatabase);
   }
@@ -36,7 +37,6 @@ class Signin{
     await db.execute('''
       CREATE TABLE Signin (
         id INTEGER PRIMARY KEY,
-        fullname TEXT NOT NULL,
         email TEXT NOT NULL,
         password TEXT NOT NULL
       )
@@ -44,7 +44,7 @@ class Signin{
   }
 
 //ADDING THE INFORMATION and passing the fields as parameters FOR SIGN UP
-  Future insertSignupInfo( password,  email,) async {
+  Future insertSigninInfo( password,  email,) async {
     final db = await database;
 
     //adding tje insert queries for adding the info of the user

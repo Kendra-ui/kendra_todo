@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:kendra_todo/utility/signinDB.dart';
+import 'package:kendra_todo/utility/Signin_DB.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/text3.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/text2.dart';
 
 // ignore: must_be_immutable
 class Text1 extends StatefulWidget {
+   const 
    Text1({super.key});
 
    @override
@@ -16,15 +17,15 @@ class _Text1State extends State<Text1> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   
-   late Signin Helper;
+   late Signin helper;
 
   @override
 
   void initState() {
     super.initState();
-    Helper = Signin();
+    helper = Signin();
     //initialize database
-    Helper.initDatabase();
+    helper.initialize();
     Signin().fetchData();
   }
   
@@ -150,7 +151,7 @@ class _Text1State extends State<Text1> {
                       )
                       ),
                       onPressed: () async{
-                       await Signin().insertSignupInfo( _passwordController.text.trim(), _emailController.text.trim());
+                       await Signin().insertSigninInfo( _passwordController.text.trim(), _emailController.text.trim());
 
                     
                       }

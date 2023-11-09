@@ -1,10 +1,7 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/utility/data_helper.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/text1.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -13,8 +10,6 @@ class Text2 extends StatefulWidget {
 
       @override
   State<Text2> createState()  => _Text2();
-
-  
 }
 
 class _Text2 extends State<Text2> {
@@ -23,6 +18,13 @@ class _Text2 extends State<Text2> {
   final _passwordController = TextEditingController();
   final _fullnameController = TextEditingController();
   late DatabaseHelper databaseHelper;
+    final _formKey = GlobalKey<FormState>();
+
+ // bool _validate = false;
+  void _submit() {
+    if (_formKey.currentState!.validate()) {
+    }
+  }
 
   @override
 
@@ -82,107 +84,120 @@ class _Text2 extends State<Text2> {
               child: const Text('Create an account and join us', style: TextStyle(color: Colors.white, fontFamily: 'Poppins', fontSize: 16),)),
         
         
-             Padding(
-              padding: const EdgeInsets.only(top:20.0),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width/1.1,
-                height: MediaQuery.of(context).size.height/15,
-                           child: TextFormField(
-                            controller: _fullnameController,
+             Form(
+              key: _formKey,
+               child: Column(
+                 children: [
+                   Padding(
+                    padding: const EdgeInsets.only(top:20.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width/1.1,
+                      height: MediaQuery.of(context).size.height/15,
+                                 child: TextFormField(
+                                  controller: _fullnameController,
+                                  decoration: const InputDecoration(
+                                    labelText: "Full Name",
+                                    filled: true,
+                                    fillColor: Color.fromARGB(255, 241, 240, 240),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide.none
+                                    ),
+                                    prefixIcon: Padding(padding: EdgeInsets.all(0),
+                                    child: Icon(Icons.person,  color: Colors.black),) 
+                                  ),
+                                  keyboardType: TextInputType.text,
+                                  validator: validateName,
+                                 ),
+                               ),
+                         ),
+                     
+                         Padding(
+                    padding: const EdgeInsets.only(top:20.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width/1.1,
+                      height: MediaQuery.of(context).size.height/15,
+                                 child: TextFormField(
+                                  controller: _emailController,
+                                  
+                                  decoration: const InputDecoration(
+                                    labelText: "E-mail",
+                                    filled: true,
+                                    fillColor: Color.fromARGB(255, 241, 240, 240),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide.none
+                                    ),
+                                    prefixIcon: Padding(padding: EdgeInsets.all(0),
+                                    child: Icon(Icons.mail,  color: Colors.black),) 
+                                  ),
+                                  keyboardType: TextInputType.emailAddress,
+                                  validator: validateEmail,
+                                 ),
+                               ),
+                         ),
+                     
+                         Padding(
+                    padding: const EdgeInsets.only(top:20.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width/1.1,
+                      height: MediaQuery.of(context).size.height/15,
+                                 child: TextFormField(
+                                  controller: _passwordController,
+                                  
+                                  decoration: const InputDecoration(
+                                    labelText: "Password",
+                                    filled: true,
+                                    fillColor: Color.fromARGB(255, 241, 240, 240),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide.none
+                                    ),
+                                    prefixIcon: Padding(padding: EdgeInsets.all(0),
+                                    child: Icon(Icons.lock_sharp,  color: Colors.black),) 
+                                  ),
+                                  keyboardType: TextInputType.visiblePassword,
+                                  validator: validatePassword,
+                                 ),
+                               ),
+                   
+                         ),
+                     
+                         
+                    Padding(
+                        padding: const EdgeInsets.only(top:20.0),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width/1.2,
+                      height: MediaQuery.of(context).size.height/15,
+                          child: ElevatedButton(
+                            style:  ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(Colors.lightBlue) ,
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
                           
-                            decoration: const InputDecoration(
-                              labelText: "Full Name",
-                              filled: true,
-                              fillColor: Color.fromARGB(255, 241, 240, 240),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none
                               ),
-                              prefixIcon: Padding(padding: EdgeInsets.all(0),
-                              child: Icon(Icons.person,  color: Colors.black),) 
+                              
+                            )
                             ),
-                            
-                           ),
-                         ),
-            ),
-        
-            Padding(
-              padding: const EdgeInsets.only(top:20.0),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width/1.1,
-                height: MediaQuery.of(context).size.height/15,
-                           child: TextFormField(
-                            controller: _emailController,
-                            
-                            decoration: const InputDecoration(
-                              labelText: "E-mail",
-                              filled: true,
-                              fillColor: Color.fromARGB(255, 241, 240, 240),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none
-                              ),
-                              prefixIcon: Padding(padding: EdgeInsets.all(0),
-                              child: Icon(Icons.mail,  color: Colors.black),) 
+                            onPressed: _submit,
+                            //() async {
+                            //   _submit,
+                            //    //await DatabaseHelper().insertSignupInfo(_fullnameController.text.trim(), _passwordController.text.trim(), _emailController.text.trim());
+             
+                              
+                            //   // calling the function in order t retrieve the info of the user
+                          
+                            // }
+                             child: GestureDetector(
+                              onTap: () {
+                             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Dashboard()));
+              
+                              },
+                              child: const Text('Sign up', style: TextStyle( color: Colors.white),))
                             ),
-                            
-                           ),
-                         ),
-            ),
-        
-            Padding(
-              padding: const EdgeInsets.only(top:20.0),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width/1.1,
-                height: MediaQuery.of(context).size.height/15,
-                           child: TextFormField(
-                            controller: _passwordController,
-                           
-                            decoration: const InputDecoration(
-                              labelText: "Password",
-                              filled: true,
-                              fillColor: Color.fromARGB(255, 241, 240, 240),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none
-                              ),
-                              prefixIcon: Padding(padding: EdgeInsets.all(0),
-                              child: Icon(Icons.lock_sharp,  color: Colors.black),) 
-                            ),
-                            
-                           ),
-                         ),
-      
-            ),
-        
-            
-              Padding(
-                  padding: const EdgeInsets.only(top:20.0),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width/1.2,
-                height: MediaQuery.of(context).size.height/15,
-                    child: ElevatedButton(
-                      style:  ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.lightBlue) ,
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                    
                         ),
-                        
-                      )
                       ),
-                      onPressed: () async {
-                        // calling the function in order t retrieve the info of the user
-                       await DatabaseHelper().insertSignupInfo(_fullnameController.text.trim(), _passwordController.text.trim(), _emailController.text.trim());
-                    
-                      }
-                      , child: GestureDetector(
-                        onTap: () {
-                       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Dashboard()));
- 
-                        },
-                        child: const Text('Sign up', style: TextStyle( color: Colors.white),))
-                      ),
-                  ),
-                ),
+                 ],
+               ),
+             ),
               Padding(
                  padding:  EdgeInsets.all(MediaQuery.of(context).size.height/40),
                  child: Row(
@@ -201,7 +216,7 @@ class _Text2 extends State<Text2> {
                            height: MediaQuery.of(context).size.height/18,
                       child: GestureDetector(
                         onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Text1()));
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Text1()));
 
                         },
                         child: const Text(' sign in', style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF63D9F3)),)))
@@ -229,4 +244,33 @@ class _Text2 extends State<Text2> {
       ),
     );
 }
+
+String? validateEmail(String? value) {
+    String pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = RegExp(pattern);
+    if (!regex.hasMatch(value!) && value.isEmpty) {
+      return 'Enter Valid Email';
+    } else {
+      return 'Please enter text';
+    }
+    
+  }
+  String? validatePassword(String? value) {
+// Indian Mobile number are of 10 digit only
+    if (value!.length != 6 && value.isEmpty) {
+      return 'Password must be of 10 digit';
+    } else {
+      return 'Please enter text';
+    }
+  }
+  String? validateName(String? value) {
+    if (value!.length < 3 && value.isEmpty) {
+      return 'Name must be more than 2 charater';
+    } else {
+      return 'Please enter text';
+    }
+  }
+
+
 }

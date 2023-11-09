@@ -16,7 +16,7 @@ class _Page4State extends State<Page4> {
   void initState() {
     super.initState();
     Timer(
-      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Text1())));
+      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  const Text1())));
   }
 
   @override
@@ -69,7 +69,7 @@ class _Page4State extends State<Page4> {
             child: GestureDetector(
               child: ElevatedButton(
                  onPressed: () { 
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Text1()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Text1()));
                   },
                  style: ButtonStyle(
                   padding: MaterialStateProperty.all(EdgeInsets.zero),
