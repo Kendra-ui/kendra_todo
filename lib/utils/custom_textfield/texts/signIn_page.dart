@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kendra_todo/utility/Signin_DB.dart';
+//import 'package:kendra_todo/utility/Signin_DB.dart';
+import 'package:kendra_todo/utility/data_helper.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/text3.dart';
-import 'package:kendra_todo/utils/custom_textfield/texts/text2.dart';
+import 'package:kendra_todo/utils/custom_textfield/texts/signUp_page.dart';
 
 // ignore: must_be_immutable
 class Text1 extends StatefulWidget {
@@ -17,17 +18,24 @@ class _Text1State extends State<Text1> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   
-   late Signin helper;
+   late DatabaseHelper databaseHelper;
    final _formKey = GlobalKey<FormState>();
+    bool isVisible= false;
+
+
+   //this checks if the username/password is correct 
+   // Inside your sign-in button's onPressed event
+      
+
 
   @override
 
   void initState() {
     super.initState();
-    helper = Signin();
-    //initialize database
-    helper.initialize();
-    Signin().fetchData();
+    // helper = Signin();
+    // //initialize database
+    // helper.initialize();
+    // Signin().fetchData();
   }
   
  
@@ -127,25 +135,38 @@ class _Text1State extends State<Text1> {
                       height: MediaQuery.of(context).size.height/15,
                                  child: TextFormField(
                                   validator: (value) {
-                                    if (value!.length >= 10) {
-                                    return 'Please enter more than 10 digits';
+                                    String pattern =
+                                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                    RegExp regex = RegExp(pattern);
+                                    if (value!.length >= 8) {
+                                    return 'Please enter more than 8 digits';
 
                                     } else if( value.isEmpty){
                                     return 'Field empty';
                                       
+                                    }else if(!regex.hasMatch(value)){
+                                      return 'Enter atleast one special character';
                                     }
                                     return null;
                                   },
                                   controller:_passwordController ,
-                                  decoration: const InputDecoration(
+                                  obscureText: !isVisible,
+                                  decoration:  InputDecoration(
                                     labelText: "Password",
                                     filled: true,
-                                    fillColor: Color.fromARGB(255, 241, 240, 240),
-                                    enabledBorder: OutlineInputBorder(
+                                    fillColor: const Color.fromARGB(255, 241, 240, 240),
+                                    enabledBorder: const OutlineInputBorder(
                                       borderSide: BorderSide.none
                                     ),
-                                    prefixIcon: Padding(padding: EdgeInsets.all(0),
-                                    child: Icon(Icons.lock_sharp,  color: Colors.black),) 
+                                    prefixIcon: const Padding(padding: EdgeInsets.all(0),
+                                    child: Icon(Icons.lock_sharp,  color: Colors.black),),
+                                    suffixIcon: IconButton(onPressed: (){
+                                      setState(() {
+                                          isVisible = !isVisible;
+                                        });
+                                    },
+                                     icon: Icon(isVisible? Icons.visibility : Icons.visibility_off)) 
+                                  
                                   ),
                                   
                                  ),
@@ -182,10 +203,24 @@ class _Text1State extends State<Text1> {
                       ),
                       onPressed: 
                       () async{
-                        if (_formKey.currentState!.validate()) {
-                            await Signin().insertSigninInfo( _passwordController.text.trim(), _emailController.text.trim());
+                        void signIn() async {
+        final email = _emailController.text;
+        final password = _passwordController.text;  // Replace with the user's entered password
 
-                            }
+        final user = await databaseHelper.checkCredentials(email, password);
+
+        if (user != null) {
+          // Authentication successful, user is signed in
+          print('Sign-in successful for user: ${user['email']}');
+        } else {
+          // Authentication failed, show an error message to the user
+          print('Sign-in failed. Invalid credentials.');
+        }
+      }
+                        // if (_formKey.currentState!.validate()) {
+                        //     await Signin().insertSigninInfo( _passwordController.text.trim(), _emailController.text.trim());
+
+                        //     }
                     
                       }
                       , child: GestureDetector(
@@ -221,8 +256,11 @@ class _Text1State extends State<Text1> {
                         child: 
                         const Text(' sign up', style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF63D9F3)),)))
                   ],
-                           ),
+                   ),
+                           
                ),
+              // isSigninTrue? const Text('Username or Password is incorrect'),
+
         
                Padding(padding:  EdgeInsets.all(MediaQuery.of(context).size.width/15),
                          child: Row(
@@ -234,7 +272,7 @@ class _Text1State extends State<Text1> {
                   )
                 ],
                          ),
-                         )
+                         ),
             ] 
              ),
            )

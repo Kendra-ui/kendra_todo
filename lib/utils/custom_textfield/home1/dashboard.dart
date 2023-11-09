@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/utils/custom_textfield/task/text4.dart';
-import 'package:kendra_todo/utils/custom_textfield/texts/text2.dart';
+import 'package:kendra_todo/utils/custom_textfield/texts/signUp_page.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});

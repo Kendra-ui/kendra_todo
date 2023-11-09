@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/onboarding/page3.dart';
-import 'package:kendra_todo/utils/custom_textfield/texts/text1.dart';
+import 'package:kendra_todo/utils/custom_textfield/texts/signIn_page.dart';
 import 'dart:async';
 
 class Page4 extends StatefulWidget {

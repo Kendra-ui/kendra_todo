@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+//import 'package:kendra_todo/models/Users.dart';
 import 'package:kendra_todo/utility/data_helper.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
-import 'package:kendra_todo/utils/custom_textfield/texts/text1.dart';
+import 'package:kendra_todo/utils/custom_textfield/texts/signIn_page.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -21,10 +22,7 @@ class _Text2 extends State<Text2> {
     final _formKey = GlobalKey<FormState>();
 
  bool isVisible= false;
-  // void _submit() {
-  //   if (_formKey.currentState!.validate()) {
-  //   }
-  // }
+  bool isLoading = false;
 
   @override
 
@@ -105,7 +103,7 @@ class _Text2 extends State<Text2> {
                                   
                                   controller: _fullnameController,
                                   decoration: const InputDecoration(
-                                    labelText: "Full Name",
+                                    labelText: "Username",
                                     filled: true,
                                     fillColor: Color.fromARGB(255, 241, 240, 240),
                                     enabledBorder: OutlineInputBorder(
@@ -159,8 +157,8 @@ class _Text2 extends State<Text2> {
                       height: MediaQuery.of(context).size.height/15,
                                  child: TextFormField(
                                   validator: (value) {
-                                     if (value!.length != 6) {
-                                        return 'Password must be of 10 digit';
+                                     if (value!.length <= 6) {
+                                        return 'Password must be of 8 digit';
                                       } else if( value.isEmpty){
                                         return 'Please enter text';
                                       }return null;
@@ -208,21 +206,32 @@ class _Text2 extends State<Text2> {
                               
                             )
                             ),
-                            onPressed: 
-                          () async {
+                            onPressed:  
+                          ()  {
+                              //await load(controller);
                             if (_formKey.currentState!.validate()) {
-                            await DatabaseHelper().insertSignupInfo(_fullnameController.text.trim(), _passwordController.text.trim(), _emailController.text.trim());
+                                        setState(() {
+                                  isLoading = true;
+                                });
 
-                            }
-             
-                                                      
+                                Future.delayed(const Duration(seconds:3),(){
+                                  setState(() {
+                                  isLoading = false;
+                                });
+                                });  
+                             DatabaseHelper().insertSignupInfo( _fullnameController.text.trim(),_emailController.text.trim(),_passwordController.text.trim());
+
+                             Future.delayed(const Duration(seconds: 3),(){
+                              setState(() {
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Dashboard()));
+
+                              });
+                             });
+
+                                }
+                                            
                              },
-                             child: GestureDetector(
-                              onTap: () {
-                             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Dashboard()));
-              
-                              },
-                              child: const Text('Sign up', style: TextStyle( color: Colors.white),))
+                             child: isLoading? const CircularProgressIndicator(color: Colors.white,): const Text('Sign up', style: TextStyle( color: Colors.white),)
                             ),
                         ),
                       ),

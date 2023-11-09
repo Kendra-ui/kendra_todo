@@ -37,9 +37,9 @@ class DatabaseHelper{
     await db.execute('''
       CREATE TABLE Signup (
         id INTEGER PRIMARY KEY,
-        fullname TEXT NOT NULL CHECK(fullname >= 6),
-        email TEXT NOT NULL CHECK(email >= 6),,
-        password TEXT NOT NULL CHECK(password >= 6),
+        fullname TEXT NOT NULL UNIQUE
+        email TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL,
 
         
         
@@ -52,13 +52,49 @@ class DatabaseHelper{
   Future insertSignupInfo(fullname, password,  email,) async {
     final db = await database;
 
-    //adding tje insert queries for adding the info of the user
+    try {
+      //adding tje insert queries for adding the info of the user
      await db.insert(
-      'Signup', {'fullname': fullname, 'email': email,'password': password});
+      'Signup', {'fullname': fullname, 'email': email,'password': password},
+      //IN ORDER TO AVOID duplicates
+      conflictAlgorithm: ConflictAlgorithm.replace
+      );
       print('$fullname added in database successfully');
+      
       return 'added';
+    } catch (e) {
+     if (e is DatabaseException) {
+       if (e.isUniqueConstraintError()) {
+         //to handle the duplicate email error
+         print('Error: This email $email already exist');
+       } else {
+         print('Error inserting user: $e');
+       }
+     
+       
+     } 
+    }
       
   }
+
+  Future<Map<String, dynamic>?> checkCredentials(String email, String password) async {
+  final db = await database;
+
+  final List<Map<String, dynamic>> queryResult = await db.query(
+    tableName,
+    where: 'email = ? AND password = ?',
+    whereArgs: [email, password],
+  );
+
+  if (queryResult.isNotEmpty) {
+    // If a user with the provided email and password is found, return their information
+    return queryResult.first;
+  } else {
+    // If no matching user is found, return null to indicate authentication failure
+    return null;
+  }
+}
+
 
    Future<void> fetchData() async{
    final db = await database;
