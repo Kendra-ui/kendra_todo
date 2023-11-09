@@ -20,11 +20,11 @@ class _Text2 extends State<Text2> {
   late DatabaseHelper databaseHelper;
     final _formKey = GlobalKey<FormState>();
 
- // bool _validate = false;
-  void _submit() {
-    if (_formKey.currentState!.validate()) {
-    }
-  }
+ bool isVisible= false;
+  // void _submit() {
+  //   if (_formKey.currentState!.validate()) {
+  //   }
+  // }
 
   @override
 
@@ -94,6 +94,15 @@ class _Text2 extends State<Text2> {
                       width: MediaQuery.of(context).size.width/1.1,
                       height: MediaQuery.of(context).size.height/15,
                                  child: TextFormField(
+                                  validator: (value) {
+                                    if (value!.length < 3) {
+                                      return 'Name must be more than 2 charater';
+                                    } else if( value.isEmpty){
+                                      return 'Please enter text';
+                                    }
+                                    return null;
+                                  },
+                                  
                                   controller: _fullnameController,
                                   decoration: const InputDecoration(
                                     labelText: "Full Name",
@@ -106,7 +115,6 @@ class _Text2 extends State<Text2> {
                                     child: Icon(Icons.person,  color: Colors.black),) 
                                   ),
                                   keyboardType: TextInputType.text,
-                                  validator: validateName,
                                  ),
                                ),
                          ),
@@ -118,7 +126,17 @@ class _Text2 extends State<Text2> {
                       height: MediaQuery.of(context).size.height/15,
                                  child: TextFormField(
                                   controller: _emailController,
-                                  
+                                  validator: (value) {
+                                    String pattern =
+                                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                    RegExp regex = RegExp(pattern);
+                                    if (!regex.hasMatch(value!) ) {
+                                      return 'Enter Valid Email';
+                                    } else if(value.isEmpty){
+                                      return 'Please enter text';
+                                    }
+                                    return null;
+                                  },
                                   decoration: const InputDecoration(
                                     labelText: "E-mail",
                                     filled: true,
@@ -130,7 +148,6 @@ class _Text2 extends State<Text2> {
                                     child: Icon(Icons.mail,  color: Colors.black),) 
                                   ),
                                   keyboardType: TextInputType.emailAddress,
-                                  validator: validateEmail,
                                  ),
                                ),
                          ),
@@ -141,20 +158,34 @@ class _Text2 extends State<Text2> {
                       width: MediaQuery.of(context).size.width/1.1,
                       height: MediaQuery.of(context).size.height/15,
                                  child: TextFormField(
-                                  controller: _passwordController,
+                                  validator: (value) {
+                                     if (value!.length != 6) {
+                                        return 'Password must be of 10 digit';
+                                      } else if( value.isEmpty){
+                                        return 'Please enter text';
+                                      }return null;
+                                    },
                                   
-                                  decoration: const InputDecoration(
+                                  controller: _passwordController,
+                                  obscureText: !isVisible,
+                                  decoration:  InputDecoration(
                                     labelText: "Password",
                                     filled: true,
-                                    fillColor: Color.fromARGB(255, 241, 240, 240),
-                                    enabledBorder: OutlineInputBorder(
+                                    fillColor: const Color.fromARGB(255, 241, 240, 240),
+                                    
+                                    enabledBorder: const OutlineInputBorder(
                                       borderSide: BorderSide.none
                                     ),
-                                    prefixIcon: Padding(padding: EdgeInsets.all(0),
-                                    child: Icon(Icons.lock_sharp,  color: Colors.black),) 
+                                    prefixIcon: const Padding(padding: EdgeInsets.all(0),
+                                    child: Icon(Icons.lock_sharp,  color: Colors.black),),
+                                    suffixIcon: IconButton(onPressed: (){
+                                      setState(() {
+                                          isVisible = !isVisible;
+                                        });
+                                    },
+                                     icon: Icon(isVisible? Icons.visibility : Icons.visibility_off)) 
                                   ),
                                   keyboardType: TextInputType.visiblePassword,
-                                  validator: validatePassword,
                                  ),
                                ),
                    
@@ -177,15 +208,15 @@ class _Text2 extends State<Text2> {
                               
                             )
                             ),
-                            onPressed: _submit,
-                            //() async {
-                            //   _submit,
-                            //    //await DatabaseHelper().insertSignupInfo(_fullnameController.text.trim(), _passwordController.text.trim(), _emailController.text.trim());
+                            onPressed: 
+                          () async {
+                            if (_formKey.currentState!.validate()) {
+                            await DatabaseHelper().insertSignupInfo(_fullnameController.text.trim(), _passwordController.text.trim(), _emailController.text.trim());
+
+                            }
              
-                              
-                            //   // calling the function in order t retrieve the info of the user
-                          
-                            // }
+                                                      
+                             },
                              child: GestureDetector(
                               onTap: () {
                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Dashboard()));
@@ -244,33 +275,6 @@ class _Text2 extends State<Text2> {
       ),
     );
 }
-
-String? validateEmail(String? value) {
-    String pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = RegExp(pattern);
-    if (!regex.hasMatch(value!) && value.isEmpty) {
-      return 'Enter Valid Email';
-    } else {
-      return 'Please enter text';
-    }
-    
-  }
-  String? validatePassword(String? value) {
-// Indian Mobile number are of 10 digit only
-    if (value!.length != 6 && value.isEmpty) {
-      return 'Password must be of 10 digit';
-    } else {
-      return 'Please enter text';
-    }
-  }
-  String? validateName(String? value) {
-    if (value!.length < 3 && value.isEmpty) {
-      return 'Name must be more than 2 charater';
-    } else {
-      return 'Please enter text';
-    }
-  }
 
 
 }

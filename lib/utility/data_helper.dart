@@ -37,9 +37,13 @@ class DatabaseHelper{
     await db.execute('''
       CREATE TABLE Signup (
         id INTEGER PRIMARY KEY,
-        fullname TEXT NOT NULL,
-        email TEXT NOT NULL,
-        password TEXT NOT NULL
+        fullname TEXT NOT NULL CHECK(fullname >= 6),
+        email TEXT NOT NULL CHECK(email >= 6),,
+        password TEXT NOT NULL CHECK(password >= 6),
+
+        
+        
+
       )
     ''');
   }

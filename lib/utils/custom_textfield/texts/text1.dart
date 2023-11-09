@@ -18,6 +18,7 @@ class _Text1State extends State<Text1> {
   final _passwordController = TextEditingController();
   
    late Signin helper;
+   final _formKey = GlobalKey<FormState>();
 
   @override
 
@@ -77,53 +78,82 @@ class _Text1State extends State<Text1> {
       
               child: const Text('Have an other productive day!', style: TextStyle(color: Colors.white, fontFamily: 'Poppins', fontSize: 16),)),
         
-            Padding(
-              padding: const EdgeInsets.only(top:20.0),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width/1.1,
-                height: MediaQuery.of(context).size.height/15,
-                           child: TextFormField(
-                            controller: _emailController,
-                            decoration: const InputDecoration(
-                              labelText: "E-mail",
-                              filled: true,
-                              fillColor: Color.fromARGB(255, 241, 240, 240),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none
-                              ),
-                              prefixIcon: Padding(padding: EdgeInsets.all(0),
-                              child: Icon(Icons.mail,  color: Colors.black),) 
-                            ),
-                            
-                           ),
-                         ),
-            ),
-            
-            SizedBox(
-              height: MediaQuery.of(context).size.height/30,
-            ),
-        
-            Padding(
-              padding: const EdgeInsets.only(top:20.0),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width/1.1,
-                height: MediaQuery.of(context).size.height/15,
-                           child: TextFormField(
-                            controller:_passwordController ,
-                            decoration: const InputDecoration(
-                              labelText: "Password",
-                              filled: true,
-                              fillColor: Color.fromARGB(255, 241, 240, 240),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none
-                              ),
-                              prefixIcon: Padding(padding: EdgeInsets.all(0),
-                              child: Icon(Icons.lock_sharp,  color: Colors.black),) 
-                            ),
-                            
-                           ),
-                         ),
-      
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top:20.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width/1.1,
+                      height: MediaQuery.of(context).size.height/15,
+                                 child: TextFormField(
+                                  validator: (value) {
+                                    String pattern =
+                                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                    RegExp regex = RegExp(pattern);
+                                    if (!regex.hasMatch(value!) ) {
+                                      return 'Enter Valid Email';
+                                    } else if(value.isEmpty){
+                                      return 'Please enter text';
+                                    }
+                                    return null;
+                                  },
+                                  
+                                  controller: _emailController,
+                                  decoration: const InputDecoration(
+                                    labelText: "E-mail",
+                                    filled: true,
+                                    fillColor: Color.fromARGB(255, 241, 240, 240),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide.none
+                                    ),
+                                    prefixIcon: Padding(padding: EdgeInsets.all(0),
+                                    child: Icon(Icons.mail,  color: Colors.black),) 
+                                  ),
+                                  
+                                 ),
+                               ),
+                  ),
+                  
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height/30,
+                  ),
+                    
+                  Padding(
+                    padding: const EdgeInsets.only(top:20.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width/1.1,
+                      height: MediaQuery.of(context).size.height/15,
+                                 child: TextFormField(
+                                  validator: (value) {
+                                    if (value!.length >= 10) {
+                                    return 'Please enter more than 10 digits';
+
+                                    } else if( value.isEmpty){
+                                    return 'Field empty';
+                                      
+                                    }
+                                    return null;
+                                  },
+                                  controller:_passwordController ,
+                                  decoration: const InputDecoration(
+                                    labelText: "Password",
+                                    filled: true,
+                                    fillColor: Color.fromARGB(255, 241, 240, 240),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide.none
+                                    ),
+                                    prefixIcon: Padding(padding: EdgeInsets.all(0),
+                                    child: Icon(Icons.lock_sharp,  color: Colors.black),) 
+                                  ),
+                                  
+                                 ),
+                               ),
+                  
+                  ),
+                ],
+              ),
             ),
 
             SizedBox(
@@ -150,9 +180,12 @@ class _Text1State extends State<Text1> {
                         
                       )
                       ),
-                      onPressed: () async{
-                       await Signin().insertSigninInfo( _passwordController.text.trim(), _emailController.text.trim());
+                      onPressed: 
+                      () async{
+                        if (_formKey.currentState!.validate()) {
+                            await Signin().insertSigninInfo( _passwordController.text.trim(), _emailController.text.trim());
 
+                            }
                     
                       }
                       , child: GestureDetector(
