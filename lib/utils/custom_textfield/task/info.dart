@@ -39,7 +39,7 @@ class Info extends StatelessWidget {
                     GestureDetector(
                       child: const Icon(Icons.arrow_back_ios, color: Colors.blue, size: 18,),
                       onTap: (){
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Text4(datatBaseInstane: datatBaseInstane,)));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Todolist(datatBaseInstane: datatBaseInstane,)));
       
                       }
                       ,),

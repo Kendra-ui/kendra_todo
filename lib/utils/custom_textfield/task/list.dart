@@ -5,10 +5,10 @@ import 'package:sqflite/sqflite.dart';
 
 
 // ignore: must_be_immutable
-class Text4 extends StatelessWidget {
+class Todolist extends StatelessWidget {
      Database? datatBaseInstane;
 
-   Text4({super.key, required this.datatBaseInstane});
+   Todolist({super.key, required this.datatBaseInstane});
 
 
   @override

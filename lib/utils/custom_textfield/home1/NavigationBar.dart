@@ -22,8 +22,8 @@ class _NavigationBarState extends State<NavigationBar> {
   int _currentIndex = 0;
   final List<Widget> screen = [
 
-    Dashboard(datatBaseInstane: datatBaseInstane),
-     Text4(datatBaseInstane: null,),
+    Dashboard(datatBaseInstane: null),
+     Todolist(datatBaseInstane: null,),
      Calendar(datatBaseInstane: null,),
      Logout(datatBaseInstane: null),
     

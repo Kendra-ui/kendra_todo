@@ -280,7 +280,7 @@ class Dashboard extends StatelessWidget {
                                   padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
                                   child: GestureDetector(
                                     onTap: () {
-                                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Text4(datatBaseInstane: datatBaseInstane,)));
+                                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Todolist(datatBaseInstane: datatBaseInstane,)));
                                     },
                                     child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,)
                                     ),
