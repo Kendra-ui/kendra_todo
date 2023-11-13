@@ -20,12 +20,12 @@ class MyApp extends StatefulWidget{
   class _MyAppState extends State<MyApp> {
 
     final DatabaseHelper _databaseHelper = DatabaseHelper();
-    late Database datatBaseInstance;
+    late Database datatBaseInstane;
 
 @override
   void initState() {
      WidgetsFlutterBinding.ensureInitialized();
-   datatBaseInstance =_databaseHelper.initialize();
+   datatBaseInstane =_databaseHelper.initialize();
     super.initState();
   }
 
@@ -41,7 +41,7 @@ class MyApp extends StatefulWidget{
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Home(datatBaseInstane: datatBaseInstance,)
+      home: Home(datatBaseInstane: datatBaseInstane,)
     );
   }
   

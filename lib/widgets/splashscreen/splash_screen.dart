@@ -5,6 +5,7 @@ import 'dart:async';
 
 import 'package:sqflite/sqflite.dart';
 
+// ignore: must_be_immutable
 class SplashScreen extends StatefulWidget {
      Database? datatBaseInstane;
 

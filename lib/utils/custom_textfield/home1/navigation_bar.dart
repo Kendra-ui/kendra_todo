@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
-import 'package:kendra_todo/utils/custom_textfield/task/list.dart';
+import 'package:kendra_todo/utils/custom_textfield/task/todo_list.dart';
 import 'package:kendra_todo/widgets/setting/logout.dart';
 import 'package:kendra_todo/widgets/setting/calendar.dart';
 import 'package:sqflite/sqflite.dart';
@@ -17,17 +17,18 @@ class NavigationBar extends StatefulWidget {
 }
 
 class _NavigationBarState extends State<NavigationBar> {
-   Database? datatBaseInstane;
+   late Database datatBaseInstane;
 
   int _currentIndex = 0;
   final List<Widget> screen = [
 
-    Dashboard(datatBaseInstane: null),
+    Dashboard(datatBaseInstane: datatBaseInstane,),
      Todolist(datatBaseInstane: null,),
      Calendar(datatBaseInstane: null,),
      Logout(datatBaseInstane: null),
     
   ];
+  
 
   void onTappedBar(int index)
   {

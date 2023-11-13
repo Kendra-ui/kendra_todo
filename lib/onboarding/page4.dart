@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/onboarding/page3.dart';
-import 'package:kendra_todo/utils/custom_textfield/texts/signIn_page.dart';
+import 'package:kendra_todo/utils/custom_textfield/texts/sign_in.dart';
 import 'dart:async';
 
 import 'package:sqflite/sqflite.dart';

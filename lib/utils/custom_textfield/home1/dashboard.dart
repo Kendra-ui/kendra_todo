@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kendra_todo/utils/custom_textfield/task/list.dart';
-import 'package:kendra_todo/utils/custom_textfield/texts/signUp_page.dart';
+import 'package:kendra_todo/utils/custom_textfield/task/todo_list.dart';
+import 'package:kendra_todo/utils/custom_textfield/texts/sign_up.dart';
 import 'package:sqflite/sqflite.dart';
 
 // ignore: must_be_immutable

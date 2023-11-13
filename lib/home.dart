@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:kendra_todo/onboarding/page1.dart';
 import 'package:kendra_todo/screen_to_show.dart';
 // import 'package:kendra_todo/screen_to_show.dart';
- import 'package:kendra_todo/utils/custom_textfield/texts/signUp_page.dart';
+ import 'package:kendra_todo/utils/custom_textfield/texts/sign_up.dart';
 import 'package:kendra_todo/widgets/splashscreen/splash_screen.dart';
 import 'package:sqflite/sqflite.dart';
 //import 'dart:async';

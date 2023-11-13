@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 //import 'package:kendra_todo/utility/Signin_DB.dart';
 import 'package:kendra_todo/utility/data_helper.dart';
-import 'package:kendra_todo/utils/custom_textfield/home1/NavigationBar.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
-import 'package:kendra_todo/utils/custom_textfield/texts/signUp_page.dart';
+import 'package:kendra_todo/utils/custom_textfield/texts/sign_up.dart';
 import 'package:sqflite/sqflite.dart';
 
 // ignore: must_be_immutable
