@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
-//import 'package:kendra_todo/models/Users.dart';
 import 'package:kendra_todo/utility/data_helper.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/signIn_page.dart';
+import 'package:sqflite/sqflite.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 
-class Text2 extends StatefulWidget {
-   const Text2({super.key});
+// ignore: must_be_immutable
+class SignUp extends StatefulWidget {
+   Database? datatBaseInstane;
+    SignUp({super.key, this.datatBaseInstane});
 
       @override
-  State<Text2> createState()  => _Text2();
+  State<SignUp> createState()  => _SignUp();
 }
 
-class _Text2 extends State<Text2> {
+class _SignUp extends State<SignUp> {
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _fullnameController = TextEditingController();
   late DatabaseHelper databaseHelper;
     final _formKey = GlobalKey<FormState>();
+       Database? datatBaseInstane;
+
 
  bool isVisible= false;
   bool isLoading = false;
@@ -28,10 +32,7 @@ class _Text2 extends State<Text2> {
 
   void initState() {
     super.initState();
-    databaseHelper = DatabaseHelper();
-    //initialize database
-    databaseHelper.initialize();
-    DatabaseHelper().fetchData();
+
   }
 
   @override
@@ -219,11 +220,11 @@ class _Text2 extends State<Text2> {
                                   isLoading = false;
                                 });
                                 });  
-                             DatabaseHelper().insertSignupInfo( _fullnameController.text.trim(),_emailController.text.trim(),_passwordController.text.trim());
+                             DatabaseHelper().insertSignupInfo( _fullnameController.text.trim(),_emailController.text.trim(),_passwordController.text.trim(), widget.datatBaseInstane!);
 
                              Future.delayed(const Duration(seconds: 3),(){
                               setState(() {
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Dashboard()));
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Dashboard(datatBaseInstane:  datatBaseInstane,)));
 
                               });
                              });
@@ -256,7 +257,7 @@ class _Text2 extends State<Text2> {
                            height: MediaQuery.of(context).size.height/18,
                       child: GestureDetector(
                         onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Text1()));
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  SignIn(datatBaseInstane: datatBaseInstane)));
 
                         },
                         child: const Text(' sign in', style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF63D9F3)),)))

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/utils/custom_textfield/task/info.dart';
+import 'package:sqflite/sqflite.dart';
 //import 'package:kendra_todo/widgets/info.dart';
 
+// ignore: must_be_immutable
 class Button1 extends StatelessWidget {
-  const Button1({super.key});
+     Database? datatBaseInstane;
+
+   Button1({super.key, this.datatBaseInstane});
 
 
   @override
@@ -162,7 +166,7 @@ class Button1 extends StatelessWidget {
                           ),
                           onPressed: (){
                             
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Info()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Info(datatBaseInstane: datatBaseInstane)));
 
                           }, 
                           child: const Text('create', style: TextStyle(fontFamily: 'Poppins', letterSpacing: 1, fontSize: 15, color: Colors.white),)),

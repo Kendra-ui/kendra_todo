@@ -3,21 +3,26 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/onboarding/page2.dart';
 import 'package:kendra_todo/onboarding/page4.dart';
+import 'package:sqflite/sqflite.dart';
 
+// ignore: must_be_immutable
 class Page3 extends StatefulWidget {
-  const Page3({super.key});
+     Database? datatBaseInstane;
+
+   Page3({super.key, required this.datatBaseInstane});
 
   @override
   State<Page3> createState() => _Page3State();
 }
 
 class _Page3State extends State<Page3> {
+   Database? datatBaseInstane;
 
     @override
   void initState() {
     super.initState();
     Timer(
-      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Page4())));
+      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Page4(datatBaseInstane: datatBaseInstane,))));
   }
   
   @override
@@ -62,7 +67,7 @@ class _Page3State extends State<Page3> {
               child: GestureDetector(
                 child: Image.asset("assets/images/slider2.png",),
                 onDoubleTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=> const Page2()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=>  Page2(datatBaseInstane: datatBaseInstane)));
                 },),
             ),
         
@@ -72,7 +77,7 @@ class _Page3State extends State<Page3> {
               child: GestureDetector(
                 child: ElevatedButton(
                    onPressed: () { 
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page4()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Page4(datatBaseInstane: datatBaseInstane,)));
                     },
                    style: ButtonStyle(
                     padding: MaterialStateProperty.all(EdgeInsets.zero),

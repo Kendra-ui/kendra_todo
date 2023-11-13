@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:kendra_todo/utils/custom_textfield/task/text4.dart';
+import 'package:kendra_todo/utils/custom_textfield/task/list.dart';
 import 'package:kendra_todo/widgets/setting/logout.dart';
+import 'package:sqflite/sqflite.dart';
 
+// ignore: must_be_immutable
 class Info extends StatelessWidget {
-  const Info({super.key});
+     Database? datatBaseInstane;
+
+   Info({super.key, required this.datatBaseInstane});
 
 
   @override
@@ -35,7 +39,7 @@ class Info extends StatelessWidget {
                     GestureDetector(
                       child: const Icon(Icons.arrow_back_ios, color: Colors.blue, size: 18,),
                       onTap: (){
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Text4()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Text4(datatBaseInstane: datatBaseInstane,)));
       
                       }
                       ,),
@@ -97,7 +101,7 @@ class Info extends StatelessWidget {
                       ),
                       onPressed: (){
                     
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Logout()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Logout(datatBaseInstane: datatBaseInstane,)));
       
                       }, 
                       child: const Padding(

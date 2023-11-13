@@ -21,7 +21,7 @@ class DatabaseHelper{
     return _database!;
   }
 
-  Future initialize() async {
+ initialize<Database>() async {
     //gets the default db location
     final databasePath = await getDatabasesPath();
   
@@ -49,8 +49,9 @@ class DatabaseHelper{
   }
 
 //ADDING THE INFORMATION and passing the fields as parameters FOR SIGN UP
-  Future insertSignupInfo(fullname, password,  email,) async {
-    final db = await database;
+  Future insertSignupInfo(fullname, password,  email,  Database datatBaseInstane) async {
+
+     Database db = datatBaseInstane;
 
     try {
       //adding tje insert queries for adding the info of the user

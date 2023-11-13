@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/utils/custom_textfield/task/info.dart';
 import 'package:kendra_todo/widgets/setting/calendar.dart';
+import 'package:sqflite/sqflite.dart';
 
+// ignore: must_be_immutable
 class Logout extends StatefulWidget {
-  const Logout({super.key});
+     Database? datatBaseInstane;
+
+   Logout({super.key, required this.datatBaseInstane});
 
       @override
   State<Logout> createState()  => _LogoutState();
 }
 
 class _LogoutState extends State<Logout> {
+   Database? datatBaseInstane;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +48,7 @@ class _LogoutState extends State<Logout> {
                           child: FloatingActionButton(
                       backgroundColor: Colors.white,
                       onPressed: () { 
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Info()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Info(datatBaseInstane: datatBaseInstane,)));
                       
                        },
                        child: const Icon(Icons.arrow_back_ios, color: Colors.blue, size: 20,),)
@@ -104,7 +109,7 @@ class _LogoutState extends State<Logout> {
                       alignment: Alignment.center,
                       child: ElevatedButton.icon(
                         onPressed: (){
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Calendar()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Calendar(datatBaseInstane: datatBaseInstane,)));
       
                         }, 
                       icon:const Icon(Icons.logout_rounded, color: Color.fromARGB(255, 250, 7, 19), size: 20,),

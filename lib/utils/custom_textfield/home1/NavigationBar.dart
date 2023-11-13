@@ -1,37 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
-import 'package:kendra_todo/utils/custom_textfield/task/text4.dart';
+import 'package:kendra_todo/utils/custom_textfield/task/list.dart';
 import 'package:kendra_todo/widgets/setting/logout.dart';
 import 'package:kendra_todo/widgets/setting/calendar.dart';
+import 'package:sqflite/sqflite.dart';
 
-class MainApp extends StatelessWidget{
-  const MainApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-   return  const  MaterialApp(
-    home: dashboard(),
-   );
-  }
-  }
+// ignore: camel_case_types, must_be_immutable
+class NavigationBar extends StatefulWidget {
+     Database? datatBaseInstane;
 
-// ignore: camel_case_types
-class dashboard extends StatefulWidget {
-  const dashboard({super.key});
+   NavigationBar({super.key, required this.datatBaseInstane});
 
       @override
-  State<dashboard> createState()  => _DashboardState();
+  State<NavigationBar> createState()  => _NavigationBarState();
 }
 
-class _DashboardState extends State<dashboard> {
+class _NavigationBarState extends State<NavigationBar> {
+   Database? datatBaseInstane;
 
   int _currentIndex = 0;
   final List<Widget> screen = [
 
-    const Dashboard(),
-    const Text4(),
-    const Calendar(),
-    const Logout(),
+    Dashboard(datatBaseInstane: datatBaseInstane),
+     Text4(datatBaseInstane: null,),
+     Calendar(datatBaseInstane: null,),
+     Logout(datatBaseInstane: null),
     
   ];
 

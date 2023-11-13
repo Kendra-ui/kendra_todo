@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:kendra_todo/utils/custom_textfield/task/text4.dart';
+import 'package:kendra_todo/utils/custom_textfield/task/list.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/signUp_page.dart';
+import 'package:sqflite/sqflite.dart';
 
+// ignore: must_be_immutable
 class Dashboard extends StatelessWidget {
-  const Dashboard({super.key});
+     Database? datatBaseInstane;
+
+   Dashboard({super.key, required this.datatBaseInstane});
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +54,7 @@ class Dashboard extends StatelessWidget {
                SizedBox(height: MediaQuery.of(context).size.height/700,),
                GestureDetector(
                  onTap: () {
-                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => const Text2()));
+                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => SignUp()));
                  },
                  child:
                   SizedBox(
@@ -275,7 +280,7 @@ class Dashboard extends StatelessWidget {
                                   padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
                                   child: GestureDetector(
                                     onTap: () {
-                                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Text4()));
+                                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Text4(datatBaseInstane: datatBaseInstane,)));
                                     },
                                     child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,)
                                     ),

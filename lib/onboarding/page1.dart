@@ -3,20 +3,26 @@ import 'package:kendra_todo/onboarding/page2.dart';
 import 'package:kendra_todo/widgets/splashscreen/splash_screen.dart';
 import 'dart:async';
 
+import 'package:sqflite/sqflite.dart';
+
+// ignore: must_be_immutable
 class Page1 extends StatefulWidget {
-  const Page1({super.key});
+     Database? datatBaseInstane;
+
+   Page1({super.key, required this.datatBaseInstane});
 
   @override
   State<Page1> createState() => _Page1State();
 }
 
 class _Page1State extends State<Page1> {
+   Database? datatBaseInstane;
 
   @override
   void initState() {
     super.initState();
     Timer(
-      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Page2())));
+      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Page2(datatBaseInstane: datatBaseInstane,))));
   }
 
   @override
@@ -62,7 +68,7 @@ class _Page1State extends State<Page1> {
               child: GestureDetector(
                 child: Image.asset("assets/images/slider.png",),
                 onDoubleTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=> const SplashScreen()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=>  SplashScreen(datatBaseInstane: datatBaseInstane)));
                 },),
             ),
         
@@ -72,7 +78,7 @@ class _Page1State extends State<Page1> {
               child: GestureDetector(
                 child: ElevatedButton(
                    onPressed: () { 
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page2()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Page2(datatBaseInstane: datatBaseInstane,)));
                     },
                    style: ButtonStyle(
                     padding: MaterialStateProperty.all(EdgeInsets.zero),

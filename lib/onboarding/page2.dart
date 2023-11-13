@@ -3,20 +3,26 @@ import 'package:kendra_todo/onboarding/page1.dart';
 import 'package:kendra_todo/onboarding/page3.dart';
 import 'dart:async';
 
+import 'package:sqflite/sqflite.dart';
+
+// ignore: must_be_immutable
 class Page2 extends StatefulWidget {
-  const Page2({super.key});
+     Database? datatBaseInstane;
+
+   Page2({super.key, required this.datatBaseInstane});
 
   @override
   State<Page2> createState() => _Page2State();
 }
 
 class _Page2State extends State<Page2> {
+   Database? datatBaseInstane;
 
     @override
   void initState() {
     super.initState();
     Timer(
-      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Page3())));
+      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Page3(datatBaseInstane: datatBaseInstane,))));
   }
 
   @override
@@ -60,7 +66,7 @@ class _Page2State extends State<Page2> {
               child: GestureDetector(
                 child: Image.asset("assets/images/slider2.png",),
                 onDoubleTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=> const Page1()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=>  Page1(datatBaseInstane: datatBaseInstane,)));
                 },),
             ),
         
@@ -70,7 +76,7 @@ class _Page2State extends State<Page2> {
               child: GestureDetector(
                 child: ElevatedButton(
                    onPressed: () { 
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Page3()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Page3(datatBaseInstane: datatBaseInstane)));
                     },
                    style: ButtonStyle(
                     padding: MaterialStateProperty.all(EdgeInsets.zero),

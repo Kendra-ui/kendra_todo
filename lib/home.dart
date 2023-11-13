@@ -4,28 +4,32 @@ import 'package:kendra_todo/screen_to_show.dart';
 // import 'package:kendra_todo/screen_to_show.dart';
  import 'package:kendra_todo/utils/custom_textfield/texts/signUp_page.dart';
 import 'package:kendra_todo/widgets/splashscreen/splash_screen.dart';
+import 'package:sqflite/sqflite.dart';
 //import 'dart:async';
 
 
+// ignore: must_be_immutable
 class Home extends StatelessWidget {
-  const Home({super.key});
+   Database datatBaseInstane;
+   Home({super.key, required this.datatBaseInstane});
 
   @override
   Widget build(BuildContext context) {
+    
     return FutureBuilder(future: screenToShow(  context), builder: (BuildContext context, AsyncSnapshot snapshot){
       //print("hhhhhhhhhhhhhhh ${snapshot.data["screenToShow"]}");
      
       if (snapshot.hasData) {
         switch (snapshot.data["screenToShow"]) {
         case "onBoarding":
-        return const SplashScreen();
+        return  SplashScreen(datatBaseInstane: datatBaseInstane,);
         case "singUp":
-        return const Text2();
+        return  SignUp(datatBaseInstane: datatBaseInstane,);
         default:
       }
        return Container(); 
       }else{
-        return const SplashScreen();
+        return  SplashScreen(datatBaseInstane: datatBaseInstane,);
       }
     }
     );

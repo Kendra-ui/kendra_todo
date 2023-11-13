@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 //import 'package:kendra_todo/utility/Signin_DB.dart';
 import 'package:kendra_todo/utility/data_helper.dart';
-import 'package:kendra_todo/utils/custom_textfield/home1/text3.dart';
+import 'package:kendra_todo/utils/custom_textfield/home1/NavigationBar.dart';
+import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/signUp_page.dart';
+import 'package:sqflite/sqflite.dart';
 
 // ignore: must_be_immutable
-class Text1 extends StatefulWidget {
-   const 
-   Text1({super.key});
+class SignIn extends StatefulWidget {
+     Database? datatBaseInstane;
+
+    
+   SignIn({super.key, required this.datatBaseInstane});
 
    @override
-  State<Text1> createState() => _Text1State();
+  State<SignIn> createState() => _SignInState();
 }
 
-class _Text1State extends State<Text1> {
+class _SignInState extends State<SignIn> {
+   Database? datatBaseInstane;
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -211,9 +216,11 @@ class _Text1State extends State<Text1> {
 
         if (user != null) {
           // Authentication successful, user is signed in
+          // ignore: avoid_print
           print('Sign-in successful for user: ${user['email']}');
         } else {
           // Authentication failed, show an error message to the user
+          // ignore: avoid_print
           print('Sign-in failed. Invalid credentials.');
         }
       }
@@ -225,7 +232,7 @@ class _Text1State extends State<Text1> {
                       }
                       , child: GestureDetector(
                         onTap: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const dashboard()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Dashboard(datatBaseInstane: datatBaseInstane)));
 
                         },
                         child: const Text('Sign in', style: TextStyle( color: Colors.white),))
@@ -250,7 +257,7 @@ class _Text1State extends State<Text1> {
                            height: MediaQuery.of(context).size.height/18,
                       child: GestureDetector(
                         onTap: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const Text2()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>SignUp()));
   
                         },
                         child: 

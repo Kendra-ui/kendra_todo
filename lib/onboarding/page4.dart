@@ -3,20 +3,26 @@ import 'package:kendra_todo/onboarding/page3.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/signIn_page.dart';
 import 'dart:async';
 
+import 'package:sqflite/sqflite.dart';
+
+// ignore: must_be_immutable
 class Page4 extends StatefulWidget {
-  const Page4({super.key});
+     Database? datatBaseInstane;
+
+   Page4({super.key, required this.datatBaseInstane});
 
   @override
   State<Page4> createState() => _Page4State();
 }
 
 class _Page4State extends State<Page4> {
+   Database? datatBaseInstane;
 
     @override
   void initState() {
     super.initState();
     Timer(
-      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  const Text1())));
+      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>   SignIn(datatBaseInstane: datatBaseInstane,))));
   }
 
   @override
@@ -59,7 +65,7 @@ class _Page4State extends State<Page4> {
             child: GestureDetector(
               child: Image.asset("assets/images/slider3.png",),
               onDoubleTap: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=> const Page3()));
+                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=>  Page3(datatBaseInstane: datatBaseInstane,)));
               },),
           ),
       
@@ -69,7 +75,7 @@ class _Page4State extends State<Page4> {
             child: GestureDetector(
               child: ElevatedButton(
                  onPressed: () { 
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Text1()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  SignIn(datatBaseInstane: datatBaseInstane)));
                   },
                  style: ButtonStyle(
                   padding: MaterialStateProperty.all(EdgeInsets.zero),
