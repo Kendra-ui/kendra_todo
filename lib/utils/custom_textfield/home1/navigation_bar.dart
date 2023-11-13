@@ -17,15 +17,15 @@ class NavigationBar extends StatefulWidget {
 }
 
 class _NavigationBarState extends State<NavigationBar> {
-   late Database datatBaseInstane;
+    Database? datatBaseInstane;
 
   int _currentIndex = 0;
-  final List<Widget> screen = [
+  late final List<Widget> screen = [
 
     Dashboard(datatBaseInstane: datatBaseInstane,),
-     Todolist(datatBaseInstane: null,),
-     Calendar(datatBaseInstane: null,),
-     Logout(datatBaseInstane: null),
+     Todolist(datatBaseInstane: datatBaseInstane,),
+     Calendar(datatBaseInstane: datatBaseInstane,),
+     Logout(datatBaseInstane: datatBaseInstane),
     
   ];
   
