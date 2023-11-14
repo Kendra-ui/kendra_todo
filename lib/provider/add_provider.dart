@@ -34,6 +34,8 @@ class UserProvider extends ChangeNotifier{
 
   Future signIn(String email, String password) async {
     final isLoggedIn = await _dataBaseService.fetchData(database!, email, password);
+    
+    
     if (isLoggedIn != null) {
       // Implement any actions you want to perform after successful sign-in
       print('User signed in successfully.');

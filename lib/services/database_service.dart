@@ -45,28 +45,42 @@ class DataBaseService  implements DataBaseInterface{
     ''');
   }
 @override
-Future fetchData(Database db,String email, String password) async {
-  
-    final queryResult = await db.query(
+Future<Map<String, dynamic>?> fetchData(Database db,String email, String password) async {
+    print('AAAAAAA ${db.isOpen}');
+
+
+    try {
+      final queryResult = await db.query(
     'Signup', 
-    where: '$email = ?  AND $password = ? ',
+    where: 'email = ?  AND password = ? ',
     whereArgs: [email, password]
    );
+       if (queryResult.isNotEmpty) {
+      return {
+        'password': queryResult.first['password'],
+      };
+   }
+  
+    } catch (e) {
+      print('$e');
+    }
+      print('AAAAAAA vvvvvvv${db.isOpen}');
+
+    return null;
+
+
 
   //check if email exist
-   if (queryResult.isNotEmpty) {
-     return queryResult.first;
-   }
-   return null;
-  }
+}
 
 Future<bool> signIn(String email, String password) async {
     final Database? db = await initialize();
-      final emailAndPassword = await fetchData(db!, email, password);
+      if (db != null) {
+      final emailAndPassword = await fetchData(db, email, password);
 
-      if (emailAndPassword != null) {
+      if (emailAndPassword != null && emailAndPassword['password'] == password) {
         return true;
-      
+      }
     }
 
     return false;
