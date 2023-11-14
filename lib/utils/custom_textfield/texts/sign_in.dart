@@ -1,9 +1,11 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
-//import 'package:kendra_todo/utility/Signin_DB.dart';
+import 'package:kendra_todo/provider/add_provider.dart';
 import 'package:kendra_todo/utility/data_helper.dart';
-import 'package:kendra_todo/utility/sign_in_db.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/sign_up.dart';
+import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 // ignore: must_be_immutable
@@ -24,26 +26,13 @@ class _SignInState extends State<SignIn> {
    late DatabaseHelper databaseHelper;
    final _formKey = GlobalKey<FormState>();
     bool isVisible= false;
-
-
-   //this checks if the username/password is correct 
-   // Inside your sign-in button's onPressed event
+    late UserProvider _userProvider;
       
-
-
-  @override
-
-  void initState() {
-    super.initState();
-    // helper = Signin();
-    // //initialize database
-    // helper.initialize();
-    // Signin().fetchData();
-  }
   
  
  @override
   Widget build(BuildContext context) {
+   _userProvider=context.read<UserProvider>();
     return  Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -141,13 +130,13 @@ class _SignInState extends State<SignIn> {
                                     String pattern =
                                         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                                     RegExp regex = RegExp(pattern);
-                                    if (value!.length >= 8) {
+                                    if (value!.length <= 8) {
                                     return 'Please enter more than 8 digits';
 
                                     } else if( value.isEmpty){
                                     return 'Field empty';
                                       
-                                    }else if(!regex.hasMatch(value)){
+                                    }else if(regex.hasMatch(value)){
                                       return 'Enter atleast one special character';
                                     }
                                     return null;
@@ -206,27 +195,21 @@ class _SignInState extends State<SignIn> {
                       ),
                       onPressed: 
                       () async{
-      //                   void signIn() async {
-      //   final email = _emailController.text;
-      //   final password = _passwordController.text;  // Replace with the user's entered password
-
-      //   final user = await databaseHelper.checkCredentials(email, password);
-
-      //   if (user != null) {
-      //     // Authentication successful, user is signed in
-      //     // ignore: avoid_print
-      //     print('Sign-in successful for user: ${user['email']}');
-      //   } else {
-      //     // Authentication failed, show an error message to the user
-      //     // ignore: avoid_print
-      //     print('Sign-in failed. Invalid credentials.');
-      //   }
-      // }
+     
                         if (_formKey.currentState!.validate()) {
-                            await Signin().insertSigninInfo( _passwordController.text.trim(), _emailController.text.trim());
+                            //await Signin().insertSigninInfo( _passwordController.text.trim(), _emailController.text.trim());
+                bool response= await _userProvider.signIn( _emailController.text.trim(), _passwordController.text.trim());
+
+                if (response) {
+            
+                  print('Password matched!');
+                } else {
+                  // Passwords don't match, display an error message
+                  print('Username or Password does not match!');
+                }
 
                             }
-                    
+            
                       }
                       , child: GestureDetector(
                         onTap: () {

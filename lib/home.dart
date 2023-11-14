@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kendra_todo/provider/add_provider.dart';
 import 'package:kendra_todo/screen_to_show.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/sign_up.dart';
-import 'package:kendra_todo/utils/custom_textfield/texts/sign_up.dart';
 import 'package:kendra_todo/widgets/splashscreen/splash_screen.dart';
 import 'package:provider/provider.dart';
 //import 'dart:async';
@@ -18,13 +17,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-   String fullName ='fullName';
-  
-   String email = 'email';
-  
-   String password = 'password';
-   
-   final queryResult = '';
 
 
 @override
@@ -32,8 +24,7 @@ class _HomeState extends State<Home> {
 WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
 
    Provider.of<UserProvider>(context, listen: false).dataBaseInitialize();
-   Provider.of<UserProvider>(context, listen: false).signUp( fullName,  email, password );
-   Provider.of<UserProvider>(context, listen: false).fetchData(queryResult);
+  
    //Provider.of<UserProvider>(context, listen: false).checkCredentials(email, password);
 
   

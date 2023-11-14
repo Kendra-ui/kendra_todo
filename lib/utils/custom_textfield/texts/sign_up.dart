@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/provider/add_provider.dart';
 import 'package:kendra_todo/utility/data_helper.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/sign_in.dart';
+import 'package:provider/provider.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -26,17 +28,16 @@ class _SignUp extends State<SignUp> {
 
  bool isVisible= false;
   bool isLoading = false;
+  late UserProvider _userProvider;
+  
 
   @override
 
-  void initState() {
-    super.initState();
-    databaseHelper.fetchData();
-
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
+    _userProvider=context.read<UserProvider>();
     return  Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -208,7 +209,7 @@ class _SignUp extends State<SignUp> {
                             )
                             ),
                             onPressed:  
-                          ()  {
+                          ()async  {
                               //await load(controller);
                             if (_formKey.currentState!.validate()) {
                                         setState(() {
@@ -220,7 +221,16 @@ class _SignUp extends State<SignUp> {
                                   isLoading = false;
                                 });
                                 });  
-                             DatabaseHelper().insertSignupInfo( _fullnameController.text.trim(),_emailController.text.trim(),_passwordController.text.trim());
+                               bool response= await _userProvider.signUp(_fullnameController.text.trim(), _emailController.text.trim(), _passwordController.text.trim());
+
+                               if (response) {
+                                // signup is successful 
+
+                                 
+                               } else {
+                                // signup has failed
+                                 
+                               }
 
                              Future.delayed(const Duration(seconds: 3),(){
                               setState(() {

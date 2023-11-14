@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'dart:async';
-import 'dart:developer';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -64,29 +63,20 @@ class DatabaseHelper{
       
   }
 
-  Future<Map<String, dynamic>?> checkCredentials(String email, String password) async {
-  final db = await database;
 
-  final List<Map<String, dynamic>> queryResult = await db.query(
-    tableName,
-    where: 'email = ? AND password = ?',
-    whereArgs: [email, password],
-  );
-
-  if (queryResult.isNotEmpty) {
-    // If a user with the provided email and password is found, return their information
-    print('$queryResult') ;
-  } else {
-    // If no matching user is found, return null to indicate authentication failure
-    return null;
-  }
-}
-
-
-   Future<void> fetchData() async{
+   Future fetchData(String email, String password) async{
    final db = await database;
-   final queryResult = await db.query(tableName);
-   inspect(queryResult);
+   final List<Map<String, dynamic>> queryResult = await db.query(
+    tableName,
+    where: '$email  AND $password ',
+    whereArgs: [email, password]
+   );
+
+//check if email exist
+   if (queryResult.isNotEmpty) {
+     return queryResult.first['password'];
+   }
+   return null;
 }
 }
 

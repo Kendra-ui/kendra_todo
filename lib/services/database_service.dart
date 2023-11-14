@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:kendra_todo/services/database_interface.dart';
 import 'package:path/path.dart';
@@ -46,27 +45,32 @@ class DataBaseService  implements DataBaseInterface{
     ''');
   }
 @override
-Future fetchData(Database db, queryResult) async{
-   await db.query('Signup');
-   inspect(queryResult);
-}
+Future fetchData(Database db,String email, String password) async {
+  
+    final queryResult = await db.query(
+    'Signup', 
+    where: '$email = ?  AND $password = ? ',
+    whereArgs: [email, password]
+   );
 
-@override
-Future checkCredentials(Database db, Map<String, dynamic>? details) async{
-final List<Map<String, dynamic>> queryResult = await db.query(
-    "Signup",
-    where: 'email = ? AND password = ?',
-    whereArgs: [details],
-  );
+  //check if email exist
+   if (queryResult.isNotEmpty) {
+     return queryResult.first;
+   }
+   return null;
+  }
 
-  if (queryResult.isNotEmpty) {
-    // If a user with the provided email and password is found, return their information
-    return queryResult.first;
-  } else {
-    // If no matching user is found, return null to indicate authentication failure
-    return null;
+Future<bool> signIn(String email, String password) async {
+    final Database? db = await initialize();
+      final emailAndPassword = await fetchData(db!, email, password);
+
+      if (emailAndPassword != null) {
+        return true;
+      
+    }
+
+    return false;
   }
 }
 
   
-}

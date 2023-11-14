@@ -1,11 +1,11 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
-import 'package:kendra_todo/services/database_interface.dart';
 import 'package:kendra_todo/services/database_service.dart';
-import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 class UserProvider extends ChangeNotifier{
-  DataBaseService _dataBaseService =DataBaseService();
+  final DataBaseService _dataBaseService =DataBaseService();
 
   Database? database;
 
@@ -32,30 +32,21 @@ class UserProvider extends ChangeNotifier{
     return true;
   }
 
-  Future fetchData(queryResult) async{
-    database = await _dataBaseService.fetchData(database!, queryResult);
+  Future signIn(String email, String password) async {
+    final isLoggedIn = await _dataBaseService.fetchData(database!, email, password);
+    if (isLoggedIn != null) {
+      // Implement any actions you want to perform after successful sign-in
+      print('User signed in successfully.');
+    } else {
+      print('Invalid credentials or user not found.');
+    }
+    
   }
-
-  // Future<bool> checkCredentials(String email, String passwoord) async {
-  //   if (database == null) {
-  //     return false;
-  //   }
-
-  //   try {
-  //   final List<Map<String, dynamic>> queryResult = await database!.query(
-  //     'Signup',
-  //     where: 'email = ? AND password = ?',
-  //     whereArgs: [email, password],
-  //   );
-
-  //   // If a user with the provided email and password exists, return true
-  //   return queryResult.isNotEmpty;
-  // } catch (e) {
-  //   // Handle any potential errors while checking credentials
-  //   print('Error checking credentials: $e');
-  //   return false;
-  // }
-  }
+}
 
 
   
+  
+
+
+
