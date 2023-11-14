@@ -1,4 +1,6 @@
 
+// ignore_for_file: avoid_print
+
 import 'package:kendra_todo/services/database_interface.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';

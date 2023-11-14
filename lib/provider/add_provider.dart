@@ -38,9 +38,9 @@ class UserProvider extends ChangeNotifier{
     
     if (isLoggedIn != null) {
       // Implement any actions you want to perform after successful sign-in
-      print('User signed in successfully.');
+      return true;
     } else {
-      print('Invalid credentials or user not found.');
+      return false;
     }
     
   }

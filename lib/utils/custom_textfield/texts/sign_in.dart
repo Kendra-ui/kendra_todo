@@ -27,6 +27,7 @@ class _SignInState extends State<SignIn> {
    final _formKey = GlobalKey<FormState>();
     bool isVisible= false;
     late UserProvider _userProvider;
+    bool isLoginTrue = false;
       
   
  
@@ -198,22 +199,25 @@ class _SignInState extends State<SignIn> {
      
                         if (_formKey.currentState!.validate()) {
                             //await Signin().insertSigninInfo( _passwordController.text.trim(), _emailController.text.trim());
-                bool response= await _userProvider.signIn( _emailController.text.trim(), _passwordController.text.trim());
-
-                if (response) {
+               bool signInSuccessful = await _userProvider.signIn(_emailController.text.trim(), _passwordController.text.trim());
             
-                  print('Password matched!');
-                } else {
-                  // Passwords don't match, display an error message
-                  print('Username or Password does not match!');
-                }
+            if (signInSuccessful) {
+              // Navigate to the home screen or perform necessary actions upon successful sign-in
+             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Dashboard()));
+
+            } else {
+
+              // Show an error message or handle unsuccessful sign-in
+                setState(() {
+                        isLoginTrue = true;
+                      });            }
+          
 
                             }
             
                       }
                       , child: GestureDetector(
                         onTap: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Dashboard()));
 
                         },
                         child: const Text('Sign in', style: TextStyle( color: Colors.white),))
@@ -247,7 +251,7 @@ class _SignInState extends State<SignIn> {
                    ),
                            
                ),
-              // isSigninTrue? const Text('Username or Password is incorrect'),
+                isLoginTrue? const Text('Username or password is incorrect', style: TextStyle(color: Colors.red),): const SizedBox(),
 
         
                Padding(padding:  EdgeInsets.all(MediaQuery.of(context).size.width/15),
