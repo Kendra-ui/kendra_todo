@@ -3,29 +3,28 @@ import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/task/todo_list.dart';
 import 'package:kendra_todo/widgets/setting/logout.dart';
 import 'package:kendra_todo/widgets/setting/calendar.dart';
-import 'package:sqflite/sqflite.dart';
 
 
 // ignore: camel_case_types, must_be_immutable
 class NavigationBar extends StatefulWidget {
-     Database? datatBaseInstane;
+     
 
-   NavigationBar({super.key, required this.datatBaseInstane});
+   const NavigationBar({super.key});
 
       @override
   State<NavigationBar> createState()  => _NavigationBarState();
 }
 
 class _NavigationBarState extends State<NavigationBar> {
-    Database? datatBaseInstane;
+   
 
   int _currentIndex = 0;
   late final List<Widget> screen = [
 
-    Dashboard(datatBaseInstane: datatBaseInstane,),
-     Todolist(datatBaseInstane: datatBaseInstane,),
-     Calendar(datatBaseInstane: datatBaseInstane,),
-     Logout(datatBaseInstane: datatBaseInstane),
+    const Dashboard(),
+     const Todolist(),
+     const Calendar(),
+     const Logout(),
     
   ];
   

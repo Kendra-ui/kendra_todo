@@ -3,15 +3,15 @@ import 'package:kendra_todo/utils/custom_textfield/task/info.dart';
 import 'package:kendra_todo/widgets/setting/calendar.dart';
 
 // ignore: must_be_immutable
-class Logout extends StatefulWidget {
+class Settings extends StatefulWidget {
 
-   const Logout({super.key});
+   const Settings({super.key});
 
       @override
-  State<Logout> createState()  => _LogoutState();
+  State<Settings> createState()  => _Settings();
 }
 
-class _LogoutState extends State<Logout> {
+class _Settings extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {

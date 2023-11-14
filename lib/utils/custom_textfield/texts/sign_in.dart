@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 //import 'package:kendra_todo/utility/Signin_DB.dart';
 import 'package:kendra_todo/utility/data_helper.dart';
+import 'package:kendra_todo/utility/sign_in_db.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/sign_up.dart';
 import 'package:sqflite/sqflite.dart';
 
 // ignore: must_be_immutable
 class SignIn extends StatefulWidget {
-     Database? datatBaseInstane;
-
     
-   SignIn({super.key, required this.datatBaseInstane});
+   const SignIn({super.key});
 
    @override
   State<SignIn> createState() => _SignInState();
@@ -207,31 +206,31 @@ class _SignInState extends State<SignIn> {
                       ),
                       onPressed: 
                       () async{
-                        void signIn() async {
-        final email = _emailController.text;
-        final password = _passwordController.text;  // Replace with the user's entered password
+      //                   void signIn() async {
+      //   final email = _emailController.text;
+      //   final password = _passwordController.text;  // Replace with the user's entered password
 
-        final user = await databaseHelper.checkCredentials(email, password);
+      //   final user = await databaseHelper.checkCredentials(email, password);
 
-        if (user != null) {
-          // Authentication successful, user is signed in
-          // ignore: avoid_print
-          print('Sign-in successful for user: ${user['email']}');
-        } else {
-          // Authentication failed, show an error message to the user
-          // ignore: avoid_print
-          print('Sign-in failed. Invalid credentials.');
-        }
-      }
-                        // if (_formKey.currentState!.validate()) {
-                        //     await Signin().insertSigninInfo( _passwordController.text.trim(), _emailController.text.trim());
+      //   if (user != null) {
+      //     // Authentication successful, user is signed in
+      //     // ignore: avoid_print
+      //     print('Sign-in successful for user: ${user['email']}');
+      //   } else {
+      //     // Authentication failed, show an error message to the user
+      //     // ignore: avoid_print
+      //     print('Sign-in failed. Invalid credentials.');
+      //   }
+      // }
+                        if (_formKey.currentState!.validate()) {
+                            await Signin().insertSigninInfo( _passwordController.text.trim(), _emailController.text.trim());
 
-                        //     }
+                            }
                     
                       }
                       , child: GestureDetector(
                         onTap: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Dashboard(datatBaseInstane: datatBaseInstane)));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Dashboard()));
 
                         },
                         child: const Text('Sign in', style: TextStyle( color: Colors.white),))
@@ -256,7 +255,7 @@ class _SignInState extends State<SignIn> {
                            height: MediaQuery.of(context).size.height/18,
                       child: GestureDetector(
                         onTap: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>SignUp()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>const SignUp()));
   
                         },
                         child: 

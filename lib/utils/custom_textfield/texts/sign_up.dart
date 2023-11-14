@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:kendra_todo/utility/data_helper.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/sign_in.dart';
-import 'package:sqflite/sqflite.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 
 // ignore: must_be_immutable
 class SignUp extends StatefulWidget {
-   Database? datatBaseInstane;
-    SignUp({super.key, this.datatBaseInstane});
+  
+    const SignUp({super.key});
 
       @override
   State<SignUp> createState()  => _SignUp();
@@ -20,9 +19,9 @@ class _SignUp extends State<SignUp> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _fullnameController = TextEditingController();
-  late DatabaseHelper databaseHelper;
-    final _formKey = GlobalKey<FormState>();
-       Database? datatBaseInstane;
+  final _formKey = GlobalKey<FormState>();
+  final databaseHelper = DatabaseHelper();
+      
 
 
  bool isVisible= false;
@@ -32,6 +31,7 @@ class _SignUp extends State<SignUp> {
 
   void initState() {
     super.initState();
+    databaseHelper.fetchData();
 
   }
 
@@ -220,11 +220,11 @@ class _SignUp extends State<SignUp> {
                                   isLoading = false;
                                 });
                                 });  
-                             DatabaseHelper().insertSignupInfo( _fullnameController.text.trim(),_emailController.text.trim(),_passwordController.text.trim(), widget.datatBaseInstane!);
+                             DatabaseHelper().insertSignupInfo( _fullnameController.text.trim(),_emailController.text.trim(),_passwordController.text.trim());
 
                              Future.delayed(const Duration(seconds: 3),(){
                               setState(() {
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Dashboard(datatBaseInstane:  datatBaseInstane,)));
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Dashboard()));
 
                               });
                              });
@@ -257,7 +257,7 @@ class _SignUp extends State<SignUp> {
                            height: MediaQuery.of(context).size.height/18,
                       child: GestureDetector(
                         onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  SignIn(datatBaseInstane: datatBaseInstane)));
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  const SignIn()));
 
                         },
                         child: const Text(' sign in', style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF63D9F3)),)))

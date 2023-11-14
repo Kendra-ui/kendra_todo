@@ -7,9 +7,9 @@ import 'package:sqflite/sqflite.dart';
 
 // ignore: must_be_immutable
 class SplashScreen extends StatefulWidget {
-     Database? datatBaseInstane;
+  
 
-   SplashScreen({super.key, required this.datatBaseInstane});
+   const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Page1(datatBaseInstane: datatBaseInstane,))));
+      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  const Page1())));
   }
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
                  child: 
                  const Text('DO IT', textAlign:TextAlign.center,style: TextStyle( fontSize: 36, color: Colors.white, fontFamily: 'Darumadrop One'),),
                  onTap: (){
-                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Page1(datatBaseInstane: datatBaseInstane,)));
+                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Page1()));
                  },
       
                  ),

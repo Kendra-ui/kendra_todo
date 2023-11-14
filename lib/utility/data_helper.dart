@@ -23,7 +23,7 @@ class DatabaseHelper{
     return _database!;
   }
 
- initialize<Database>() async {
+ Future<Database> initialize() async {
     //gets the default db location
     final databasePath = await getDatabasesPath();
   
@@ -42,20 +42,16 @@ class DatabaseHelper{
         fullname TEXT NOT NULL UNIQUE
         email TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL,
-
-        
-        
-
       )
     ''');
   }
 
 //ADDING THE INFORMATION and passing the fields as parameters FOR SIGN UP
-  Future insertSignupInfo(fullname, password,  email,  Database datatBaseInstane) async {
+  Future insertSignupInfo(fullname, email, password) async {
 
-     Database db = datatBaseInstane;
+     final db = await database;
 
-    try {
+    
       //adding tje insert queries for adding the info of the user
      await db.insert(
       'Signup', {'fullname': fullname, 'email': email,'password': password},
@@ -65,18 +61,6 @@ class DatabaseHelper{
       print('$fullname added in database successfully');
       
       return 'added';
-    } catch (e) {
-     if (e is DatabaseException) {
-       if (e.isUniqueConstraintError()) {
-         //to handle the duplicate email error
-         print('Error: This email $email already exist');
-       } else {
-         print('Error inserting user: $e');
-       }
-     
-       
-     } 
-    }
       
   }
 
@@ -91,7 +75,7 @@ class DatabaseHelper{
 
   if (queryResult.isNotEmpty) {
     // If a user with the provided email and password is found, return their information
-    return queryResult.first;
+    print('$queryResult') ;
   } else {
     // If no matching user is found, return null to indicate authentication failure
     return null;

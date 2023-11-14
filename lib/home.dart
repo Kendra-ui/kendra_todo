@@ -1,17 +1,46 @@
 import 'package:flutter/material.dart';
-//import 'package:kendra_todo/onboarding/page1.dart';
+import 'package:kendra_todo/provider/add_provider.dart';
 import 'package:kendra_todo/screen_to_show.dart';
-// import 'package:kendra_todo/screen_to_show.dart';
- import 'package:kendra_todo/utils/custom_textfield/texts/sign_up.dart';
+import 'package:kendra_todo/utils/custom_textfield/texts/sign_up.dart';
+import 'package:kendra_todo/utils/custom_textfield/texts/sign_up.dart';
 import 'package:kendra_todo/widgets/splashscreen/splash_screen.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:provider/provider.dart';
 //import 'dart:async';
 
 
 // ignore: must_be_immutable
-class Home extends StatelessWidget {
-   Database datatBaseInstane;
-   Home({super.key, required this.datatBaseInstane});
+class Home extends StatefulWidget {
+   
+   const Home({super.key, });
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+   String fullName ='fullName';
+  
+   String email = 'email';
+  
+   String password = 'password';
+   
+   final queryResult = '';
+
+
+@override
+  void initState() {
+WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+
+   Provider.of<UserProvider>(context, listen: false).dataBaseInitialize();
+   Provider.of<UserProvider>(context, listen: false).signUp( fullName,  email, password );
+   Provider.of<UserProvider>(context, listen: false).fetchData(queryResult);
+   //Provider.of<UserProvider>(context, listen: false).checkCredentials(email, password);
+
+  
+});
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +51,14 @@ class Home extends StatelessWidget {
       if (snapshot.hasData) {
         switch (snapshot.data["screenToShow"]) {
         case "onBoarding":
-        return  SplashScreen(datatBaseInstane: datatBaseInstane,);
+        return  const SplashScreen();
         case "singUp":
-        return  SignUp(datatBaseInstane: datatBaseInstane,);
+        return  const SignUp();
         default:
       }
        return Container(); 
       }else{
-        return  SplashScreen(datatBaseInstane: datatBaseInstane,);
+        return  const SplashScreen();
       }
     }
     );

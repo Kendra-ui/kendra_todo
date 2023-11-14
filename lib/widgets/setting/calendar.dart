@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/widgets/setting/logout.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:table_calendar/table_calendar.dart';
 //import 'package:table_calendar/table_calendar.dart';
 
 
 // ignore: must_be_immutable
 class Calendar extends StatefulWidget {  
-   Database? datatBaseInstane;
 
-    Calendar({super.key, required this.datatBaseInstane});
+    const Calendar({super.key});
 
        @override
   State<Calendar> createState()  => _CalendarState();
 }
 
 class _CalendarState extends State<Calendar> {
-     Database? datatBaseInstane;
 
     DateTime today = DateTime.now();
 
@@ -59,7 +56,7 @@ class _CalendarState extends State<Calendar> {
                         child: FloatingActionButton(
                     backgroundColor: Colors.white,
                     onPressed: () { 
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Logout(datatBaseInstane: datatBaseInstane)));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Logout()));
                     
                      },
                      child: const Icon(Icons.arrow_back_ios, color: Colors.blue, size: 20,),)

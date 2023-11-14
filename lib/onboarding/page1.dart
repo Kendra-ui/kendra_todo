@@ -7,9 +7,8 @@ import 'package:sqflite/sqflite.dart';
 
 // ignore: must_be_immutable
 class Page1 extends StatefulWidget {
-     Database? datatBaseInstane;
 
-   Page1({super.key, required this.datatBaseInstane});
+   const Page1({super.key});
 
   @override
   State<Page1> createState() => _Page1State();
@@ -22,7 +21,7 @@ class _Page1State extends State<Page1> {
   void initState() {
     super.initState();
     Timer(
-      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Page2(datatBaseInstane: datatBaseInstane,))));
+      const Duration(seconds:  5), ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  const Page2())));
   }
 
   @override
@@ -68,7 +67,7 @@ class _Page1State extends State<Page1> {
               child: GestureDetector(
                 child: Image.asset("assets/images/slider.png",),
                 onDoubleTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=>  SplashScreen(datatBaseInstane: datatBaseInstane)));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext  context)=>  const SplashScreen()));
                 },),
             ),
         
@@ -78,7 +77,7 @@ class _Page1State extends State<Page1> {
               child: GestureDetector(
                 child: ElevatedButton(
                    onPressed: () { 
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Page2(datatBaseInstane: datatBaseInstane,)));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Page2()));
                     },
                    style: ButtonStyle(
                     padding: MaterialStateProperty.all(EdgeInsets.zero),

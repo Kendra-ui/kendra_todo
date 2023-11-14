@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/task/info.dart';
-import 'package:sqflite/sqflite.dart';
-
 
 // ignore: must_be_immutable
 class Todolist extends StatelessWidget {
-     Database? datatBaseInstane;
 
-   Todolist({super.key, required this.datatBaseInstane});
+   const Todolist({super.key});
 
 
   @override
@@ -90,7 +87,7 @@ class Todolist extends StatelessWidget {
               SizedBox(height: MediaQuery.of(context).size.height/30,),
                GestureDetector(
                  onTap: (){
-                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Dashboard(datatBaseInstane: datatBaseInstane,)));
+                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  const Dashboard()));
                  },
                  child: 
                   SizedBox(
@@ -405,7 +402,7 @@ class Todolist extends StatelessWidget {
                           ),
                           onPressed: (){
                             
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Info(datatBaseInstane: datatBaseInstane,)));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Info()));
                       
                           }, 
                           child: const Text('create', style: TextStyle(fontFamily: 'Poppins', letterSpacing: 1, fontSize: 15, color: Colors.white),)),

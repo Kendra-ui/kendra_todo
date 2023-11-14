@@ -49,7 +49,7 @@ class _Info2 extends State<Info2> {
                           child: FloatingActionButton(
                       backgroundColor: Colors.white,
                       onPressed: () { 
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Info(datatBaseInstane: datatBaseInstane)));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Info()));
                       
                        },
                        child: const Icon(Icons.arrow_back_ios, color: Colors.blue, size: 20,),)
@@ -110,7 +110,7 @@ class _Info2 extends State<Info2> {
                       alignment: Alignment.center,
                       child: ElevatedButton.icon(
                         onPressed: (){
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> Calendar(datatBaseInstane: datatBaseInstane,)));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Calendar()));
       
                         }, 
                       icon:const Icon(Icons.logout_rounded, color: Color.fromARGB(255, 250, 7, 19), size: 20,),
