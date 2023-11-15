@@ -211,39 +211,37 @@ class _SignUp extends State<SignUp> {
                             ),
                             onPressed:  
                           ()async  {
-                              //await load(controller);
                             if (_formKey.currentState!.validate()) {
                                         setState(() {
                                   isLoading = true;
                                 });
-
-                               
+ 
                                bool response= await _userProvider.addUserIfNotExists(_fullnameController.text.trim(), _emailController.text.trim(), _passwordController.text.trim());
 
                                if (response) {
                                 // signup is successful 
-                              Future.delayed(const Duration(seconds:3),(){
-                                  setState(() {
-                                  isLoading = true;
-                                });
+                                // ignore: use_build_context_synchronously
                                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Dashboard()));
 
-                                }); 
-                              // ignore: use_build_context_synchronously
-  
                                } else {
                                 // signup has failed
                                 setState(() {
                                   doesUserExist = true;
+                                  isLoading = false; // Reset the loading state if sign-up fails
+
                                   });            
           
 
                             }
+                 
                                 }
           
-                             },
+                             },child: GestureDetector(
+                                  onTap: () {
 
-                             child: isLoading? const CircularProgressIndicator(color: Colors.white,): const Text('Sign up', style: TextStyle( color: Colors.white),)
+                                  },
+  
+                             child: isLoading? const CircularProgressIndicator(color: Colors.white,): const Text('Sign up', style: TextStyle( color: Colors.white),))
                             ),
                         ),
                       ),

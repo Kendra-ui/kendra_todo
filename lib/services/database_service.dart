@@ -108,7 +108,7 @@ Future<bool> signIn(String email, String password) async {
     final result = await createTable(database, userData);
     
     if (result != -1) {
-      print('User added successfully!');
+      return true;
     } else {
       print('Failed to add user.');
       // Handle the failure to insert user data if needed
