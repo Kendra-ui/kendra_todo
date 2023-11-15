@@ -44,6 +44,15 @@ class UserProvider extends ChangeNotifier{
     }
     
   }
+
+  Future addUserIfNotExists(String fullname, String email, String password) async{
+    final isPresent = await _dataBaseService.addUserIfNotExists(database!, fullname, email, password);
+
+    if (isPresent != null) {
+      return true;
+    }
+    return false;
+  }
 }
 
 

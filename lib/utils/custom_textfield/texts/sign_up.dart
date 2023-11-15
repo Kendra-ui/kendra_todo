@@ -28,6 +28,7 @@ class _SignUp extends State<SignUp> {
 
  bool isVisible= false;
   bool isLoading = false;
+  bool doesUserExist = false;
   late UserProvider _userProvider;
   
 
@@ -216,32 +217,32 @@ class _SignUp extends State<SignUp> {
                                   isLoading = true;
                                 });
 
-                                Future.delayed(const Duration(seconds:3),(){
-                                  setState(() {
-                                  isLoading = false;
-                                });
-                                });  
-                               bool response= await _userProvider.signUp(_fullnameController.text.trim(), _emailController.text.trim(), _passwordController.text.trim());
+                               
+                               bool response= await _userProvider.addUserIfNotExists(_fullnameController.text.trim(), _emailController.text.trim(), _passwordController.text.trim());
 
                                if (response) {
                                 // signup is successful 
+                              Future.delayed(const Duration(seconds:3),(){
+                                  setState(() {
+                                  isLoading = true;
+                                });
+                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Dashboard()));
 
-                                 
+                                }); 
+                              // ignore: use_build_context_synchronously
+  
                                } else {
                                 // signup has failed
-                                 
-                               }
+                                setState(() {
+                                  doesUserExist = true;
+                                  });            
+          
 
-                             Future.delayed(const Duration(seconds: 3),(){
-                              setState(() {
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Dashboard()));
-
-                              });
-                             });
-
+                            }
                                 }
-                                            
+          
                              },
+
                              child: isLoading? const CircularProgressIndicator(color: Colors.white,): const Text('Sign up', style: TextStyle( color: Colors.white),)
                             ),
                         ),
@@ -274,6 +275,8 @@ class _SignUp extends State<SignUp> {
                   ],
                            ),
                ),
+              doesUserExist? const Text('Username or email  already exist', style: TextStyle(color: Colors.red),): const SizedBox(),
+
         
                SizedBox(
                 width: MediaQuery.of(context).size.width/1.2,

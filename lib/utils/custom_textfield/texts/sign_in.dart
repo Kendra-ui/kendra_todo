@@ -129,7 +129,7 @@ class _SignInState extends State<SignIn> {
                                  child: TextFormField(
                                   validator: (value) {
                                     String pattern =
-                                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                        r'^[\w-\.]+@[a-zA-Z]+\.[a-zA-Z]{2,}$';
                                     RegExp regex = RegExp(pattern);
                                     if (value!.length <= 8) {
                                     return 'Please enter more than 8 digits';
@@ -199,18 +199,19 @@ class _SignInState extends State<SignIn> {
      
                         if (_formKey.currentState!.validate()) {
                             //await Signin().insertSigninInfo( _passwordController.text.trim(), _emailController.text.trim());
-               bool signInSuccessful = await _userProvider.signIn(_emailController.text.trim(), _passwordController.text.trim());
-            
-            if (signInSuccessful) {
-              // Navigate to the home screen or perform necessary actions upon successful sign-in
-             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Dashboard()));
+                            bool signInSuccessful = await _userProvider.signIn(_emailController.text.trim(), _passwordController.text.trim());
+                          
+                          if (signInSuccessful) {
+                            // Navigate to the home screen or perform necessary actions upon successful sign-in
+                          // ignore: use_build_context_synchronously
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Dashboard()));
 
-            } else {
+                          } else {
 
-              // Show an error message or handle unsuccessful sign-in
-                setState(() {
-                        isLoginTrue = true;
-                      });            }
+                            // Show an error message or handle unsuccessful sign-in
+                              setState(() {
+                                      isLoginTrue = true;
+                                    });            }
           
 
                             }

@@ -54,8 +54,6 @@ class DatabaseHelper{
       //adding tje insert queries for adding the info of the user
      await db.insert(
       'Signup', {'fullname': fullname, 'email': email,'password': password},
-      //IN ORDER TO AVOID duplicates
-      conflictAlgorithm: ConflictAlgorithm.replace
       );
       print('$fullname added in database successfully');
       
