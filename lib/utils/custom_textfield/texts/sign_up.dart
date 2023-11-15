@@ -273,6 +273,7 @@ class _SignUp extends State<SignUp> {
                   ],
                            ),
                ),
+               
               doesUserExist? const Text('Username or email  already exist', style: TextStyle(color: Colors.red),): const SizedBox(),
 
         
