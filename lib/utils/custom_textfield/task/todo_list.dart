@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -394,7 +394,7 @@ class _TodolistState extends State<Todolist> {
                                   borderRadius: BorderRadius.all(Radius.circular(5))
                                 ) 
                               ),
-                             style: TextStyle(fontSize: 15, color: Colors.white),
+                             style: const TextStyle(fontSize: 15, color: Colors.white),
                             ),
                           ),
                            SizedBox(width: MediaQuery.of(context).size.width/100,)

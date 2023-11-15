@@ -48,6 +48,15 @@ class DataBaseService  implements DataBaseInterface{
         UNIQUE(fullname, email)
       )
     ''');
+
+    await db.execute('''
+      CREATE TABLE task (
+        id INTEGER PRIMARY KEY,
+        descrption TEXT NOT NULL,
+        date TEXT NOT NULL,
+        time TEXT NOT NULL
+      )
+''');
   }
 @override
 Future<Map<String, dynamic>?> fetchData(Database db,String email, String password) async {

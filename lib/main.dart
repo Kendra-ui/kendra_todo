@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/home.dart';
+import 'package:kendra_todo/provider/todo_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'provider/add_provider.dart';
@@ -35,7 +36,9 @@ class MyApp extends StatefulWidget{
     
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create:  (context) => UserProvider())
+        ChangeNotifierProvider(create:  (context) => UserProvider()),
+        ChangeNotifierProvider(create:  (context) => TodoProvider())
+
 
       ],
       child: 
