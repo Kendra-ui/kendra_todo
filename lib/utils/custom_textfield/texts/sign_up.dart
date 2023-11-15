@@ -221,7 +221,13 @@ class _SignUp extends State<SignUp> {
                                if (response) {
                                 // signup is successful 
                                 // ignore: use_build_context_synchronously
+                              Future.delayed(const Duration(seconds:3),(){
+                                  setState(() {
+                                  isLoading = true;
+                                });
                                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Dashboard()));
+
+                                }); 
 
                                } else {
                                 // signup has failed
@@ -233,15 +239,12 @@ class _SignUp extends State<SignUp> {
           
 
                             }
-                 
+                            
                                 }
           
-                             },child: GestureDetector(
-                                  onTap: () {
+                             },
 
-                                  },
-  
-                             child: isLoading? const CircularProgressIndicator(color: Colors.white,): const Text('Sign up', style: TextStyle( color: Colors.white),))
+                             child: isLoading? const CircularProgressIndicator(color: Colors.white,): const Text('Sign up', style: TextStyle( color: Colors.white),)
                             ),
                         ),
                       ),
@@ -273,7 +276,6 @@ class _SignUp extends State<SignUp> {
                   ],
                            ),
                ),
-               
               doesUserExist? const Text('Username or email  already exist', style: TextStyle(color: Colors.red),): const SizedBox(),
 
         

@@ -110,13 +110,8 @@ Future<bool> signIn(String email, String password) async {
     if (result != -1) {
       return true;
     } else {
-      print('Failed to add user.');
-      // Handle the failure to insert user data if needed
-    }
-  } else {
     print('Username or email already exists!');
-    // Handle the case where the username or email already exists
-  }
+  }}
   } catch (e) {
     print('$e');
   }

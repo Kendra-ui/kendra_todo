@@ -1,13 +1,30 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/task/info.dart';
 
 // ignore: must_be_immutable
-class Todolist extends StatelessWidget {
+class Todolist extends StatefulWidget {
 
    const Todolist({super.key});
 
+  @override
+  State<Todolist> createState() => _TodolistState();
+}
 
+class _TodolistState extends State<Todolist> {
+  final dateInput = TextEditingController();
+  final timeInput = TextEditingController();
+
+
+  @override
+  void initState() {
+    dateInput.text = '';
+    timeInput.text ='';
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -308,8 +325,26 @@ class Todolist extends StatelessWidget {
                             width: MediaQuery.of(context).size.width/3,
                             height: MediaQuery.of(context).size.height/15,
                           child: 
-                            const TextField(
-                              decoration:  InputDecoration(
+                             TextField(
+                              controller: dateInput,
+                              onTap:  () async {
+                                DateTime? pickedDate = await showDatePicker(
+                                  context: context, initialDate: DateTime.now(), 
+                                  firstDate: DateTime(2015), lastDate: DateTime(2050));
+
+                                  if (pickedDate != null) {
+                                    print(pickedDate);
+                                    String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                                    print(formattedDate);
+
+                                    setState(() {
+                                      dateInput.text = formattedDate;
+                                    });
+                                  }else{
+                                    print('Select date');
+                                  }
+                              },
+                              decoration:  const InputDecoration(
                                 labelText: "Date",
                                 labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 1),
                                 filled: true,
@@ -321,7 +356,7 @@ class Todolist extends StatelessWidget {
                                 )
                                 
                               ),
-                             style: TextStyle(fontSize: 15, color: Colors.white),
+                             style: const TextStyle(fontSize: 15, color: Colors.white),
                             ),
                           ),
       
@@ -330,8 +365,25 @@ class Todolist extends StatelessWidget {
                             width: MediaQuery.of(context).size.width/3,
                             height: MediaQuery.of(context).size.height/15,
                           child: 
-                            const TextField(
-                              decoration:  InputDecoration(
+                             TextField(
+                              controller: timeInput,
+                              onTap:  () async {
+                                TimeOfDay? pickedTime = await showTimePicker(
+                                  context: context, initialTime: TimeOfDay.now());
+
+                                  if (pickedTime != null) {
+                                    print(pickedTime.format(context));
+                                    DateTime parsedTime = DateFormat.jm().parse(pickedTime.format(context).toString());
+                                    print(parsedTime);
+
+                                    String formattedTime = DateFormat('HH:mm:ss').format(parsedTime);
+                                    setState(() {
+                                      timeInput.text = formattedTime;
+                                    });
+                                  }else{
+                                    print('Select time');
+                                  }},
+                              decoration:  const InputDecoration(
                                 labelText: "Time",
                                 labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 1),
                                 filled: true,
