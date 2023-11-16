@@ -142,8 +142,9 @@ Future<bool> checkIfUserExists(Database database, String fullname, String email)
 }
 
 @override
-Future<int> addUserAndTasks(String fullName, String email, String password, List<Map<String, dynamic>> tasks) async {
-    final Database? db = await initialize();
+Future addUserAndTasks(String fullName, String email, String password, List<Map<String, dynamic>> tasks) async {
+    try {
+      final Database? db = await initialize();
     if (db != null) {
       // Insert the user details into the Signup table
       int userId = await createUser(db, fullName, email, password);
@@ -151,9 +152,13 @@ Future<int> addUserAndTasks(String fullName, String email, String password, List
       // Insert tasks associated with the user into the Tasks table
       await createTasksForUser(db, userId, tasks);
 
-      return userId;
+      return true;
+    }else{
+    return false;
     }
-    return -1;
+    } catch (e) {
+      print('$e');
+    }
   }
 
   Future<int> createUser(Database db, String fullName, String email, String password) async {
@@ -166,7 +171,8 @@ Future<int> addUserAndTasks(String fullName, String email, String password, List
     return await db.insert('Signup', userData);
   }
 
-  Future<void> createTasksForUser(Database db, int userId, List<Map<String, dynamic>> tasks) async {
+  @override
+  Future createTasksForUser(Database db, int userId, List<Map<String, dynamic>> tasks) async {
     for (Map<String, dynamic> task in tasks) {
       // Assign each task to the specified userId
       task['userId'] = userId;

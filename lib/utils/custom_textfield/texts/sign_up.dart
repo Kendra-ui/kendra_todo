@@ -31,9 +31,7 @@ class _SignUp extends State<SignUp> {
   bool doesUserExist = false;
   late UserProvider _userProvider;
   
-  String fullname= '';
-  String email = '';
-  String password= '';
+  
 
   List<Map<String, dynamic>> tasks = [];
   
@@ -220,7 +218,7 @@ class _SignUp extends State<SignUp> {
                                   isLoading = true;
                                 });
  
-                               bool response= await _userProvider.addUserIfNotExists(_fullnameController.text.trim(), _emailController.text.trim(), _passwordController.text.trim());
+                               bool response= await _userProvider.storeUser(_fullnameController.text.trim(), _emailController.text.trim(), _passwordController.text.trim(), tasks);
 
                                if (response) {
                                 // signup is successful 

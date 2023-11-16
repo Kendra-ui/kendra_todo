@@ -57,14 +57,23 @@ class UserProvider extends ChangeNotifier{
     return false;
   }
 
-  Future<int> storeUser(String fullName, String email, String password, List<Map<String, dynamic>> tasks) async {
+  Future storeUser(String fullName, String email, String password, List<Map<String, dynamic>> tasks) async {
     int userId = await _dataBaseService.addUserAndTasks(fullName, email, password, tasks);
 
     if (userId != -1) {
-      notifyListeners();
+      return true;
     }
 
-    return userId;
+    return true;
+  }
+
+  Future<bool> connectUserToTask(int userId, List<Map<String, dynamic>> tasks ) async {
+    final taskId = await _dataBaseService.createTasksForUser(database!, userId, tasks);
+
+    if (taskId != null) {
+      return true;
+    }
+    return false;
   }
 
 }
