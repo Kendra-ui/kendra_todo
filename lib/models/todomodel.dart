@@ -1,12 +1,22 @@
 class TodoModel{
   String title;
   String description;
-  String startDate;
-  String endDate;
-  String createdTime;
+  String startTime;
+  String endTime;
+  String createdDate;
   bool completed;
 
-  TodoModel({required this.title, required this.description, required this.startDate, required this.endDate, required this.createdTime, required this.completed});
+  TodoModel({required this.title, required this.description, required this.startTime, required this.endTime, required this.createdDate, required this.completed});
+
+  Map toJson(){
+    return {
+      'title' : title,
+      'description' : description,
+      'startTime' : startTime,
+      'endTime' : endTime,
+      'createdDate' : createdDate,
+    };
+  }
 
   //to toggle the task
   void toggleCompleted(){

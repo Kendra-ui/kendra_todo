@@ -25,8 +25,6 @@ WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
 
    Provider.of<UserProvider>(context, listen: false).dataBaseInitialize();
   
-   //Provider.of<UserProvider>(context, listen: false).checkCredentials(email, password);
-
   
 });
 

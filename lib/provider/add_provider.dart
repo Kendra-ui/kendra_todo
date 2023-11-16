@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:kendra_todo/services/database_service.dart';
 import 'package:sqflite/sqflite.dart';
 
+
 class UserProvider extends ChangeNotifier{
+
+
   final DataBaseService _dataBaseService =DataBaseService();
 
   Database? database;
@@ -53,6 +56,17 @@ class UserProvider extends ChangeNotifier{
     }
     return false;
   }
+
+  Future<int> storeUser(String fullName, String email, String password, List<Map<String, dynamic>> tasks) async {
+    int userId = await _dataBaseService.addUserAndTasks(fullName, email, password, tasks);
+
+    if (userId != -1) {
+      notifyListeners();
+    }
+
+    return userId;
+  }
+
 }
 
 

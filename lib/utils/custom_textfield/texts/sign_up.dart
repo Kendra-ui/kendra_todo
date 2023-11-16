@@ -31,8 +31,12 @@ class _SignUp extends State<SignUp> {
   bool doesUserExist = false;
   late UserProvider _userProvider;
   
+  String fullname= '';
+  String email = '';
+  String password= '';
 
-  @override
+  List<Map<String, dynamic>> tasks = [];
+  
 
  
 

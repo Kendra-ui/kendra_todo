@@ -1,12 +1,12 @@
 
 // ignore_for_file: avoid_print
-
 import 'package:kendra_todo/services/database_interface.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DataBaseService  implements DataBaseInterface{
 
+   
     @override
   Future<Database?> initialize()async {
    //gets the default db location
@@ -48,13 +48,18 @@ class DataBaseService  implements DataBaseInterface{
         UNIQUE(fullname, email)
       )
     ''');
-
+    
+    
     await db.execute('''
-      CREATE TABLE task (
+      CREATE TABLE Task (
         id INTEGER PRIMARY KEY,
+        title TEXT NOT NULL,
         descrption TEXT NOT NULL,
-        date TEXT NOT NULL,
-        time TEXT NOT NULL
+        createdDate TEXT NOT NULL,
+        startTime TEXT NOT NULL,
+        endTime TEXT NOT NULL,
+        userId INTEGER NOT NULL,
+        FOREIGN KEY(userId)  REFERENCES Signup(id) ON DELETE CASCADE
       )
 ''');
   }
@@ -136,5 +141,37 @@ Future<bool> checkIfUserExists(Database database, String fullname, String email)
   return count != null && count > 0;
 }
 
+@override
+Future<int> addUserAndTasks(String fullName, String email, String password, List<Map<String, dynamic>> tasks) async {
+    final Database? db = await initialize();
+    if (db != null) {
+      // Insert the user details into the Signup table
+      int userId = await createUser(db, fullName, email, password);
+
+      // Insert tasks associated with the user into the Tasks table
+      await createTasksForUser(db, userId, tasks);
+
+      return userId;
+    }
+    return -1;
+  }
+
+  Future<int> createUser(Database db, String fullName, String email, String password) async {
+    final Map<String, dynamic> userData = {
+      'fullname': fullName,
+      'email': email,
+      'password': password,
+    };
+
+    return await db.insert('Signup', userData);
+  }
+
+  Future<void> createTasksForUser(Database db, int userId, List<Map<String, dynamic>> tasks) async {
+    for (Map<String, dynamic> task in tasks) {
+      // Assign each task to the specified userId
+      task['userId'] = userId;
+      await db.insert('Tasks', task);
+    }
+  }
 }
 
