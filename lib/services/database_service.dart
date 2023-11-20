@@ -6,7 +6,19 @@ import 'package:sqflite/sqflite.dart';
 
 class DataBaseService  implements DataBaseInterface{
 
-   
+   late String username;
+   late String todoTableName;
+
+   void initializeTableName() {
+    username = '';
+    todoTableName = '${username}todo';
+  }
+
+  // this is to permit the foreign key to work
+Future _onConfigure(Database db) async {
+  await db.execute('PRAGMA foreign_keys = ON');
+}
+
     @override
   Future<Database?> initialize()async {
    //gets the default db location
@@ -16,7 +28,7 @@ class DataBaseService  implements DataBaseInterface{
     //path of the db; where join is used to combine the given path into a single path
     final path = join(databasePath, 'Signup.db');
 
-    return await openDatabase(path, version: 1, onCreate: createDatabase);
+    return await openDatabase(path, version: 1, onCreate: createDatabase, onConfigure: _onConfigure);
     
 
   }
@@ -42,27 +54,53 @@ class DataBaseService  implements DataBaseInterface{
     await db.execute('''
       CREATE TABLE Signup (
         id INTEGER PRIMARY KEY,
-        fullname TEXT NOT NULL 
+        fullname TEXT NOT NULL,
         email TEXT NOT NULL ,
         password TEXT NOT NULL,
         UNIQUE(fullname, email)
       )
     ''');
-    
+  
     
     await db.execute('''
-      CREATE TABLE Task (
+      CREATE TABLE $todoTableName (
         id INTEGER PRIMARY KEY,
         title TEXT NOT NULL,
-        descrption TEXT NOT NULL,
+        description TEXT NOT NULL,
         createdDate TEXT NOT NULL,
         startTime TEXT NOT NULL,
-        endTime TEXT NOT NULL,
+        completed INTEGER NOT NULL CHECK (completed IN(0,1)),
         userId INTEGER NOT NULL,
         FOREIGN KEY(userId)  REFERENCES Signup(id) ON DELETE CASCADE
       )
 ''');
   }
+
+@override
+  Future<Map<String, dynamic>?> getUser(Database database, String email) async {
+
+    print('kkkk ${database.isOpen}');
+  try {
+    final user = await database.query(
+      'Signup',
+      where: 'email = ?',
+      whereArgs: [email],
+    );
+
+    if (user.isNotEmpty) {
+     return user.first;
+     //print('yes');
+    }else{
+      print('false');
+    }
+  } catch (e) {
+    print('Error fetching user: $e');
+  }
+  
+  return null;
+}
+
+
 @override
 Future<Map<String, dynamic>?> fetchData(Database db,String email, String password) async {
     print('AAAAAAA ${db.isOpen}');
@@ -92,7 +130,8 @@ Future<Map<String, dynamic>?> fetchData(Database db,String email, String passwor
   //check if email exist
 }
 
-Future<bool> signIn(String email, String password) async {
+@override
+  Future<bool> signIn(String email, String password) async {
     final Database? db = await initialize();
       if (db != null) {
       final emailAndPassword = await fetchData(db, email, password);
@@ -141,43 +180,75 @@ Future<bool> checkIfUserExists(Database database, String fullname, String email)
   return count != null && count > 0;
 }
 
-@override
-Future addUserAndTasks(String fullName, String email, String password, List<Map<String, dynamic>> tasks) async {
-    try {
-      final Database? db = await initialize();
+
+
+//helps to check if a task is complete or not for a particular user
+ Future<bool?> toggle(int taskId, int userId) async {
+    final Database? db = await initialize();
     if (db != null) {
-      // Insert the user details into the Signup table
-      int userId = await createUser(db, fullName, email, password);
+      final List<Map<String, dynamic>> result = await db.query(
+        todoTableName,
+        columns: ['completed'],
+        where: 'id = ? AND userId = ?' ,
+        whereArgs: [taskId, userId],
+      );
 
-      // Insert tasks associated with the user into the Tasks table
-      await createTasksForUser(db, userId, tasks);
-
-      return true;
-    }else{
-    return false;
+      if (result.isNotEmpty) {
+        final completedValue = result.first['completed'];
+        return completedValue == 1; // Return true if completedValue is 1, else false
+      }
     }
-    } catch (e) {
-      print('$e');
-    }
-  }
-
-  Future<int> createUser(Database db, String fullName, String email, String password) async {
-    final Map<String, dynamic> userData = {
-      'fullname': fullName,
-      'email': email,
-      'password': password,
-    };
-
-    return await db.insert('Signup', userData);
+    return null; // Return null if the task with the specified ID isn't found
   }
 
   @override
-  Future createTasksForUser(Database db, int userId, List<Map<String, dynamic>> tasks) async {
-    for (Map<String, dynamic> task in tasks) {
-      // Assign each task to the specified userId
-      task['userId'] = userId;
-      await db.insert('Tasks', task);
+  Future<int> addTodo(
+      int userId,
+      String title,
+      String description,
+      String createdDate,
+      String startTime,
+      bool completed) async {
+    final Database? db = await initialize();
+    if (db != null) {
+      final Map<String, dynamic> todoData = {
+        'userId': userId,
+        'title': title,
+        'description': description,
+        'createdDate': createdDate,
+        'startTime': startTime,
+        'completed': completed ? 1 : 0, // Store as 1 if completed, 0 otherwise
+      };
+
+      return await db.insert(todoTableName, todoData);
     }
+
+    return -1; // Return -1 if database is not available
   }
+@override
+  Future<List<Map<String, dynamic>>?> getTasksOrderedByDate(int userId) async {
+    final Database? db = await initialize();
+    if (db != null) {
+      final result = await db.query(
+        todoTableName,
+        where: 'userId = ?',
+        whereArgs: [userId],
+        orderBy: 'createdDate DESC', // Order by createdDate in ascending order
+      );
+    }
+    return null;
+  }
+
+  //function which permits to delete a taskfrom the database
+  @override
+  Future<int> deleteTodo(Map<String, dynamic> todoData, Database db, int userId) async{
+    return db.delete(todoTableName,
+    where: '$todoData  AND userId = ?',
+    whereArgs: [todoData, userId]);
+  }
+
+
 }
+
+ 
 

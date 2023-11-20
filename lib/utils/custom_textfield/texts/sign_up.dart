@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/provider/add_provider.dart';
 import 'package:kendra_todo/utility/data_helper.dart';
@@ -24,6 +25,7 @@ class _SignUp extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   final databaseHelper = DatabaseHelper();
       
+  List<Map<String, dynamic>> tasks = [];
 
 
  bool isVisible= false;
@@ -31,12 +33,6 @@ class _SignUp extends State<SignUp> {
   bool doesUserExist = false;
   late UserProvider _userProvider;
   
-  
-
-  List<Map<String, dynamic>> tasks = [];
-  
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -213,23 +209,28 @@ class _SignUp extends State<SignUp> {
                             ),
                             onPressed:  
                           ()async  {
+                            FocusManager.instance.primaryFocus?.unfocus();
                             if (_formKey.currentState!.validate()) {
                                         setState(() {
                                   isLoading = true;
                                 });
  
-                               bool response= await _userProvider.storeUser(_fullnameController.text.trim(), _emailController.text.trim(), _passwordController.text.trim(), tasks);
+                               //bool response= await _userProvider.storeUser(_fullnameController.text.trim(), _emailController.text.trim(), _passwordController.text.trim(), tasks);
+                            bool response= await _userProvider.addUserIfNotExists(_fullnameController.text.trim(), _emailController.text.trim(), _passwordController.text.trim());
+
 
                                if (response) {
                                 // signup is successful 
                                 // ignore: use_build_context_synchronously
-                              Future.delayed(const Duration(seconds:3),(){
+                              Future.delayed(const Duration(seconds:2),(){
                                   setState(() {
                                   isLoading = true;
                                 });
+                                
                                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Dashboard()));
 
-                                }); 
+                                });
+                               
 
                                } else {
                                 // signup has failed

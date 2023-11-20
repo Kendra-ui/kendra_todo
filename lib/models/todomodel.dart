@@ -1,20 +1,33 @@
-class TodoModel{
+class TodoFields{
+   final String title = 'title';
+   final String description = 'description';
+   final String startTime = 'startTime';
+    String createdDate = 'createdDate';
+   final String completed = 'completed';
+
+   final List<String> allFields = [ ];
+}
+
+
+class Todo{
   String title;
   String description;
-  String startTime;
-  String endTime;
+  DateTime startTime;
+  //String endTime;
   String createdDate;
   bool completed;
 
-  TodoModel({required this.title, required this.description, required this.startTime, required this.endTime, required this.createdDate, required this.completed});
+  Todo({ required this.title,required this.description, required this.startTime, required this.createdDate,  this.completed = false});
 
-  Map toJson(){
+  Map<String, Object?> toJson() {
     return {
       'title' : title,
       'description' : description,
-      'startTime' : startTime,
-      'endTime' : endTime,
+      //convert the datetime to string
+      'startTime' : startTime.toIso8601String(),
+      //'endTime' : endTime,
       'createdDate' : createdDate,
+      'completed' : completed ? 1:0
     };
   }
 
@@ -23,3 +36,4 @@ class TodoModel{
     completed = !completed;
   }
 }
+

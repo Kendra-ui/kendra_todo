@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/provider/add_provider.dart';
+import 'package:kendra_todo/provider/todo_provider.dart';
 import 'package:kendra_todo/utility/data_helper.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/sign_up.dart';
@@ -27,13 +28,18 @@ class _SignInState extends State<SignIn> {
    final _formKey = GlobalKey<FormState>();
     bool isVisible= false;
     late UserProvider _userProvider;
+    late TodoProvider _todoProvider;
     bool isLoginTrue = false;
+    
+      Map<String, dynamic>? userData;
+      int id = 0;
       
   
  
  @override
   Widget build(BuildContext context) {
    _userProvider=context.read<UserProvider>();
+   _todoProvider = context.read<TodoProvider>();
     return  Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -198,7 +204,9 @@ class _SignInState extends State<SignIn> {
                       () async{
      
                         if (_formKey.currentState!.validate()) {
-                            bool signInSuccessful = await _userProvider.signIn(_emailController.text.trim(), _passwordController.text.trim());
+                            bool signInSuccessful = await _userProvider.signIn(_emailController.text.trim(), _passwordController.text.trim(), _emailController.text);
+                            // await _userProvider.updateUser(userId);
+                            // await _todoProvider.getTasksOrderedByDate(userId);
                           
                           if (signInSuccessful) {
                             // Navigate to the home screen or perform necessary actions upon successful sign-in
@@ -214,6 +222,8 @@ class _SignInState extends State<SignIn> {
           
 
                             }
+
+                            
             
                       }
                       , child: GestureDetector(

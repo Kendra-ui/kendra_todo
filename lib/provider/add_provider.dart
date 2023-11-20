@@ -8,14 +8,13 @@ import 'package:sqflite/sqflite.dart';
 class UserProvider extends ChangeNotifier{
 
 
-  final DataBaseService _dataBaseService =DataBaseService();
+  final DataBaseService dataBaseService =DataBaseService();
 
   Database? database;
 
-
  Future<void> dataBaseInitialize()async{
 
-    database= await _dataBaseService.initialize();
+    database= await dataBaseService.initialize();
 
     print("++++++++++++++++++++++++++++++++++++++++ initialize database is ${database!.isOpen}");
     notifyListeners();
@@ -26,21 +25,24 @@ class UserProvider extends ChangeNotifier{
   }
 
   Future<bool> signUp(String fullName, String email, String password)async{
-    int id= await _dataBaseService.createTable(database!,{'fullname': fullName, 'email': email,'password': password} );
+    int id= await dataBaseService.createTable(database!,{'fullname': fullName, 'email': email,'password': password} );
 
-    if(id ==0){
+    if(id == 0){
+      await updateUser(email);
       return false;
     }
 
     return true;
   }
 
-  Future signIn(String email, String password) async {
-    final isLoggedIn = await _dataBaseService.fetchData(database!, email, password);
+  Future signIn(String email, String password, id) async {
+    final isLoggedIn = await dataBaseService.fetchData(database!, email, password);
     
     
     if (isLoggedIn != null) {
       // Implement any actions you want to perform after successful sign-in
+      await updateUser(email);
+      
       return true;
     } else {
       return false;
@@ -49,38 +51,36 @@ class UserProvider extends ChangeNotifier{
   }
 
   Future addUserIfNotExists(String fullname, String email, String password) async{
-    final isPresent = await _dataBaseService.addUserIfNotExists(database!, fullname, email, password);
+    final isPresent = await dataBaseService.addUserIfNotExists(database!, fullname, email, password);
 
     if (isPresent != null) {
+      await updateUser(email);
       return true;
     }
     return false;
   }
 
-  Future storeUser(String fullName, String email, String password, List<Map<String, dynamic>> tasks) async {
-    int userId = await _dataBaseService.addUserAndTasks(fullName, email, password, tasks);
+Map<String, dynamic>? currentUser; // Holds the user's information
 
-    if (userId != -1) {
-      return true;
+
+  // Update the current user's information in the provider
+   Future<void> updateUser(String email) async{
+    
+    try {
+      currentUser = await dataBaseService.getUser(database!, email);
+        notifyListeners();
+      
+    } catch (e) {
+      print('Error fetching user information: $e');
+      // You might want to handle the error in an appropriate way
     }
 
-    return true;
-  }
-
-  Future<bool> connectUserToTask(int userId, List<Map<String, dynamic>> tasks ) async {
-    final taskId = await _dataBaseService.createTasksForUser(database!, userId, tasks);
-
-    if (taskId != null) {
-      return true;
-    }
-    return false;
-  }
 
 }
 
 
   
   
-
+}
 
 

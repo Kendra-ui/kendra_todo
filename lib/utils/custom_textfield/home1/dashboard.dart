@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/provider/add_provider.dart';
+import 'package:kendra_todo/provider/todo_provider.dart';
 import 'package:kendra_todo/utils/custom_textfield/task/todo_list.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/sign_up.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
     
 
    const Dashboard({super.key});
 
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
+late UserProvider userProvider;
+late TodoProvider _todoProvider;
+
+  int userId = 0;
 
   @override
   Widget build(BuildContext context) {
+  userProvider=context.read<UserProvider>();
+  _todoProvider=context.read<TodoProvider>();
     return  Scaffold(
       body: SafeArea(
       
@@ -37,13 +51,30 @@ class Dashboard extends StatelessWidget {
                   padding:  EdgeInsets.all(MediaQuery.of(context).size.width/20),
                   child: Image.asset('assets/images/logo.png', height: 45,),
                 ),
-                   const Column(
+                    Column(
                     
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('oussama chahidi', style: TextStyle(fontFamily: 'Poppins', color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 1)),
-                      Text('oussamachahidi@gmail.com', style: TextStyle(fontFamily: 'Poppins', color: Color.fromARGB(255, 206, 204, 204),fontSize: 12, letterSpacing: 1 ),)
+                      Selector<UserProvider, Map<String, dynamic>?>
+                      (selector: (context ,userProvider ) =>
+                        userProvider.currentUser,
+                      builder: (BuildContext context, Map<String, dynamic>? currentUser, Widget? child) {
+                        if (currentUser != null) {
+                          String fullname = currentUser['fullname'] ?? 'Full name not available';
+                          String email = currentUser['email'];
+
+                        return   Column(
+                          children: [
+                        Text(fullname, style: const TextStyle(fontFamily: 'Poppins', color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 1)),
+                        Text(email, style: const TextStyle(fontFamily: 'Poppins', color: Color.fromARGB(255, 206, 204, 204),fontSize: 12, letterSpacing: 1 ),)
+
+                          ],
+                        );
+                       
+                       } return const Text('Loading ..');
+  })
+
                     ],
                     ),
                      SizedBox(width: MediaQuery.of(context).size.width/8,),
