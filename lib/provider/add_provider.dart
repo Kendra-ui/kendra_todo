@@ -41,6 +41,7 @@ class UserProvider extends ChangeNotifier{
     
     if (isLoggedIn != null) {
       // Implement any actions you want to perform after successful sign-in
+      
       await updateUser(email);
       
       return true;
@@ -74,6 +75,7 @@ Map<String, dynamic>? currentUser; // Holds the user's information
       print('Error fetching user information: $e');
       // You might want to handle the error in an appropriate way
     }
+    
 
 
 }

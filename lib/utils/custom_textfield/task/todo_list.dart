@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:kendra_todo/provider/add_provider.dart';
 import 'package:kendra_todo/provider/todo_provider.dart';
+import 'package:kendra_todo/services/database_service.dart';
+import 'package:kendra_todo/utility/data_helper.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/task/info.dart';
 import 'package:provider/provider.dart';
@@ -20,25 +22,21 @@ class Todolist extends StatefulWidget {
 class _TodolistState extends State<Todolist> {
   final dateInput = TextEditingController();
   final timeInput = TextEditingController();
+  final _description = TextEditingController();
   late UserProvider _userProvider;
   late TodoProvider _todoProvider;
+  final DataBaseService dataBaseService = DataBaseService();
+  DatabaseHelper databaseHelper = DatabaseHelper();
+          
+      bool completed = false;
 
-    List<Map<String, dynamic>> tasks = [];
-  //adding item in the tasks list
-  int _counter = 0;
-  
-  int userId = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   void initState() {
-    dateInput.text = '';
-    timeInput.text ='';
+   // _todoProvider.dataBaseInitialize();
+   databaseHelper = DatabaseHelper();
+     databaseHelper.initialize();
+    DatabaseHelper().fetchTodoData();
     super.initState();
   }
   
@@ -131,139 +129,87 @@ class _TodolistState extends State<Todolist> {
                 child: const Text('Tasks List', style: TextStyle(letterSpacing: 1, color: Colors.white, fontFamily: 'Poppins', fontSize: 14),)),
                  ),
               SizedBox(height: MediaQuery.of(context).size.height/30,),
+
+              //  Padding(
+              //           padding:  EdgeInsets.all(MediaQuery.of(context).size.height/100),
+              //           child: Container(
+              //             width: MediaQuery.of(context).size.width/1.1,
+              //             height: MediaQuery.of(context).size.height/13,
+      
+              //             decoration:  BoxDecoration(
+              //               color: Colors.white,
+              //               borderRadius: BorderRadius.circular(5)
+              //             ),
+              //             child: 
+              //              Padding(
+              //               padding:  const EdgeInsets.only(top:8.0, left: 20),
+              //               child: Selector<TodoProvider, List<Map<String, dynamic>>?>(
+              //                 selector: (context, todoProvider) => todoProvider.todos,
+              //                 builder: (BuildContext context, List<Map<String, dynamic>>? todos, Widget? child ) {
+
+              //                   if( todos != null){
+              //                   Map<String, dynamic> startTime = todos[0];
+              //                   Map<String, dynamic> createdDate = todos[0];
+
+              //                   return ListView.builder(
+              //                   itemCount: 10,
+              //                   itemBuilder: (BuildContext context, int index) {
+            
+              //                     return  Container(
+              //                     width: MediaQuery.of(context).size.width/1.1,
+              //                     height: MediaQuery.of(context).size.height/13,
               
-              Container(
-                width: MediaQuery.of(context).size.width/1.1,
-                height: MediaQuery.of(context).size.height/13,
-      
-                decoration:  BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5)
-                ),
-                child: 
-                 Padding(
-                  padding:  const EdgeInsets.only(top:8.0, left: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Column(
-                        children: [
-                      Text('Client Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
-                      Text('Tomorrow | 10:30pm', style: TextStyle(fontFamily: 'Poppins', fontSize: 10,letterSpacing: 1, fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
-                        child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,),
-                      )
-                      
-                    ],
-                  ),
-                ),
-              ),
-      
-              SizedBox(height: MediaQuery.of(context).size.height/20,),
-           
-                     Container(
-                       width: MediaQuery.of(context).size.width/1.1,
-                       height: MediaQuery.of(context).size.height/13,
-      
-                       decoration:  BoxDecoration(
-                         color: Colors.white,
-                         borderRadius: BorderRadius.circular(5)
-                       ),
-                       child: 
-                        Padding(
-                         padding:  const EdgeInsets.only(top:8.0, left: 20),
-                         child: Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                           crossAxisAlignment: CrossAxisAlignment.start,
-                           children: [
-                             const Column(
-                               children: [
-                             Text('Client Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
-                             Text('Tomorrow | 10:30pm', style: TextStyle(fontFamily: 'Poppins', fontSize: 10,letterSpacing: 1, fontWeight: FontWeight.bold ),),
-                               ],
-                             ),
-                             Padding(
-                               padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
-                               child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,),
-                             )
-                             
-                           ],
-                         ),
-                       ),
-                     ),
-      
-              SizedBox(height: MediaQuery.of(context).size.height/20,),
-      
-        
-                     Container(
-                       width: MediaQuery.of(context).size.width/1.1,
-                       height: MediaQuery.of(context).size.height/13,
-      
-                       decoration:  BoxDecoration(
-                         color: Colors.white,
-                         borderRadius: BorderRadius.circular(5)
-                       ),
-                       child: 
-                        Padding(
-                         padding:  const EdgeInsets.only(top:8.0, left: 20),
-                         child: Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                           crossAxisAlignment: CrossAxisAlignment.start,
-                           children: [
-                             const Column(
-                               children: [
-                             Text('Client Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
-                             Text('Tomorrow | 10:30pm', style: TextStyle(fontFamily: 'Poppins', fontSize: 10,letterSpacing: 1, fontWeight: FontWeight.bold ),),
-                               ],
-                             ),
-                             Padding(
-                               padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
-                               child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,),
-                             )
-                             
-                           ],
-                         ),
-                       ),
-                     ),
-      
-              SizedBox(height: MediaQuery.of(context).size.height/20,),
-      
-        
-                       Container(
-                         width: MediaQuery.of(context).size.width/1.1,
-                         height: MediaQuery.of(context).size.height/13,
-      
-                         decoration:  BoxDecoration(
-                           color: Colors.white,
-                           borderRadius: BorderRadius.circular(5)
-                         ),
-                         child: 
-                          Padding(
-                           padding:  const EdgeInsets.only(top:8.0, left: 20),
-                           child: Row(
-                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                             crossAxisAlignment: CrossAxisAlignment.start,
-                             children: [
-                               const Column(
-                                 children: [
-                               Text('Client Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
-                               Text('Tomorrow | 10:30pm', style: TextStyle(fontFamily: 'Poppins', fontSize: 10,letterSpacing: 1, fontWeight: FontWeight.bold ),),
-                                 ],
-                               ),
-                               Padding(
-                                 padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
-                                 child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,),
-                               )
+              //                     decoration:  BoxDecoration(
+              //                 color: Colors.white,
+              //                 borderRadius: BorderRadius.circular(5)
+              //       ),
+              //               child: Padding(
+              //                 padding:  const EdgeInsets.only(top:8.0, left: 20),
+              //                 child: Row(
+              //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //                   crossAxisAlignment: CrossAxisAlignment.start,
+              //                   children: [
+                                 
+              //                      Padding(
+              //                       padding:  const EdgeInsets.only(right: 120),
+              //                       child: Column(
+              //                         crossAxisAlignment: CrossAxisAlignment.start,
+              //                         children: [
+              //                       const Text('Client Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
+              //                       Text(
+              //                     '$startTime | $createdDate' , style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1, fontFamily: 'Poppins'), // Extracting and displaying the current date
+              //                       ),
+              //                         ],
+              //                       ),
+              //                     ),
+              //                     Padding(
+              //                       padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
+              //                       child:GestureDetector(
+              //                         onTap: () {
+              //                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Info()));
+              //                         },
+              //                         child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,)
+              //                         ),)
+                                  
+              //                   ],
+              //                 ),
+              //                  ),
+              //                 );
+              //                   } 
+              //                  );
                                
-                             ],
-                           ),
-                         ),
-                       ),
-        
+                               
+              //                 }
+              //               return const Text('error');
+
+              //                 }
+      
+              //               ))
+              //               ),
+              //             ),
+
+              
+             
               SizedBox(
                 height: MediaQuery.of(context).size.height/10,),
               Padding(
@@ -320,8 +266,9 @@ class _TodolistState extends State<Todolist> {
                       child: SizedBox(
                         height: MediaQuery.of(context).size.height/5,
                         width: MediaQuery.of(context).size.width/1.2,
-                        child: const TextField(
-                          decoration:  InputDecoration(
+                        child:  TextField(
+                          controller: _description,
+                          decoration:  const InputDecoration(
                             labelText: "Description",
                             labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 1),
                             filled: true,
@@ -329,7 +276,7 @@ class _TodolistState extends State<Todolist> {
                             prefixIcon:  Padding(padding: EdgeInsets.only(bottom:90),
                             child: Icon(Icons.line_weight, color: Colors.white,),) 
                           ),
-                         style: TextStyle(fontSize: 15, color: Colors.white, fontFamily: "Poppins"),
+                         style: const TextStyle(fontSize: 15, color: Colors.white, fontFamily: "Poppins"),
                         ),
                       ),
                     ),
@@ -472,12 +419,50 @@ class _TodolistState extends State<Todolist> {
                             )
                           ),
                           onPressed: () async{
-                            //await _userProvider.connectUserToTask(userId, tasks);
+                            if (_description.text.isEmpty) {
+                                       ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        behavior: SnackBarBehavior.floating,
+                                        margin: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context).size.height - 100,
+                                          left: 10,
+                                          right: 10,
+                                        ),
+                                        content: const Text('Enter description'),
+                                      ),
+                                    );
+                              }else{ 
                             
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Info()));
+                                                   print("resullllll ");
+                               try {
+                                  final Map<String, dynamic>? currentUser = _userProvider.currentUser;
+                                if (currentUser != null) {
+                                  
+                                  final String fullname = currentUser['fullname'] ?? 'Full name not available';
+                                  final result = _todoProvider.addItems(context.read<UserProvider>().currentUser as int, context.read<TodoProvider>().todoId, _description.text.trim(), dateInput.text.trim(), timeInput.text.trim(), completed);
+
+                                     print("resullllll $result ");
+
+                                    // ignore: unrelated_type_equality_checks
+                                    if (result == 'OK') {
+                                      print('added');
+                                      _description.clear();
+                                    }else{
+                                     // print('failed to add tak to  $fullname');
+                                    }
+                                }else{
+                                  print('Nos such user');
+                                }
+                               } catch (e) {
+                                 print('$e');
+                               }
+                         
+                              }
+                    //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Info()));
                       
-                          }, 
-                          child: const Text('create', style: TextStyle(fontFamily: 'Poppins', letterSpacing: 1, fontSize: 15, color: Colors.white),)),
+                          } 
+                        , 
+                        child: const Text('create', style: TextStyle(fontFamily: 'Poppins', letterSpacing: 1, fontSize: 15, color: Colors.white),),),
                         ),
                 
                         const SizedBox(width: 10,)

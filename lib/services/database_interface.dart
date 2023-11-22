@@ -6,9 +6,9 @@ Future<Database?> initialize();
 Future createTable(Database database,Map<String, Object?> column);
 Future fetchData(Database db, String email, String password);
 Future addUserIfNotExists(Database database, String fullname, String email, String password);
-Future addTodo(int userId, String title, String description, String createdDate, String startTime, bool completed);
-Future deleteTodo(Map<String, dynamic> todoData, Database db, int userId);
+Future createTodo(Database db,int id, String description, String createdDate, String startTime, bool completed, int userId);
+Future deleteTodo(int id, Database db, int userId);
 Future getUser(Database db, String email);
-Future getTasksOrderedByDate(int userId);
+Future getTasksOrderedByDate(Database db, int id);
 Future signIn(String email, String password);
 }

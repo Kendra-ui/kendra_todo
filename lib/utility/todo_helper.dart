@@ -5,10 +5,13 @@ import 'dart:developer';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DatabaseHelper{
+class TodoHelper{
+
+  // static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
   static Database? _database;
-  final tableName = 'Signup';
-  final todotable = 'Todo';
+  final todotable = 'todo';
+
+  // DatabaseHelper._privateConstructor();
 
   Future<Database> get database async {
     if (_database != null) return _database!;
@@ -23,20 +26,12 @@ class DatabaseHelper{
   
     //accepts a string which is the path of db
     //path of the db; where join is used to combine the given path into a single path
-    final path = join(databasePath, 'Signup.db');
+    final path = join(databasePath, 'Todo.db');
 
     return await openDatabase(path, version: 1, onCreate: ((db, version)  async{
 
-       await db.execute('''
-      CREATE TABLE Signup (
-        id INTEGER PRIMARY KEY,
-        fullname TEXT NOT NULL UNIQUE,
-        email TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL,
-      )''');
-
       await db.execute('''
-    CREATE TABLE todo(
+CREATE TABLE todo(
         id INTEGER PRIMARY KEY,
         description TEXT NOT NULL,
         createdDate TEXT NOT NULL,
@@ -52,25 +47,7 @@ class DatabaseHelper{
     
   }
 
-
-
-//ADDING THE INFORMATION and passing the fields as parameters FOR SIGN UP
-  Future insertSignupInfo(fullname, email, password) async {
-
-     final db = await database;
-
-    
-      //adding tje insert queries for adding the info of the user
-     await db.insert(
-      'Signup', {'fullname': fullname, 'email': email,'password': password},
-      );
-      print('$fullname added in database successfully');
-      
-      return 'added';
-      
-  }
-
-  Future insertTodoInfo(id, description, createdDate, startTime, completed, userId) async {
+ Future insertodoInfo(id, description, createdDate, startTime, completed, userId) async {
 
     try {
        final db = await database;
@@ -80,7 +57,7 @@ class DatabaseHelper{
      await db.insert(
       'todo', {'id': id, 'description': description,'createdDate': createdDate, 'startTime': startTime, 'completed': completed ? 1:0, 'userId': userId},
       );
-      print('added in database successfully');
+      //print('$fullname added in database successfully');
       
       return 'added';
     } catch (e) {
@@ -90,9 +67,11 @@ class DatabaseHelper{
   }
 
 
+
+  
 Future fetchTodoData() async{
    final  db = await database;
-   final queryResult = await db.query(todotable);
+   final queryResult = await db.query('todo');
    inspect(queryResult);
 }
 }

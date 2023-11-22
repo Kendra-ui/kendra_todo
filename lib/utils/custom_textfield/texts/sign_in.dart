@@ -28,7 +28,6 @@ class _SignInState extends State<SignIn> {
    final _formKey = GlobalKey<FormState>();
     bool isVisible= false;
     late UserProvider _userProvider;
-    late TodoProvider _todoProvider;
     bool isLoginTrue = false;
     
       Map<String, dynamic>? userData;
@@ -39,7 +38,6 @@ class _SignInState extends State<SignIn> {
  @override
   Widget build(BuildContext context) {
    _userProvider=context.read<UserProvider>();
-   _todoProvider = context.read<TodoProvider>();
     return  Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(

@@ -1,6 +1,8 @@
+import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/provider/add_provider.dart';
 import 'package:kendra_todo/provider/todo_provider.dart';
+import 'package:kendra_todo/utils/custom_textfield/task/info.dart';
 import 'package:kendra_todo/utils/custom_textfield/task/todo_list.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/sign_up.dart';
 import 'package:provider/provider.dart';
@@ -17,14 +19,13 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
 late UserProvider userProvider;
-late TodoProvider _todoProvider;
-
-  int userId = 0;
+late TodoProvider todoProvider;
 
   @override
   Widget build(BuildContext context) {
   userProvider=context.read<UserProvider>();
-  _todoProvider=context.read<TodoProvider>();
+  todoProvider=context.read<TodoProvider>();
+  
     return  Scaffold(
       body: SafeArea(
       
@@ -65,6 +66,8 @@ late TodoProvider _todoProvider;
                           String email = currentUser['email'];
 
                         return   Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                         Text(fullname, style: const TextStyle(fontFamily: 'Poppins', color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 1)),
                         Text(email, style: const TextStyle(fontFamily: 'Poppins', color: Color.fromARGB(255, 206, 204, 204),fontSize: 12, letterSpacing: 1 ),)
@@ -77,7 +80,7 @@ late TodoProvider _todoProvider;
 
                     ],
                     ),
-                     SizedBox(width: MediaQuery.of(context).size.width/8,),
+                     SizedBox(width: MediaQuery.of(context).size.width/2.5,),
                  const Icon(Icons.notifications, color: Colors.white,)
                 ],
               ),
@@ -159,73 +162,85 @@ late TodoProvider _todoProvider;
                 width: MediaQuery.of(context).size.width/1.1,
                 child: const Text('Incomplete Tasks', style: TextStyle(letterSpacing: 1, color: Colors.white, fontFamily: 'Poppins', fontSize: 14),)),
         
-              Padding(
-                        padding:  EdgeInsets.all(MediaQuery.of(context).size.height/100),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width/1.1,
-                          height: MediaQuery.of(context).size.height/13,
+              // Padding(
+              //           padding:  EdgeInsets.all(MediaQuery.of(context).size.height/100),
+              //           child: Container(
+              //             width: MediaQuery.of(context).size.width/1.1,
+              //             height: MediaQuery.of(context).size.height/13,
       
-                          decoration:  BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5)
-                          ),
-                          child: 
-                           Padding(
-                            padding:  const EdgeInsets.only(top:8.0, left: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Column(
-                                  children: [
-                                Text('Client Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
-                                Text('Tomorrow | 10:30pm', style: TextStyle(fontFamily: 'Poppins', fontSize: 10,letterSpacing: 1, fontWeight: FontWeight.bold ),),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
-                                  child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,),
-                                )
-                                
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-        
-                      Padding(
-                        padding:  EdgeInsets.all(MediaQuery.of(context).size.height/100, ),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width/1.1,
-                          height: MediaQuery.of(context).size.height/13,
+              //             decoration:  BoxDecoration(
+              //               color: Colors.white,
+              //               borderRadius: BorderRadius.circular(5)
+              //             ),
+              //             child: 
+              //              Padding(
+              //               padding:  const EdgeInsets.only(top:8.0, left: 20),
+              //               child: Selector<TodoProvider, List<Map<String, dynamic>>?>(
+              //                 selector: (context, todoProvider) => todoProvider.todos,
+              //                 builder: (BuildContext context, List<Map<String, dynamic>>? todos, Widget? child ) {
+
+              //                   if( todos != null){
+              //                   Map<String, dynamic> startTime = todos[0];
+              //                   Map<String, dynamic> createdDate = todos[0];
+
+              //                   return ListView.builder(
+              //                   itemCount: 10,
+              //                   itemBuilder: (BuildContext context, int index) {
+            
+              //                     return  Container(
+              //                     width: MediaQuery.of(context).size.width/1.1,
+              //                     height: MediaQuery.of(context).size.height/13,
+              
+              //                     decoration:  BoxDecoration(
+              //                 color: Colors.white,
+              //                 borderRadius: BorderRadius.circular(5)
+              //       ),
+              //               child: Padding(
+              //                 padding:  const EdgeInsets.only(top:8.0, left: 20),
+              //                 child: Row(
+              //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //                   crossAxisAlignment: CrossAxisAlignment.start,
+              //                   children: [
+                                 
+              //                      Padding(
+              //                       padding:  const EdgeInsets.only(right: 120),
+              //                       child: Column(
+              //                         crossAxisAlignment: CrossAxisAlignment.start,
+              //                         children: [
+              //                       const Text('Client Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
+              //                       Text(
+              //                     '$startTime | $createdDate' , style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1, fontFamily: 'Poppins'), // Extracting and displaying the current date
+              //                       ),
+              //                         ],
+              //                       ),
+              //                     ),
+              //                     Padding(
+              //                       padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
+              //                       child:GestureDetector(
+              //                         onTap: () {
+              //                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Info()));
+              //                         },
+              //                         child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,)
+              //                         ),)
+                                  
+              //                   ],
+              //                 ),
+              //                  ),
+              //                 );
+              //                   } 
+              //                  );
+                               
+                               
+              //                 }
+              //               return const Text('error');
+
+              //                 }
       
-                          decoration:  BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5)
-                          ),
-                          child: 
-                           Padding(
-                            padding:  const EdgeInsets.only(top:8.0, left: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Column(
-                                  children: [
-                                Text('Client Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
-                                Text('Thursday | 10:30pm', style: TextStyle(fontFamily: 'Poppins', fontSize: 10,letterSpacing: 1, fontWeight: FontWeight.bold ),),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
-                                  child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,),
-                                )
-                                
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+              //               ))
+              //               ),
+              //             ),
+                        
+                     
         
       
                SizedBox(height: MediaQuery.of(context).size.height/30,),
@@ -322,11 +337,14 @@ late TodoProvider _todoProvider;
                         ),
                       ),
                     
-                  ],
-                ),
-              ),
-            ),
-      ),
-    );
+                  
+                ])
+                 ),
+        
+                      
+                          ),
+                        ),
+                      );
+   
   }
 }
