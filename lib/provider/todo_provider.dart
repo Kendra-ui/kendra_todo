@@ -25,7 +25,7 @@ class TodoProvider extends ChangeNotifier{
     notifyListeners();
  }
  
-int _todoId = 0; // Initial value for todoId, modify this as needed
+  late int _todoId; // Initial value for todoId, modify this as needed
 
   // Getter for todoId
   int get todoId => _todoId;
@@ -72,28 +72,22 @@ int? userIdFromTodo;
   return result;
  }
 
- Future addItems(int userId, int id, String description, String createdDate, String startTime, bool completed ) async {
+ Future<String> addItems( String description, String createdDate, String startTime, bool completed, int userId,) async {
   try {
-   final isadded =  await _dataBaseService.createTodo(db!, id, description, createdDate, startTime, completed, userId);
+   final isadded =  await _dataBaseService.createTodo( description, createdDate, startTime, completed, userId);
     // Assuming the addTodo method performs the addition of the task to the database
     if (isadded != null) {
-      await setUserIdForTodoId(id);
-      print('good');
-    } else {
+      print('$isadded');
+      return '';
+    } else { 
       print('no');
+      return 'fail';
     }
   } catch (e) {
     // Handle the error appropriately, e.g., log the error or show an error message
-    return 'Error adding task: $e';
-  }
+    print('Error adding task: $e');
+    return 'Error adding task';
 
-  // Refresh the list after adding the task
-  try {
-    String result = await getTasksOrderedByDate(userId);
-    return result;
-  } catch (e) {
-    // Handle the error from refreshing the list, if any
-    return 'Error fetching updated tasks: $e';
   }
 }
 
@@ -110,7 +104,11 @@ try {
     return result;
 }
 
-
+Future<void> userTask(int userId) async {
+  final task = await _dataBaseService.currentUserTaskFromTodoTable(db!, userId);
+  print('$task'); 
+  
+}
  }
  
 

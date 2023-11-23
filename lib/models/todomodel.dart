@@ -1,4 +1,3 @@
-import 'package:flutter/src/painting/text_style.dart';
 
 class TodoFields{
    final String title = 'title';
@@ -19,7 +18,7 @@ class Todo{
   String createdDate;
   bool completed;
 
-  Todo({ required this.title,required this.description, required this.startTime, required this.createdDate,  this.completed = false, required TextStyle style});
+  Todo({ required this.title,required this.description, required this.startTime, required this.createdDate,  this.completed = false,});
 
   Map<String, Object?> toJson() {
     return {

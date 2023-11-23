@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:kendra_todo/provider/todo_provider.dart';
 import 'package:kendra_todo/utils/custom_textfield/task/todo_list.dart';
 import 'package:kendra_todo/widgets/setting/logout.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class Info extends StatelessWidget {
 
-   const Info({super.key});
+    Info({super.key});
+
+  late TodoProvider todoProvider;
 
 
   @override
   Widget build(BuildContext context) {
+    todoProvider=context.read<TodoProvider>();
+
     return  Scaffold(
       body: SafeArea(
         child: Container(

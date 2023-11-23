@@ -433,32 +433,33 @@ class _TodolistState extends State<Todolist> {
                                     );
                               }else{ 
                             
-                                                   print("resullllll ");
+                            //print("resullllll ");
                                try {
-                                  final Map<String, dynamic>? currentUser = _userProvider.currentUser;
+                                final Map<String, dynamic>? currentUser = _userProvider.currentUser;
                                 if (currentUser != null) {
                                   
                                   final String fullname = currentUser['fullname'] ?? 'Full name not available';
-                                  final result = _todoProvider.addItems(context.read<UserProvider>().currentUser as int, context.read<TodoProvider>().todoId, _description.text.trim(), dateInput.text.trim(), timeInput.text.trim(), completed);
+                                    final int userId = currentUser['id'] ?? 0;
+                                  //final int id = _todoProvider.todoId;
+
+                                  String result = await  _todoProvider.addItems( _description.text.trim(), dateInput.text.trim(), timeInput.text.trim(), completed, userId,);
 
                                      print("resullllll $result ");
 
                                     // ignore: unrelated_type_equality_checks
-                                    if (result == 'OK') {
+                                    if (result.isNotEmpty) {
                                       print('added');
                                       _description.clear();
                                     }else{
-                                     // print('failed to add tak to  $fullname');
+                                    print('failed to add task to  $fullname');
                                     }
-                                }else{
-                                  print('Nos such user');
                                 }
-                               } catch (e) {
-                                 print('$e');
+                               } catch (e, stacktrace) {
+                                 print('$e, $stacktrace');
                                }
                          
                               }
-                    //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Info()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Info()));
                       
                           } 
                         , 

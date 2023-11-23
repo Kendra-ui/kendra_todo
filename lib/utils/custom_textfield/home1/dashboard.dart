@@ -20,6 +20,8 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
 late UserProvider userProvider;
 late TodoProvider todoProvider;
+late final List<Map<String, dynamic>> tasks;
+
 
   @override
   Widget build(BuildContext context) {
@@ -162,83 +164,43 @@ late TodoProvider todoProvider;
                 width: MediaQuery.of(context).size.width/1.1,
                 child: const Text('Incomplete Tasks', style: TextStyle(letterSpacing: 1, color: Colors.white, fontFamily: 'Poppins', fontSize: 14),)),
         
-              // Padding(
-              //           padding:  EdgeInsets.all(MediaQuery.of(context).size.height/100),
-              //           child: Container(
-              //             width: MediaQuery.of(context).size.width/1.1,
-              //             height: MediaQuery.of(context).size.height/13,
+              Padding(
+                        padding:  EdgeInsets.all(MediaQuery.of(context).size.height/100),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width/1.1,
+                          height: MediaQuery.of(context).size.height/13,
       
-              //             decoration:  BoxDecoration(
-              //               color: Colors.white,
-              //               borderRadius: BorderRadius.circular(5)
-              //             ),
-              //             child: 
-              //              Padding(
-              //               padding:  const EdgeInsets.only(top:8.0, left: 20),
-              //               child: Selector<TodoProvider, List<Map<String, dynamic>>?>(
-              //                 selector: (context, todoProvider) => todoProvider.todos,
-              //                 builder: (BuildContext context, List<Map<String, dynamic>>? todos, Widget? child ) {
+                          decoration:  BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5)
+                          ),
+                          child: Consumer<TodoProvider>(
+                          builder: (context, value, child){
+                            return  ListView.builder(
+                               itemCount: tasks.length,
+                                itemBuilder: (context, index) {
+                                  final task = tasks[index];
+                                  return ListTile(
+                                    title: const Text('Client Meeting'),
+                                    subtitle: Text(task['createdDate'] ?? 'No date'),
+                                  );});
+                          },
+                          ),)),
 
-              //                   if( todos != null){
-              //                   Map<String, dynamic> startTime = todos[0];
-              //                   Map<String, dynamic> createdDate = todos[0];
-
-              //                   return ListView.builder(
-              //                   itemCount: 10,
-              //                   itemBuilder: (BuildContext context, int index) {
-            
-              //                     return  Container(
-              //                     width: MediaQuery.of(context).size.width/1.1,
-              //                     height: MediaQuery.of(context).size.height/13,
-              
-              //                     decoration:  BoxDecoration(
-              //                 color: Colors.white,
-              //                 borderRadius: BorderRadius.circular(5)
-              //       ),
-              //               child: Padding(
-              //                 padding:  const EdgeInsets.only(top:8.0, left: 20),
-              //                 child: Row(
-              //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //                   crossAxisAlignment: CrossAxisAlignment.start,
-              //                   children: [
-                                 
-              //                      Padding(
-              //                       padding:  const EdgeInsets.only(right: 120),
-              //                       child: Column(
-              //                         crossAxisAlignment: CrossAxisAlignment.start,
-              //                         children: [
-              //                       const Text('Client Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
-              //                       Text(
-              //                     '$startTime | $createdDate' , style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1, fontFamily: 'Poppins'), // Extracting and displaying the current date
-              //                       ),
-              //                         ],
-              //                       ),
-              //                     ),
-              //                     Padding(
-              //                       padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
-              //                       child:GestureDetector(
-              //                         onTap: () {
-              //                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Info()));
-              //                         },
-              //                         child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,)
-              //                         ),)
+                           Padding(
+                            padding:  const EdgeInsets.only(top:8.0, left: 20),
+                            child: 
+                                  Padding(
+                                    padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
+                                    child:GestureDetector(
+                                      onTap: () {
+                                       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Info()));
+                                      },
+                                      child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,)
+                                      ),)
                                   
-              //                   ],
-              //                 ),
-              //                  ),
-              //                 );
-              //                   } 
-              //                  );
-                               
-                               
-              //                 }
-              //               return const Text('error');
-
-              //                 }
-      
-              //               ))
-              //               ),
-              //             ),
+                       ,
+                          ),
                         
                      
         

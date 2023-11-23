@@ -1,27 +1,16 @@
 
 // ignore_for_file: avoid_print
+import 'dart:developer';
+
 import 'package:kendra_todo/services/database_interface.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DataBaseService  implements DataBaseInterface{
 
-  //  late String username;
-  //  late String todoTableName;
-
-  // DataBaseService() {
-  //   initializeTableName();
-  // }
-
-  //  initializeTableName()  {
-  //   username = '';
-  //   todoTableName = '${username}todo';
-  // }
-
-  
 
     @override
-  Future<Database?> initialize()async {
+  Future<Database> initialize() async {
    //gets the default db location
     final databasePath = await getDatabasesPath();
   
@@ -31,7 +20,30 @@ class DataBaseService  implements DataBaseInterface{
 
     return await openDatabase(path, 
     version: 1,
-    onCreate: createDatabase,
+    onCreate: ((db, version) async{
+      await db.execute('''
+      CREATE TABLE Signup (
+        userId INTEGER PRIMARY KEY,
+        fullname TEXT NOT NULL,
+        email TEXT NOT NULL ,
+        password TEXT NOT NULL,
+        UNIQUE(fullname, email)
+      )
+    ''');
+
+    await db.execute('''
+      CREATE TABLE todo (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        description TEXT NOT NULL,
+        createdDate TEXT NOT NULL,
+        startTime TEXT NOT NULL,
+        completed INTEGER NOT NULL CHECK (completed IN (0, 1)),
+        userId INTEGER NOT NULL,
+        FOREIGN KEY(userId)  REFERENCES Signup(userId) 
+        )
+      '''); 
+
+    }),
     onConfigure: _onConfigure);
     
   }
@@ -52,30 +64,8 @@ class DataBaseService  implements DataBaseInterface{
       
   }
 
-   Future createDatabase(Database db, int version) async {
-    //here, we run the queries
-    await db.execute('''
-      CREATE TABLE Signup (
-        userId INTEGER PRIMARY KEY,
-        fullname TEXT NOT NULL,
-        email TEXT NOT NULL ,
-        password TEXT NOT NULL,
-        UNIQUE(fullname, email)
-      )
-    ''');
 
-    await db.execute('''
-      CREATE TABLE todo (
-        id INTEGER PRIMARY KEY,
-        description TEXT NOT NULL,
-        createdDate TEXT NOT NULL,
-        startTime TEXT NOT NULL,
-        completed INTEGER NOT NULL CHECK (completed IN(0,1)),
-        userId INTEGER NOT NULL,
-        FOREIGN KEY(userId)  REFERENCES Signup(userId) 
-      '''); 
 
-  }
 // this is to permit the foreign key to work
 Future _onConfigure(Database db) async {
   await db.execute('PRAGMA foreign_keys = ON');
@@ -137,16 +127,14 @@ Future<Map<String, dynamic>?> fetchData(Database db,String email, String passwor
 
 @override
   Future<bool> signIn(String email, String password) async {
-    final Database? db = await initialize();
-      if (db != null) {
-      final emailAndPassword = await fetchData(db, email, password);
-      
+    final Database db = await initialize();
+    final emailAndPassword = await fetchData(db, email, password);
+    
 
-      if (emailAndPassword != null && emailAndPassword['password'] == password) {
-        return true;
-      }
+    if (emailAndPassword != null && emailAndPassword['password'] == password) {
+      return true;
     }
-
+  
     return false;
   }
 
@@ -205,25 +193,27 @@ Future<bool> checkIfUserExists(Database database, String fullname, String email)
   }
 
   @override
-  Future createTodo(Database db,int id,String description,String createdDate,String startTime,bool completed, int userId) async {
+  Future createTodo(String description,String createdDate,String startTime,bool completed, int userId) async {
     
     try{
       final db = await initialize();
-     await db!.insert('todo',
+   
+       final set = await db.insert('todo',
       {
-        'id': id,
+       
         'description': description,
         'createdDate': createdDate,
         'startTime': startTime,
         'completed': completed ? 1 : 0,
         'userId': userId,
     }
-        );
+    );
+   return ' yyyyyy $set';
+        
       
-      return 'id';
   } catch (e) {
     print('Error adding todo to database: $e');
-    return false;
+    
   }
     
   }
@@ -245,8 +235,8 @@ Future<bool> checkIfUserExists(Database database, String fullname, String email)
     whereArgs: [id, userId]);
   }
 
-  Future<List<Map<String, dynamic>>?> fetchDataFromTodoTable(Database db, int userId) async {
-    print('jjjkjkjj ');
+  @override
+  Future<List<Map<String, dynamic>>?> currentUserTaskFromTodoTable(Database db, int userId) async {
 
   try {
     final List<Map<String, dynamic>> result = await db.query(
@@ -260,10 +250,7 @@ print('jjjkjkjj $result');
     print('Error fetching data from todo table: $e');
   }
 
-  return null; // Returns null if there's an issue with the database or query
-}
-// get userId from the todo table
-  // ... Other code
+  return null; }
 
   Future<int?> getUserIdForTodoId(Database db, int id) async {
     
@@ -278,6 +265,14 @@ print('jjjkjkjj $result');
     }
     return null;
   }
+
+Future fetchTodoData() async{
+   final  db = await initialize();
+   
+   final queryResult = await db.query('todo');
+   inspect(queryResult);
+}
+
 }
 
 

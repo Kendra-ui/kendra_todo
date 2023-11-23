@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/provider/add_provider.dart';
-import 'package:kendra_todo/provider/todo_provider.dart';
 import 'package:kendra_todo/utility/data_helper.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/texts/sign_up.dart';
