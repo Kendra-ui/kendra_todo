@@ -46,9 +46,9 @@ class TodoProvider extends ChangeNotifier{
   return result;
  }
 
- Future<String> addItems( String title, String description, String createdDate, String startTime, bool completed, int userId,) async {
+ Future<String> addItems(String description, String createdDate, String startTime, bool completed, int userId,) async {
   try {
-   final isadded =  await _dataBaseService.createTodo(title, description, createdDate, startTime, completed, userId);
+   final isadded =  await _dataBaseService.createTodo( description, createdDate, startTime, completed, userId);
     // Assuming the addTodo method performs the addition of the task to the database
     if (isadded != null) {
       await fetchTodosFromDatabase(userId);

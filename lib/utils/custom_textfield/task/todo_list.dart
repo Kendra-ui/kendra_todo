@@ -27,6 +27,7 @@ class _TodolistState extends State<Todolist> {
 
   late UserProvider _userProvider;
   late TodoProvider _todoProvider;
+  DataBaseService helper = DataBaseService();
   
           
       bool completed = false;
@@ -35,6 +36,9 @@ class _TodolistState extends State<Todolist> {
   @override
   void initState() {
     super.initState();
+    helper.initialize();
+    helper.fetchTodoData();
+
   }
   
   @override
@@ -155,7 +159,7 @@ class _TodolistState extends State<Todolist> {
                                               final todo = todos[index];
                                                 return ListTile(
                                                   title: const Text('Client Meeting', style: TextStyle(color: Colors.black, fontFamily: 'Poppins'),),
-                                                  subtitle: Text(' ${todo['createdDate']} ${todo['startTime']} |'),
+                                                  subtitle: Text(' ${todo['createdDate']} | ${todo['startTime']} '),
                                                   trailing: Icon(Icons.arrow_forward_ios, color: Colors.blue.shade400,),
                                         );
                                         }
@@ -391,54 +395,54 @@ class _TodolistState extends State<Todolist> {
                             )
                           ),
                           onPressed: () async{
-                            if (_description.text.isEmpty) {
-                                       ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        behavior: SnackBarBehavior.floating,
-                                        margin: EdgeInsets.only(
-                                          bottom: MediaQuery.of(context).size.height - 100,
-                                          left: 10,
-                                          right: 10,
-                                        ),
-                                        content: const Text('Enter description'),
-                                      ),
-                                    );
-                              }else{ 
+                            // if (_description.text.isEmpty) {
+                            //            ScaffoldMessenger.of(context).showSnackBar(
+                            //           SnackBar(
+                            //             behavior: SnackBarBehavior.floating,
+                            //             margin: EdgeInsets.only(
+                            //               bottom: MediaQuery.of(context).size.height - 100,
+                            //               left: 10,
+                            //               right: 10,
+                            //             ),
+                            //             content: const Text('Enter description'),
+                            //           ),
+                            //         );
+                            //   }else{ 
                             
-                            //print("resullllll ");
-                               try {
-                                final Map<String, dynamic>? currentUser = _userProvider.currentUser;
-                                if (currentUser != null) {
+                            // //print("resullllll ");
+                            //    try {
+                            //     final Map<String, dynamic>? currentUser = _userProvider.currentUser;
+                            //     if (currentUser != null) {
                                   
-                                  final String fullname = currentUser['fullname'] ?? 'Full name not available';
-                                    final int userId = currentUser['id'] ?? 0;
-                                  //final int id = _todoProvider.todoId;
-                                  final String createdDate = dateInput.text;
-                                  final  String startTime= timeInput.text;
-                                  final String description = _description.text;
-                                  final String title = _title.text;
+                            //       final String fullname = currentUser['fullname'] ?? 'Full name not available';
+                            //         final int userId = currentUser['id'] ?? 0;
+                            //       //final int id = _todoProvider.todoId;
+                            final String createdDate = dateInput.text;
+                            final  String startTime= timeInput.text;
+                            final String description = _description.text;
+                            final String title = _title.text;
     
                              
-                                  String result = await  _todoProvider.addItems(_title.text.trim(), _description.text.trim(), dateInput.text.trim(), timeInput.text.trim(), completed, userId,);
+                            //       String result = await  _todoProvider.addItems( _description.text.trim(), dateInput.text.trim(), timeInput.text.trim(), completed, userId,);
 
-                                     print("resullllll $result ");
+                            //          print("resullllll $result ");
 
-                                    // ignore: unrelated_type_equality_checks
-                                    if (result.isNotEmpty) {
+                            //         // ignore: unrelated_type_equality_checks
+                            //         if (result.isNotEmpty) {
                                         
-                                      _description.clear();
-                                      _title.clear();
+                            //           _description.clear();
+                            //           _title.clear();
                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>  Info( startTime: startTime, createdDate:  createdDate, title: title, description: description,)));
 
-                                    }else{
-                                    print('failed to add task to  $fullname');
-                                    }
-                                }
-                               } catch (e) {
-                                 print('$e');
-                               }
+                            //         }else{
+                            //         print('failed to add task to  $fullname');
+                            //         }
+                            //     }
+                            //    } catch (e) {
+                            //      print('$e');
+                            //    }
                          
-                              }
+                            //   }
                       
                           } 
                         , 

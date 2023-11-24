@@ -34,7 +34,6 @@ class DataBaseService  implements DataBaseInterface{
     await db.execute('''
       CREATE TABLE todo (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT NOT NULL,
         description TEXT NOT NULL,
         createdDate TEXT NOT NULL,
         startTime TEXT NOT NULL,
@@ -45,10 +44,10 @@ class DataBaseService  implements DataBaseInterface{
       '''); 
 
     }),
-    onConfigure: _onConfigure);
+    onConfigure: _onConfigure,
+    );
     
   }
-
 
   @override
   Future createTable(Database database,Map<String, Object?> column)async{
@@ -194,14 +193,14 @@ Future<bool> checkIfUserExists(Database database, String fullname, String email)
   }
 
   @override
-  Future createTodo(String title,String description,String createdDate,String startTime,bool completed, int userId) async {
+  Future createTodo( String description,String createdDate,String startTime,bool completed, int userId) async {
     
     try{
       final db = await initialize();
    
        final set = await db.insert('todo',
       {
-        'title': title,
+        
         'description': description,
         'createdDate': createdDate,
         'startTime': startTime,

@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:kendra_todo/provider/add_provider.dart';
@@ -9,7 +9,7 @@ import 'package:kendra_todo/widgets/setting/logout.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class Info extends StatelessWidget {
+class Info extends StatefulWidget {
 
     final String description;
     final String startTime;
@@ -19,19 +19,37 @@ class Info extends StatelessWidget {
 
    Info({Key? key, required this.title, required this.description, required this.startTime, required this.createdDate}) : super(key: key);
 
+  @override
+  State<Info> createState() => _InfoState();
+}
+
+class _InfoState extends State<Info> {
   final dateInput = TextEditingController();
+
   final timeInput = TextEditingController();
+
   final _description = TextEditingController();
-  final _title = TextEditingController();
+
+  //final _title = TextEditingController();
 
   late UserProvider _userProvider;
+
   late TodoProvider _todoProvider;
-  
-          
+
       bool completed = false;
+      
+        
+
+    @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _userProvider = UserProvider();
+  }
   @override
   Widget build(BuildContext context) {
-
+  _userProvider=context.read<UserProvider>();
+   _todoProvider=context.read<TodoProvider>();
     return  Scaffold(
       body: SafeArea(
         child: Container(
@@ -72,10 +90,10 @@ class Info extends StatelessWidget {
                     
                   SizedBox(height:MediaQuery.of(context).size.height/30),
                   
-                   Row(
+                    Row(
                     children: [
-                      Text(title, style: const TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 2, fontSize: 18),),
-                      const Padding(
+                      Text(widget.title, style:  const TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 2, fontSize: 18),),
+                       const Padding(
                         padding: EdgeInsets.only(left:8.0),
                         child: Icon(Icons.note_alt_outlined, color: Colors.white,),
                       ),
@@ -86,9 +104,9 @@ class Info extends StatelessWidget {
                    Row(
                     children: [
                       const Icon(Icons.calendar_month, color: Colors.white, size: 15,),
-                      Text('$createdDate|',style: const TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 2, fontSize: 12), ),
+                      Text('${widget.createdDate}|',style: const TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 2, fontSize: 12), ),
                       const Icon(Icons.timelapse, color: Colors.white, size: 15,),
-                      Text(startTime,style: const TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 2, fontSize: 12),)
+                      Text(widget.startTime,style: const TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 2, fontSize: 12),)
                     ],
                   ),
                    Padding(
@@ -100,7 +118,7 @@ class Info extends StatelessWidget {
                    SizedBox(
                      width: MediaQuery.of(context).size.width/1,
                      height: MediaQuery.of(context).size.height/4,
-                     child:  Text(description
+                     child:  Text(widget.description
                      , style: const TextStyle(fontFamily: "Poppins", fontSize: 14, color: Colors.white),),
                    ),
                   
@@ -123,22 +141,50 @@ class Info extends StatelessWidget {
                           )
                         ),
                         onPressed: () async{
-                      
-                          final Map<String, dynamic>? currentUser = _userProvider.currentUser;
+                             
+                            
+                            //print("resullllll ");
+                               try {
+                                final Map<String, dynamic>? currentUser = _userProvider.currentUser;
                                 if (currentUser != null) {
                                   
                                   final String fullname = currentUser['fullname'] ?? 'Full name not available';
                                     final int userId = currentUser['id'] ?? 0;
-                                    
+                                    final String createdDate = dateInput.text;
+                                    final  String startTime= timeInput.text;
                              
-                                  String result = await  _todoProvider.addItems(_title.text.trim(), _description.text.trim(), dateInput.text.trim(), timeInput.text.trim(), completed, userId,);
+                                  String result = await  _todoProvider.addItems( _description.text.trim(), dateInput.text.trim(), timeInput.text.trim(), completed, userId,);
 
                                      print("resullllll $result ");
-                                  // ignore: use_build_context_synchronously
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>  Dashboard( startTime: startTime, createdDate:  createdDate,)));
 
-
-                        }}, 
+                                    // ignore: unrelated_type_equality_checks
+                                    if (result.isNotEmpty) {
+                                        
+                                       ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        behavior: SnackBarBehavior.floating,
+                                        margin: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context).size.height - 100,
+                                          left: 10,
+                                          right: 10,
+                                        ),
+                                        content: const Text('Successfully added'),
+                                      ),
+                                    );
+                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => Todolist(startTime: startTime, createdDate: createdDate))));
+                                    }else{
+                                    print('failed to add task to  $fullname');
+                                    }
+                                }
+                               } catch (e) {
+                                 print('$e');
+                               }
+                         
+                              
+                      
+                          } 
+                        , 
+                           
                         child: const Padding(
                           padding:  EdgeInsets.only(top:8.0),
                           child:  Column(
@@ -215,13 +261,3 @@ class Info extends StatelessWidget {
     );
   }
 }
-
-// _todoProvider.addItems(
-//                                         userId: 1,
-//                                         title: 'Client meeting',
-//                                         description: 'Description',
-//                                         startTime: '08:00 AM',
-//                                         createdDate: '2023-11-20',
-//                                         completed: false,
-//                                     );
-                                  // return null
