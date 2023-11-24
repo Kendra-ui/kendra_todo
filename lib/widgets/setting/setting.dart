@@ -45,7 +45,7 @@ class _Settings extends State<Settings> {
                           child: FloatingActionButton(
                       backgroundColor: Colors.white,
                       onPressed: () { 
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Info()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Info(description: '', startTime: '', createdDate: '', title: '',)));
                       
                        },
                        child: const Icon(Icons.arrow_back_ios, color: Colors.blue, size: 20,),)

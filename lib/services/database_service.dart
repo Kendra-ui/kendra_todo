@@ -34,6 +34,7 @@ class DataBaseService  implements DataBaseInterface{
     await db.execute('''
       CREATE TABLE todo (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
         description TEXT NOT NULL,
         createdDate TEXT NOT NULL,
         startTime TEXT NOT NULL,
@@ -193,14 +194,14 @@ Future<bool> checkIfUserExists(Database database, String fullname, String email)
   }
 
   @override
-  Future createTodo(String description,String createdDate,String startTime,bool completed, int userId) async {
+  Future createTodo(String title,String description,String createdDate,String startTime,bool completed, int userId) async {
     
     try{
       final db = await initialize();
    
        final set = await db.insert('todo',
       {
-       
+        'title': title,
         'description': description,
         'createdDate': createdDate,
         'startTime': startTime,
@@ -229,42 +230,39 @@ Future<bool> checkIfUserExists(Database database, String fullname, String email)
 
   //function which permits to delete a taskfrom the database
   @override
-  Future<int> deleteTodo(int id, Database db, int userId) async{
-    return db.delete('todo',
+  Future deleteTodo(int id, Database db, int userId) async{
+    try {
+      final delete = db.delete('todo',
     where: '$id  AND userId = ?',
     whereArgs: [id, userId]);
+    return delete;
+    } 
+    catch (e) {
+      print('$e');
+      return null;
+    }
   }
 
   @override
-  Future<List<Map<String, dynamic>>?> currentUserTaskFromTodoTable(Database db, int userId) async {
+  Future currentUserTaskFromTodoTable( int userId) async {
 
   try {
+          final db = await initialize();
+
     final List<Map<String, dynamic>> result = await db.query(
       'todo', 
       where: 'userId = ?', 
       whereArgs: [userId],
     );
-print('jjjkjkjj $result');
     return result; // Returns the list of data fetched
   } catch (e) {
     print('Error fetching data from todo table: $e');
-  }
-
-  return null; }
-
-  Future<int?> getUserIdForTodoId(Database db, int id) async {
-    
-    final List<Map<String, dynamic>> result = await db.query(
-      'todo',
-      columns: ['userId'],
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-    if (result.isNotEmpty) {
-      return result.first['userId'] as int?;
-    }
     return null;
   }
+
+  }
+
+
 
 Future fetchTodoData() async{
    final  db = await initialize();

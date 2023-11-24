@@ -21,8 +21,8 @@ class _NavigationBarState extends State<NavigationBar> {
   int _currentIndex = 0;
   late final List<Widget> screen = [
 
-    const Dashboard(),
-     const Todolist(),
+     Dashboard(createdDate: '', startTime: '',),
+    const Todolist(startTime: '', createdDate: '',),
      const Calendar(),
      const Logout(),
     

@@ -25,32 +25,6 @@ class TodoProvider extends ChangeNotifier{
     notifyListeners();
  }
  
-  late int _todoId; // Initial value for todoId, modify this as needed
-
-  // Getter for todoId
-  int get todoId => _todoId;
-
-  // Method to set todoId
-  void setTodoId(int id) {
-    _todoId = id;
-    // Notify listeners if applicable
-     notifyListeners();
-     }
-
-int? userIdFromTodo;
-
-  Future<void> setUserIdForTodoId(int id) async {
-    try {
-      final userId = await _dataBaseService.getUserIdForTodoId(db!,id);
-    if (userId != null) {
-      userIdFromTodo = userId;
-      // Notify listeners or perform any other necessary actions after setting the userId
-      notifyListeners();
-    }
-    } catch (e) {
-      print('$e');
-    }
-  }
 
  Future<String> getTasksOrderedByDate(int userId) async {
   try {
@@ -72,13 +46,14 @@ int? userIdFromTodo;
   return result;
  }
 
- Future<String> addItems( String description, String createdDate, String startTime, bool completed, int userId,) async {
+ Future<String> addItems( String title, String description, String createdDate, String startTime, bool completed, int userId,) async {
   try {
-   final isadded =  await _dataBaseService.createTodo( description, createdDate, startTime, completed, userId);
+   final isadded =  await _dataBaseService.createTodo(title, description, createdDate, startTime, completed, userId);
     // Assuming the addTodo method performs the addition of the task to the database
     if (isadded != null) {
-      print('$isadded');
-      return '';
+      await fetchTodosFromDatabase(userId);
+      
+      return 'success';
     } else { 
       print('no');
       return 'fail';
@@ -104,11 +79,13 @@ try {
     return result;
 }
 
-Future<void> userTask(int userId) async {
-  final task = await _dataBaseService.currentUserTaskFromTodoTable(db!, userId);
-  print('$task'); 
+Future fetchTodosFromDatabase(int userId) async {
   
-}
+      
+      
+      notifyListeners();
+      
+  }
  }
  
 

@@ -208,7 +208,7 @@ class _SignInState extends State<SignIn> {
                           if (signInSuccessful) {
                             // Navigate to the home screen or perform necessary actions upon successful sign-in
                           // ignore: use_build_context_synchronously
-                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Dashboard()));
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Dashboard(createdDate: '', startTime: '',)));
 
                           } else {
 

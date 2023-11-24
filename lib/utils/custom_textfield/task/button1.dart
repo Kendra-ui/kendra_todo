@@ -164,7 +164,7 @@ class Button1 extends StatelessWidget {
                           ),
                           onPressed: (){
                             
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Info()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Info(description: '', startTime: '', createdDate: '', title: '',)));
 
                           }, 
                           child: const Text('create', style: TextStyle(fontFamily: 'Poppins', letterSpacing: 1, fontSize: 15, color: Colors.white),)),

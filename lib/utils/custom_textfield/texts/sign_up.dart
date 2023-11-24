@@ -227,7 +227,7 @@ class _SignUp extends State<SignUp> {
                                   isLoading = true;
                                 });
                                 
-                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Dashboard()));
+                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Dashboard(createdDate: '', startTime: '',)));
 
                                 });
                                

@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 // ignore: must_be_immutable
 class Todolist extends StatefulWidget {
 
-   const Todolist({super.key});
+   const Todolist({super.key, required String startTime, required String createdDate});
 
   @override
   State<Todolist> createState() => _TodolistState();
@@ -23,20 +23,17 @@ class _TodolistState extends State<Todolist> {
   final dateInput = TextEditingController();
   final timeInput = TextEditingController();
   final _description = TextEditingController();
+  final _title = TextEditingController();
+
   late UserProvider _userProvider;
   late TodoProvider _todoProvider;
-  final DataBaseService dataBaseService = DataBaseService();
-  DatabaseHelper databaseHelper = DatabaseHelper();
+  
           
       bool completed = false;
 
 
   @override
   void initState() {
-   // _todoProvider.dataBaseInitialize();
-   databaseHelper = DatabaseHelper();
-     databaseHelper.initialize();
-    DatabaseHelper().fetchTodoData();
     super.initState();
   }
   
@@ -121,7 +118,7 @@ class _TodolistState extends State<Todolist> {
               SizedBox(height: MediaQuery.of(context).size.height/30,),
                GestureDetector(
                  onTap: (){
-                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  const Dashboard()));
+                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>   Dashboard(createdDate: '', startTime: '',)));
                  },
                  child: 
                   SizedBox(
@@ -130,86 +127,49 @@ class _TodolistState extends State<Todolist> {
                  ),
               SizedBox(height: MediaQuery.of(context).size.height/30,),
 
-              //  Padding(
-              //           padding:  EdgeInsets.all(MediaQuery.of(context).size.height/100),
-              //           child: Container(
-              //             width: MediaQuery.of(context).size.width/1.1,
-              //             height: MediaQuery.of(context).size.height/13,
+             Padding(
+                        padding:  EdgeInsets.all(MediaQuery.of(context).size.height/100),
+                        child:  SingleChildScrollView(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width/1.1,
+                          height: MediaQuery.of(context).size.height/10,
       
-              //             decoration:  BoxDecoration(
-              //               color: Colors.white,
-              //               borderRadius: BorderRadius.circular(5)
-              //             ),
-              //             child: 
-              //              Padding(
-              //               padding:  const EdgeInsets.only(top:8.0, left: 20),
-              //               child: Selector<TodoProvider, List<Map<String, dynamic>>?>(
-              //                 selector: (context, todoProvider) => todoProvider.todos,
-              //                 builder: (BuildContext context, List<Map<String, dynamic>>? todos, Widget? child ) {
+                          decoration:  BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5)
+                          ),
+                            child: Padding(
+                              padding:  const EdgeInsets.only(bottom:10.0, left: 20),
+                              child: Column(
+                                
+                                children: [
+                                  Consumer<TodoProvider>(
+                                    builder: (context, todoProvider, child){
+                                      final todos = todoProvider.todos;
+                                                      
+                                      return   Expanded(
+                                        child: ListView.builder(
+                                            shrinkWrap: true,
+                                            itemCount: todos.length,
+                                            itemBuilder: (context, index) {
+                                              final todo = todos[index];
+                                                return ListTile(
+                                                  title: const Text('Client Meeting', style: TextStyle(color: Colors.black, fontFamily: 'Poppins'),),
+                                                  subtitle: Text(' ${todo['createdDate']} ${todo['startTime']} |'),
+                                                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.blue.shade400,),
+                                        );
+                                        }
+                                                                        ),
+                                      );
+                                    },
+                                   
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),),
 
-              //                   if( todos != null){
-              //                   Map<String, dynamic> startTime = todos[0];
-              //                   Map<String, dynamic> createdDate = todos[0];
-
-              //                   return ListView.builder(
-              //                   itemCount: 10,
-              //                   itemBuilder: (BuildContext context, int index) {
-            
-              //                     return  Container(
-              //                     width: MediaQuery.of(context).size.width/1.1,
-              //                     height: MediaQuery.of(context).size.height/13,
-              
-              //                     decoration:  BoxDecoration(
-              //                 color: Colors.white,
-              //                 borderRadius: BorderRadius.circular(5)
-              //       ),
-              //               child: Padding(
-              //                 padding:  const EdgeInsets.only(top:8.0, left: 20),
-              //                 child: Row(
-              //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //                   crossAxisAlignment: CrossAxisAlignment.start,
-              //                   children: [
-                                 
-              //                      Padding(
-              //                       padding:  const EdgeInsets.only(right: 120),
-              //                       child: Column(
-              //                         crossAxisAlignment: CrossAxisAlignment.start,
-              //                         children: [
-              //                       const Text('Client Meeting', style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold,letterSpacing: 1),),
-              //                       Text(
-              //                     '$startTime | $createdDate' , style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1, fontFamily: 'Poppins'), // Extracting and displaying the current date
-              //                       ),
-              //                         ],
-              //                       ),
-              //                     ),
-              //                     Padding(
-              //                       padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
-              //                       child:GestureDetector(
-              //                         onTap: () {
-              //                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Info()));
-              //                         },
-              //                         child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,)
-              //                         ),)
-                                  
-              //                   ],
-              //                 ),
-              //                  ),
-              //                 );
-              //                   } 
-              //                  );
-                               
-                               
-              //                 }
-              //               return const Text('error');
-
-              //                 }
-      
-              //               ))
-              //               ),
-              //             ),
-
-              
-             
               SizedBox(
                 height: MediaQuery.of(context).size.height/10,),
               Padding(
@@ -246,16 +206,30 @@ class _TodolistState extends State<Todolist> {
                             borderRadius: BorderRadius.circular(5)
                           ),
                           child: 
-                          const Padding(
-                            padding:  EdgeInsets.only(top:3.0, left: 20),
+                           Padding(
+                            padding:  const EdgeInsets.only(top:3.0, left: 20),
                             child: Row(
                               children: [
-                            Icon(Icons.check_box_outlined, color: Colors.white, size: 20,),
+                            const Icon(Icons.check_box_outlined, color: Colors.white, size: 20,),
                             Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text('task', style: TextStyle(fontFamily: 'Poppins', fontSize: 16,letterSpacing: 1,color: Colors.white),),
-                            ),
-                              ],
+                              padding: const EdgeInsets.all(8.0),
+                              child:  SizedBox(
+                                  height: MediaQuery.of(context).size.height/5,
+                                  width: MediaQuery.of(context).size.width/2,
+                                  child:  TextField(
+                                    controller: _title,
+                                    decoration:  const InputDecoration(
+                                      labelText: "Title...",
+                                      labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins', letterSpacing: 1),
+                                      filled: true,
+                                      fillColor: Color.fromRGBO(5, 36, 62, 1),
+                                       
+                                    ),
+                                  style: const TextStyle(fontSize: 15, color: Colors.white, fontFamily: "Poppins"),
+                                  ),
+                                ),
+                                      ),
+                                        ],
                             ),
                           ),
                         ),
@@ -333,16 +307,14 @@ class _TodolistState extends State<Todolist> {
                           child: 
                              TextField(
                               controller: timeInput,
+                              readOnly: true,
                               onTap:  () async {
                                 TimeOfDay? pickedTime = await showTimePicker(
                                   context: context, initialTime: TimeOfDay.now());
 
                                   if (pickedTime != null) {
-                                    print(pickedTime.format(context));
-                                    DateTime parsedTime = DateFormat.jm().parse(pickedTime.format(context).toString());
-                                    print(parsedTime);
 
-                                    String formattedTime = DateFormat('HH:mm:ss').format(parsedTime);
+                                    String formattedTime = pickedTime.format(context);
                                     setState(() {
                                       timeInput.text = formattedTime;
                                     });
@@ -441,25 +413,32 @@ class _TodolistState extends State<Todolist> {
                                   final String fullname = currentUser['fullname'] ?? 'Full name not available';
                                     final int userId = currentUser['id'] ?? 0;
                                   //final int id = _todoProvider.todoId;
-
-                                  String result = await  _todoProvider.addItems( _description.text.trim(), dateInput.text.trim(), timeInput.text.trim(), completed, userId,);
+                                  final String createdDate = dateInput.text;
+                                  final  String startTime= timeInput.text;
+                                  final String description = _description.text;
+                                  final String title = _title.text;
+    
+                             
+                                  String result = await  _todoProvider.addItems(_title.text.trim(), _description.text.trim(), dateInput.text.trim(), timeInput.text.trim(), completed, userId,);
 
                                      print("resullllll $result ");
 
                                     // ignore: unrelated_type_equality_checks
                                     if (result.isNotEmpty) {
-                                      print('added');
+                                        
                                       _description.clear();
+                                      _title.clear();
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>  Info( startTime: startTime, createdDate:  createdDate, title: title, description: description,)));
+
                                     }else{
                                     print('failed to add task to  $fullname');
                                     }
                                 }
-                               } catch (e, stacktrace) {
-                                 print('$e, $stacktrace');
+                               } catch (e) {
+                                 print('$e');
                                }
                          
                               }
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Info()));
                       
                           } 
                         , 

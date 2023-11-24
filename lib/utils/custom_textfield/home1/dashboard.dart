@@ -8,20 +8,16 @@ import 'package:kendra_todo/utils/custom_textfield/texts/sign_up.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class Dashboard extends StatefulWidget {
+class Dashboard extends StatelessWidget {
     
+final String createdDate;
+  final String startTime;
 
-   const Dashboard({super.key});
+    Dashboard({super.key, required this.createdDate, required this.startTime});
 
-  @override
-  State<Dashboard> createState() => _DashboardState();
-}
-
-class _DashboardState extends State<Dashboard> {
 late UserProvider userProvider;
-late TodoProvider todoProvider;
-late final List<Map<String, dynamic>> tasks;
 
+late TodoProvider todoProvider;
 
   @override
   Widget build(BuildContext context) {
@@ -166,44 +162,46 @@ late final List<Map<String, dynamic>> tasks;
         
               Padding(
                         padding:  EdgeInsets.all(MediaQuery.of(context).size.height/100),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width/1.1,
-                          height: MediaQuery.of(context).size.height/13,
+                        child:  SingleChildScrollView(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width/1.1,
+                          height: MediaQuery.of(context).size.height/10,
       
                           decoration:  BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(5)
                           ),
-                          child: Consumer<TodoProvider>(
-                          builder: (context, value, child){
-                            return  ListView.builder(
-                               itemCount: tasks.length,
-                                itemBuilder: (context, index) {
-                                  final task = tasks[index];
-                                  return ListTile(
-                                    title: const Text('Client Meeting'),
-                                    subtitle: Text(task['createdDate'] ?? 'No date'),
-                                  );});
-                          },
-                          ),)),
-
-                           Padding(
-                            padding:  const EdgeInsets.only(top:8.0, left: 20),
-                            child: 
-                                  Padding(
-                                    padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
-                                    child:GestureDetector(
-                                      onTap: () {
-                                       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Info()));
-                                      },
-                                      child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,)
-                                      ),)
-                                  
-                       ,
+                            child: Padding(
+                              padding:  const EdgeInsets.only(bottom:10.0, left: 20),
+                              child: Column(
+                                
+                                children: [
+                                  Consumer<TodoProvider>(
+                                    builder: (context, todoProvider, child){
+                                      final todos = todoProvider.todos;
+                                                      
+                                      return   Expanded(
+                                        child: ListView.builder(
+                                            shrinkWrap: true,
+                                            itemCount: todos.length,
+                                            itemBuilder: (context, index) {
+                                              final todo = todos[index];
+                                                return ListTile(
+                                                  title: const Text('Client Meeting'),
+                                                  subtitle: Text(' ${todo['createdDate']} ${todo['startTime']} |'),
+                                                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.blue.shade400,),
+                                        );
+                                        }
+                                                                        ),
+                                      );
+                                    },
+                                   
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                        
-                     
-        
+                        ),),
       
                SizedBox(height: MediaQuery.of(context).size.height/30,),
                       
@@ -287,7 +285,7 @@ late final List<Map<String, dynamic>> tasks;
                                   padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
                                   child: GestureDetector(
                                     onTap: () {
-                                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Todolist()));
+                                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Todolist(startTime: '', createdDate: '',)));
                                     },
                                     child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,)
                                     ),
