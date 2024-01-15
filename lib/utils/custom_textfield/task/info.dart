@@ -5,7 +5,6 @@ import 'package:kendra_todo/provider/add_provider.dart';
 import 'package:kendra_todo/provider/todo_provider.dart';
 import 'package:kendra_todo/utils/custom_textfield/home1/dashboard.dart';
 import 'package:kendra_todo/utils/custom_textfield/task/todo_list.dart';
-import 'package:kendra_todo/widgets/setting/logout.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
