@@ -6,8 +6,6 @@ import 'package:provider/provider.dart';
 import 'provider/add_provider.dart';
 
 void main()  {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await DatabaseHelper.instance.database; // Initialize the database
   
   runApp(const MyApp());
 }
@@ -74,15 +72,7 @@ class MyApp extends StatefulWidget{
   }
   
   class _HomepageState extends State<Homepage> with WidgetsBindingObserver{
-//     DatabaseHelper _databaseHelper = DatabaseHelper();
-//     Database datatBaseInstane;
 
-// @override
-//   void initState() {
-//      WidgetsFlutterBinding.ensureInitialized();
-//    datatBaseInstane =_databaseHelper.initialize();
-//     super.initState();
-//   }
   @override
   Widget build(BuildContext context) {
 

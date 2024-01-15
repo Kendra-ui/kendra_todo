@@ -17,7 +17,7 @@ class Info extends StatefulWidget {
     final String title;
 
 
-   Info({Key? key, required this.title, required this.description, required this.startTime, required this.createdDate}) : super(key: key);
+   const Info({Key? key, required this.title, required this.description, required this.startTime, required this.createdDate}) : super(key: key);
 
   @override
   State<Info> createState() => _InfoState();
@@ -42,7 +42,6 @@ class _InfoState extends State<Info> {
 
     @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _userProvider = UserProvider();
   }
@@ -70,17 +69,15 @@ class _InfoState extends State<Info> {
             padding:   EdgeInsets.all(MediaQuery.of(context).size.width/15),
             child: Consumer<TodoProvider>(
               builder: (context, todoProvider, child){
-                  final todos = todoProvider.todos;
               return Column(
                 children: [
                   SizedBox(height:MediaQuery.of(context).size.height/20),
-                  
                    Row(
                     children: [
                       GestureDetector(
                         child: const Icon(Icons.arrow_back_ios, color: Colors.blue, size: 18,),
                         onTap: (){
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Todolist(startTime: '', createdDate: '',)));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Todolist(startTime: '', createdDate: '', )));
                   
                         }
                         ,),
@@ -150,8 +147,7 @@ class _InfoState extends State<Info> {
                                   
                                   final String fullname = currentUser['fullname'] ?? 'Full name not available';
                                     final int userId = currentUser['id'] ?? 0;
-                                    final String createdDate = dateInput.text;
-                                    final  String startTime= timeInput.text;
+                                    
                              
                                   String result = await  _todoProvider.addItems( _description.text.trim(), dateInput.text.trim(), timeInput.text.trim(), completed, userId,);
 
@@ -171,7 +167,7 @@ class _InfoState extends State<Info> {
                                         content: const Text('Successfully added'),
                                       ),
                                     );
-                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => Todolist(startTime: startTime, createdDate: createdDate))));
+                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => Dashboard( startTime: timeInput.text, createdDate: dateInput.text))));
                                     }else{
                                     print('failed to add task to  $fullname');
                                     }
@@ -211,7 +207,42 @@ class _InfoState extends State<Info> {
                             )
                           )
                         ),
-                        onPressed: (){}, 
+                        onPressed: () async{
+                          try {
+                            final Map<String, dynamic>? currentUser = _userProvider.currentUser;
+                                if (currentUser != null) {
+                                final String fullname = currentUser['fullname'] ?? 'Full name not available';
+
+                                final int userId = currentUser['id'] ?? 0;
+
+                                  String delete = await todoProvider.deleteTodo( userId);
+                                   print("resullllll $delete ");
+
+                                    // ignore: unrelated_type_equality_checks
+                                    if (delete.isNotEmpty) {
+                                        
+                                       ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        behavior: SnackBarBehavior.floating,
+                                        margin: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context).size.height - 100,
+                                          left: 10,
+                                          right: 10,
+                                        ),
+                                        content: const Text('Successfully deleted'),
+                                        
+                                      ),
+                                    );
+                                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  Dashboard(startTime: '', createdDate: '',)));
+
+                                    }else{
+                                    print('failed to delete task for  $fullname');
+                                    }
+                                }
+                          } catch (e) {
+                            print('$e');
+                          }
+                        }, 
                         child: const Padding(
                           padding:  EdgeInsets.only(top:8.0),
                           child:  Column(

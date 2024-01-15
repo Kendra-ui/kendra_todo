@@ -11,20 +11,24 @@ import 'package:kendra_todo/utils/custom_textfield/task/info.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class Todolist extends StatefulWidget {
+  class Todolist extends StatefulWidget {
+  final String startTime;
+  final String createdDate;
 
-   const Todolist({super.key, required String startTime, required String createdDate});
+
+   const Todolist({super.key, required this.startTime, required this.createdDate,});
 
   @override
   State<Todolist> createState() => _TodolistState();
 }
 
-class _TodolistState extends State<Todolist> {
+  class _TodolistState extends State<Todolist> {
   final dateInput = TextEditingController();
   final timeInput = TextEditingController();
   final _description = TextEditingController();
   final _title = TextEditingController();
-
+  late final String startTime;
+  late final String createdDate;
   late UserProvider _userProvider;
   late TodoProvider _todoProvider;
   DataBaseService helper = DataBaseService();
@@ -32,14 +36,6 @@ class _TodolistState extends State<Todolist> {
           
       bool completed = false;
 
-
-  @override
-  void initState() {
-    super.initState();
-    helper.initialize();
-    helper.fetchTodoData();
-
-  }
   
   @override
   Widget build(BuildContext context) {
@@ -122,7 +118,7 @@ class _TodolistState extends State<Todolist> {
               SizedBox(height: MediaQuery.of(context).size.height/30,),
                GestureDetector(
                  onTap: (){
-                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>   Dashboard(createdDate: '', startTime: '',)));
+                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>   Dashboard(createdDate: dateInput.text, startTime: timeInput.text)));
                  },
                  child: 
                   SizedBox(
@@ -147,27 +143,23 @@ class _TodolistState extends State<Todolist> {
                               child: Column(
                                 
                                 children: [
-                                  Consumer<TodoProvider>(
-                                    builder: (context, todoProvider, child){
-                                      final todos = todoProvider.todos;
-                                                      
-                                      return   Expanded(
+                                    Expanded(
                                         child: ListView.builder(
                                             shrinkWrap: true,
-                                            itemCount: todos.length,
+                                            itemCount: 1,
                                             itemBuilder: (context, index) {
-                                              final todo = todos[index];
+                                             
                                                 return ListTile(
                                                   title: const Text('Client Meeting', style: TextStyle(color: Colors.black, fontFamily: 'Poppins'),),
-                                                  subtitle: Text(' ${todo['createdDate']} | ${todo['startTime']} '),
+                                                  //subtitle: Text(' $createdDate | $startTime '),
                                                   trailing: Icon(Icons.arrow_forward_ios, color: Colors.blue.shade400,),
                                         );
                                         }
                                                                         ),
-                                      );
-                                    },
+                                      )
+                                    ,
                                    
-                                  ),
+                                  
                                 ],
                               ),
                             ),

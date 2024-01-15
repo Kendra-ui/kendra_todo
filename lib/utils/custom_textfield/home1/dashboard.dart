@@ -242,7 +242,12 @@ late TodoProvider todoProvider;
                                 ),
                                 Padding(
                                   padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
-                                  child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,),
+                                  child: GestureDetector(
+                                    onTap: (){
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  const Info(startTime: '', createdDate: '', title: '', description: '',)));
+
+                                    },
+                                    child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,)),
                                 )
                                 
                               ],
@@ -285,7 +290,7 @@ late TodoProvider todoProvider;
                                   padding: EdgeInsets.all(MediaQuery.of(context).size.width/50),
                                   child: GestureDetector(
                                     onTap: () {
-                                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const Todolist(startTime: '', createdDate: '',)));
+                                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>  const Todolist(startTime: '', createdDate: '',)));
                                     },
                                     child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue, size: 16,)
                                     ),

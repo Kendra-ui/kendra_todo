@@ -35,15 +35,21 @@ class TodoProvider extends ChangeNotifier{
   }return 'OK';
  }
 
- Future deleteTodo(int id, int userId) async{
+ Future deleteTodo( int userId) async{
    try {
-    await _dataBaseService.deleteTodo(id, db!, userId);
+    final delete = await _dataBaseService.deleteTodo(userId);
+
+    if (delete != null) {
+      await fetchTodosFromDatabase(userId);
+      return 'delete';
+    }else{
+      print('failed');
+    }
     notifyListeners();
   } catch (e) {
-    return e.toString();
+    print('Error adding task: $e');
   }
-  String result = await getTasksOrderedByDate(userId);
-  return result;
+  
  }
 
  Future<String> addItems(String description, String createdDate, String startTime, bool completed, int userId,) async {
